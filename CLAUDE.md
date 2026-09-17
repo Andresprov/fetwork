@@ -134,14 +134,22 @@ Puntos clave a no olvidar:
     simulan la respuesta. Único TODO que queda intacto a propósito: el
     redirect real a Q10 SAML (`IniciarSesionQ10.jsx` usa el roster mock en su
     lugar, ya que no hay acceso real a Q10 todavía).
-  - ⚠️ **Base de datos**: `backend/.env` (gitignored) todavía tiene una
-    `DATABASE_URL` placeholder de Postgres local — la URL real de Neon aún no
-    se ha configurado en este entorno. `npx prisma generate` sí se corrió
-    (cliente generado y verificado). `npx prisma migrate dev --name init`
-    **no** se ha ejecutado — queda pendiente en cuanto se reemplace la URL.
-    Con el placeholder, el backend arranca y responde correctamente pero
-    cualquier endpoint que toque la base de datos devuelve un error 500
-    controlado (autenticación fallida contra Postgres), sin tumbar el proceso.
+  - ✅ **Base de datos**: `backend/.env` (gitignored) tiene la `DATABASE_URL`
+    (pooled) y `DIRECT_URL` (sin pooler) reales de Neon. Prisma 7 ya no
+    admite `url`/`directUrl` dentro del bloque `datasource` de
+    `schema.prisma` (error P1012 "no longer supported in schema files");
+    ambas viven en `prisma.config.ts`: `datasource.url` usa `DIRECT_URL`
+    (la usa el CLI para `migrate`/`introspect`), mientras que el runtime de
+    la app usa `DATABASE_URL` (pooled) a través del `@prisma/adapter-pg`
+    instanciado en `src/lib/prisma.js` — son dos mecanismos independientes.
+    `npx prisma migrate dev --name init` se corrió contra Neon: las 19
+    tablas del ERD + `password_reset_tokens` (21 tablas con
+    `_prisma_migrations`) quedaron creadas sin errores. Verificado
+    end-to-end con curl contra el backend real: roster y login Q10 (mock)
+    hacen upsert real en `usuarios`/`estudiantes`; registro de empresa crea
+    fila en `usuarios`+`empresas` con `estado_validacion='pendiente'`; login
+    de empresa devuelve el estado correcto (pendiente/rechazada/aprobada);
+    recuperar/resetear contraseña genera y valida un token real end-to-end.
 - Fases 5–12: pendientes según cronograma, hasta mediados de noviembre 2026.
 
 ## Documentos de referencia (cópialos a `/docs` en este repo)
