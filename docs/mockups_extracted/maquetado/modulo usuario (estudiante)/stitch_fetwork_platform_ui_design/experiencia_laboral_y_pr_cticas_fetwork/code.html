@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f7f9fb","on-secondary":"#ffffff","surface-variant":"#e0e3e5","on-secondary-fixed":"#002204","error":"#ba1a1a","surface-tint":"#2a6b2c","surface":"#f7f9fb","on-tertiary-fixed-variant":"#005236","tertiary-fixed":"#6ffbbe","surface-container":"#eceef0","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","surface-container-high":"#e6e8ea","secondary":"#1b6d24","inverse-on-surface":"#eff1f3","outline-variant":"#c0c9bb","error-container":"#ffdad6","primary-fixed-dim":"#91d78a","on-primary-container":"#90d689","on-tertiary-container":"#4ddda2","surface-bright":"#f7f9fb","primary-fixed":"#acf4a4","on-secondary-fixed-variant":"#005312","secondary-container":"#a0f399","on-tertiary":"#ffffff","secondary-fixed":"#a3f69c","on-secondary-container":"#217128","on-tertiary-fixed":"#002113","primary-container":"#1b5e20","on-primary-fixed-variant":"#0c5216","on-primary-fixed":"#002203","on-error-container":"#93000a","on-background":"#191c1e","secondary-fixed-dim":"#88d982","tertiary-container":"#005e3f","outline":"#717a6d","on-surface":"#191c1e","primary":"#00450d","inverse-primary":"#91d78a","on-surface-variant":"#41493e","inverse-surface":"#2d3133","surface-dim":"#d8dadc","on-primary":"#ffffff","tertiary":"#00442d","tertiary-fixed-dim":"#4edea3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","space-2xl":"3rem","space-xxs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter-mobile":"1rem","container-max":"1280px","space-sm":"0.75rem","space-xs":"0.5rem","space-xl":"2rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-primary-container text-on-primary shadow-[0_2px_10px_rgba(0,0,0,0.12)]"><div class="h-28 max-w-[1280px] mx-auto px-gutter-desktop flex flex-col justify-between pt-space-xs pb-space-xxs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="FETWork Institutional Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO54wG_yWAqeuqjvS4LH1d-wS7yK3CYaU6VtdFzOWksXe5ENmQA4igcOTZTq4cfErGrZ_XIeEk2P1Sq9lXy97_s483oUZrsWoFbF7ZkR7lferUEWswQeNvtsT5bG4aG9HI5wI6ha_Se8rC9sohAqT_ONqCDLYzVHF8JoxnEmeElSo0KUbTCQ6iMW1LUUYQi_q-WIFlseNJqew7HJ_ETwY2DBNElR4Yf6y9XiBkCZ3Ak5JysDNNlWtA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-primary leading-tight">FETWork</span><span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Portal de Empleabilidad FET</span></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-primary px-space-sm py-space-xxs rounded-lg text-on-primary text-body-sm font-body-sm gap-space-xs"><span class="material-symbols-outlined text-[18px]">search</span><span>Buscar convocatorias...</span><kbd class="text-[10px] bg-primary-container/60 px-1.5 py-0.5 rounded text-on-primary-container">Ctrl+K</kbd></div><button class="relative p-space-xs text-on-primary hover:bg-primary rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-primary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-on-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1H-OH2LKoEHmhxc-VpowWJJLnwzZ3AQoBilDp3lpCxbJSlEEHoA8Je5ergwnbQX-b2coiF64dNsIlEKSg48h8s6-svrgiH-Q3A8czCmxYGpfr-i7uOM3-3a2DRbERP3fkpwnrQg1ZDedd__Yb_DKKmcUr_JW91XLg4K3NdZ7BKJnQmogNQiJNs5V4MaURTFM-IrkcMIErtn-cqWH59adKHUotLsZEBExm4JGuqAHrEoA-I3E4vSVjQ"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-primary leading-none">Andrés David</span><span class="font-label-sm text-label-sm text-on-primary-container leading-none mt-1">Ing. de Software</span></div><span class="material-symbols-outlined text-[18px] text-on-primary-container hidden lg:inline">expand_more</span></div></div></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1 scrollbar-none" data-active-classes="text-on-primary font-bold bg-primary rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-1.5 transition-colors whitespace-nowrap text-on-primary font-bold bg-primary rounded-lg shadow-sm" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mi-perfil-y-q10" href="#">Mi Perfil &amp; Q10</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="habilidades-y-cv" href="#">Habilidades &amp; CV</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mis-proyectos" href="#">Mis Proyectos</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="hoja-de-vida" href="#">Hoja de Vida (PA-GTH-F-10)</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="explorar-vacantes" href="#">Explorar Vacantes</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="visibilidad" href="#">Visibilidad</a></nav></div><div class="bg-surface-container-low text-on-surface py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">sync</span><span class="text-secondary font-semibold">Sincronizado con Q10 Académico</span><span class="text-outline-variant">•</span><span>Registro Oficial Estudiantil</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface px-space-xs py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Semestre VIII - 2025-1</span><span class="text-on-surface-variant hidden sm:inline">Sede Neiva (Huila)</span></div></div></div></header><main class="w-full pt-28 bg-background min-h-screen"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-lg"><div class="flex flex-col w-full">
+<!-- Subtle decorative ambient accents (contained) -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-16 right-1/4 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-48 left-10 w-80 h-80 bg-secondary-fixed/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Header Section (Institutional & High Contrast) -->
+<div class="w-full flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col max-w-2xl">
+<div class="flex items-center gap-space-xs mb-space-xxs">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold tracking-wide uppercase">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            CU-03 • Módulo Curricular FET
+          </span>
+<span class="text-outline-variant text-label-sm">•</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Expediente Académico-Laboral</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight font-bold">
+          Experiencia Laboral y Prácticas
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs leading-relaxed">
+          Registra y certifica tus pasantías, contratos de aprendizaje, monitorías institucionales FET y empleos formales. Cada entrada homologada alimenta automáticamente la sección de trayectoria laboral del formato institucional <strong class="text-on-surface font-semibold">PA-GTH-F-10</strong>.
+        </p>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex flex-wrap items-center gap-space-xs shrink-0">
+<button class="inline-flex items-center justify-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-5 py-2.5 rounded-lg font-label-lg text-label-lg shadow-sm hover:shadow-md transition-all" id="btnToggleForm" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>+ Agregar Nueva Experiencia</span>
+</button>
+</div>
+</div>
+<!-- Main Grid Layout (Asymmetrical 8 / 4 distribution) -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left Column: Registration Form & Experiences Feed (8 Columns) -->
+<div class="lg:col-span-8 flex flex-col gap-space-xl">
+<!-- Experience Creation Form (Collapsible Card) -->
+<section class="hidden bg-surface-container-lowest rounded-xl shadow-md p-space-lg transition-all duration-300" id="formExperienceContainer">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">domain_add</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Registrar Trayectoria Laboral o Práctica</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Los campos marcados con (*) son indispensables para el aval institucional</span>
+</div>
+</div>
+<button class="p-1 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors" id="btnCloseForm" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-space-md" id="formExperience" onsubmit="event.preventDefault();">
+<!-- Row 1: Cargo & Empresa -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expCargo">Cargo o Rol Desempeñado *</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none shadow-sm transition-all" id="expCargo" placeholder="Ej. Desarrollador Junior / Auxiliar Técnico" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expEmpresa">Nombre de la Empresa o Institución *</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none shadow-sm transition-all" id="expEmpresa" placeholder="Ej. TechHuila Soluciones S.A.S" type="text"/>
+</div>
+</div>
+</div>
+<!-- Row 2: Tipo de Vinculación, Modalidad & Ubicación -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expTipo">Tipo de Vinculación *</label>
+<select class="w-full h-11 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm transition-all" id="expTipo">
+<option value="pasantia">Pasantía Curricular</option>
+<option value="aprendizaje">Contrato de Aprendizaje SENA/FET</option>
+<option value="monitoria">Monitoría Académica FET</option>
+<option value="laboral">Contrato Laboral / Término Fijo o Indefinido</option>
+<option value="servicios">Prestación de Servicios</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expModalidad">Modalidad</label>
+<select class="w-full h-11 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm transition-all" id="expModalidad">
+<option value="presencial">Presencial</option>
+<option selected="" value="hibrida">Híbrida</option>
+<option value="remota">Remota</option>
+</select>
+</div>
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expCiudad">Ciudad / Ubicación *</label>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none shadow-sm transition-all" id="expCiudad" placeholder="Ej. Neiva, Huila" type="text"/>
+</div>
+</div>
+<!-- Row 3: Fechas y Actualidad -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center">
+<div class="md:col-span-5 flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expFechaInicio">Fecha de Inicio *</label>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm" id="expFechaInicio" type="date"/>
+</div>
+<div class="md:col-span-5 flex flex-col gap-space-xxs">
+<label class="font-label-md text-label-md text-on-surface" for="expFechaFin">Fecha Fin</label>
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm" id="expFechaFin" type="date"/>
+</div>
+<div class="md:col-span-2 flex items-center pt-5">
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<input class="w-4 h-4 rounded text-primary focus:ring-secondary accent-primary" id="expActual" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface leading-tight select-none">Trabajo actualmente aquí</span>
+</label>
+</div>
+</div>
+<!-- Row 4: Referencia Laboral / Contacto para Validación Q10 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-md text-label-md font-bold">Datos para Validación Institucional (PA-GTH-F-10)</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="expJefe">Jefe Inmediato / Contacto de Referencia *</label>
+<input class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none shadow-sm" id="expJefe" placeholder="Ing. Carlos Mendoza (Líder TI)" type="text"/>
+</div>
+<div class="flex flex-col gap-space-xxs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="expTelefono">Teléfono de Contacto Institucional *</label>
+<input class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none shadow-sm" id="expTelefono" placeholder="+57 310 890 1234" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Row 5: Funciones y Logros (Con Contador) -->
+<div class="flex flex-col gap-space-xxs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" for="expFunciones">Funciones y Logros Principales *</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="charCounter">0 / 600 caracteres</span>
+</div>
+<textarea class="w-full p-3.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-outline focus:bg-surface-container-lowest focus:outline-none shadow-sm resize-none" id="expFunciones" maxlength="600" placeholder="Describe brevemente tus responsabilidades, tecnologías empleadas y metas alcanzadas. Ej: Diseñé la interfaz del módulo de pagos usando React y Tailwind, logrando una reducción del 30% en tiempos de respuesta..." rows="4"></textarea>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors" id="btnCancelForm" type="button">
+                Cancelar
+              </button>
+<button class="inline-flex items-center gap-2 bg-primary hover:bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md shadow-sm transition-all" id="btnSaveExperience" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Guardar e Incorporar a PA-GTH-F-10</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Summary & Stats Bar (Academic Metrics) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/40 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">work_history</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">11 Meses</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Experiencia Total Registrada</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">1 Monitoría</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Institucional FET Avalada</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/40 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">100%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Sincronizado Q10 &amp; Hoja de Vida</span>
+</div>
+</div>
+</div>
+<!-- Experiences List Header with Filters -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Experiencias Acreditadas</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-semibold">2 Registros</span>
+</div>
+<div class="flex items-center gap-space-xxs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span class="font-label-sm text-label-sm">Orden: Más recientes</span>
+</div>
+</div>
+<!-- Experience Cards Stack -->
+<div class="flex flex-col gap-space-md" id="experiencesList">
+<!-- Card 1: Desarrollador Junior / Pasante -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-space-md">
+<!-- Header zone -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-14 h-14 rounded-xl bg-surface-container-low overflow-hidden flex items-center justify-center shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Logotipo corporativo minimalista y tecnológico para la empresa de software TechHuila con tonalidades verdes esmeralda sobre fondo limpio y estilizado" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7KFEtprL87ig-kxZfBsxcZR-_rGQ2UEc3lYqhThTZILYdYXpGnKbRwORTKR2AV_kaJDS_pnQ2C0YlnIH4K8btfg3psLmEi-mTnOuczr71I_OflrCBp82CWHeOt6dqaOOTECfNVaWNzh3Dns3v7A7yfH4aKzo_dFKAoN8OmLAZ9F86-LsbmhYfGTyin44Fiv_x_g7t33LS2Xmxjx6hS3l25vdHVW5jntipTsRjfrKjh6g6ct218_Zy6g"/>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-xs mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Desarrollador Junior / Pasante</h3>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm font-semibold">
+                      Pasantía Empresarial
+                    </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-secondary-fixed/30 text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+                      Modalidad Híbrida
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-sm gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">business</span>
+                      TechHuila Soluciones SAS
+                    </span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                      Neiva, Huila
+                    </span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+                      Ene 2024 - Jul 2024 (7 meses)
+                    </span>
+</div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center gap-space-xxs self-end sm:self-auto">
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Editar Registro" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/40 transition-colors" title="Eliminar Registro" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Body zone: Functions & Achievements -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Funciones y Contribuciones</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                Desarrollo y modernización de interfaces frontend en React.js y Tailwind CSS para aplicaciones corporativas locales. Integración y consumo de APIs RESTful seguras, optimización de renderizado web que disminuyó los tiempos de carga en un 28% y participación activa en ceremonias ágiles Scrum bajo la supervisión directa del equipo senior.
+              </p>
+</div>
+<!-- Verification metadata footer -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">how_to_reg</span>
+<span>Referencia: <strong>Ing. Carlos Mendoza (Líder TI)</strong> • Tel: +57 310 456 7890</span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+<span>Aprobado para PA-GTH-F-10</span>
+</div>
+</div>
+</article>
+<!-- Card 2: Monitor Académico FET -->
+<article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-space-md relative overflow-hidden">
+<!-- Institutional Accent Stripe -->
+<div class="absolute top-0 left-0 bottom-0 w-1.5 bg-primary"></div>
+<!-- Header zone -->
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm pl-1">
+<div class="flex items-start gap-space-md">
+<div class="w-14 h-14 rounded-xl bg-primary-container/10 overflow-hidden flex items-center justify-center shrink-0 text-primary shadow-sm">
+<span class="material-symbols-outlined text-[32px]">account_balance</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-xs mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Monitor Académico de Algoritmos y POO</h3>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">stars</span>
+                      Institucional FET
+                    </span>
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                      Presencial • Sede Neiva
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-sm gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">school</span>
+                      Fundación Escuela Tecnológica de Neiva - FET
+                    </span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+                      Ago 2023 - Dic 2023 (5 meses)
+                    </span>
+</div>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center gap-space-xxs self-end sm:self-auto">
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Editar Registro" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/40 transition-colors" title="Eliminar Registro" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Body zone: Functions & Achievements -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs pl-space-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Responsabilidad y Acompañamiento Docente</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                Tutoría personalizada a más de 45 estudiantes de primer a tercer semestre de Ingeniería de Software en lógica de programación, estructuras de control y Programación Orientada a Objetos en Java y Python. Coordinación de talleres prácticos de laboratorio y apoyo docente en la calificación de proyectos finales.
+              </p>
+</div>
+<!-- Verification metadata footer -->
+<div class="flex flex-wrap items-center justify-between gap-space-xs pt-space-xs font-label-sm text-label-sm text-on-surface-variant pl-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+<span>Certificado Académico Q10: <strong>Acta Docente 2023-II • Coordinación FET</strong></span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span>Validado Oficialmente</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Inline Visual Graph: Experience Distribution Across Competencies -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md mt-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Distribución por Áreas de Práctica</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Balance de horas y dedicación según el currículo FET</span>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold">1,020 Horas Computadas</span>
+</div>
+<!-- SVG Visual Bar & Breakdown -->
+<div class="w-full flex flex-col gap-space-xs">
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 58%;" title="Desarrollo de Software"></div>
+<div class="h-full bg-tertiary-container" style="width: 42%;" title="Monitoría y Docencia FET"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Desarrollo Frontend &amp; Web (58% / 590h)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span>
+<span>Pedagogía &amp; Fundamentos POO (42% / 430h)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Institutional Guidance & Actions (4 Columns) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- PA-GTH-F-10 Institutional Sync Card -->
+<div class="bg-primary-container text-on-primary rounded-xl p-space-lg shadow-md relative overflow-hidden">
+<!-- Background geometric element -->
+<div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-on-primary/5 pointer-events-none"></div>
+<div class="flex items-center gap-space-xs mb-space-sm">
+<div class="w-8 h-8 rounded-lg bg-on-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-on-primary-container">sync_alt</span>
+</div>
+<span class="font-label-sm text-label-sm tracking-wider uppercase font-bold text-on-primary-container">Ecosistema Institucional</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-primary leading-snug">
+            Sincronización con Formato PA-GTH-F-10
+          </h3>
+<p class="font-body-sm text-body-sm text-on-primary/90 mt-space-xs leading-relaxed">
+            Cada experiencia que acredites aquí es revisada por la <strong class="text-white">Coordinación de Prácticas y Empleabilidad FET</strong>. Al ser validada, se plasma de manera inmediata en el anexo de experiencia del formato oficial universitario para convenios y ferias de contratación laboral en Neiva y la región surcolombiana.
+          </p>
+<div class="mt-space-md pt-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-on-primary font-label-sm text-label-sm">
+<span>Integridad de Hoja de Vida</span>
+<span class="font-bold">92%</span>
+</div>
+<div class="w-full h-2 bg-on-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-on-primary-container rounded-full" style="width: 92%;"></div>
+</div>
+</div>
+<div class="mt-space-md">
+<button class="w-full inline-flex items-center justify-center gap-2 bg-on-primary text-primary-container hover:bg-surface-container-lowest px-4 py-2.5 rounded-lg font-label-md text-label-md font-bold shadow-sm transition-all" id="btnPreviewCV" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Previsualizar en Hoja de Vida</span>
+</button>
+</div>
+</div>
+<!-- FET Employability Tips Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Consejos de Empleabilidad FET</h3>
+</div>
+<div class="flex flex-col gap-space-sm divide-y divide-transparent">
+<!-- Tip 1 -->
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Redacta logros cuantificables</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Menciona porcentajes, horas reducidas o volumen de personas asistidas. En el Huila, los empleadores valoran la eficiencia demostrable.
+                </p>
+</div>
+</div>
+<!-- Tip 2 -->
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">code</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Palabras clave del sector TIC</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Si participaste en desarrollo, especifica frameworks exactos (React, Node, PostgreSQL, Git). Esto aumenta tu match en vacantes FETWork.
+                </p>
+</div>
+</div>
+<!-- Tip 3 -->
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">contact_phone</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Referencias de contacto vigentes</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Asegúrate de que el número telefónico y cargo de tu jefe directo estén activos para las verificaciones requeridas por el PA-GTH-F-10.
+                </p>
+</div>
+</div>
+</div>
+<!-- Academic Contact Badge -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">help_center</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">¿Dudas con la homologación?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Escribe a coordinacion.practicas@fet.edu.co</span>
+</div>
+</div>
+</div>
+<!-- Institutional Quality Commitment -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Acreditación Institucional FET</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-tight">Cumplimiento de estándares de práctica según Resolución Rectoral 048-2022.</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- Micro-interaction / Script for Dynamic Interactions -->
+<script>
+    (function() {
+      // Toggle form expand/collapse
+      const btnToggle = document.getElementById('btnToggleForm');
+      const btnClose = document.getElementById('btnCloseForm');
+      const btnCancel = document.getElementById('btnCancelForm');
+      const formContainer = document.getElementById('formExperienceContainer');
+      const textarea = document.getElementById('expFunciones');
+      const charCounter = document.getElementById('charCounter');
+      const checkboxActual = document.getElementById('expActual');
+      const inputFechaFin = document.getElementById('expFechaFin');
+      const btnPreview = document.getElementById('btnPreviewCV');
+
+      function openForm() {
+        formContainer.classList.remove('hidden');
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function closeForm() {
+        formContainer.classList.add('hidden');
+      }
+
+      if (btnToggle) btnToggle.addEventListener('click', openForm);
+      if (btnClose) btnClose.addEventListener('click', closeForm);
+      if (btnCancel) btnCancel.addEventListener('click', closeForm);
+
+      // Character counter
+      if (textarea && charCounter) {
+        textarea.addEventListener('input', function() {
+          const len = textarea.value.length;
+          charCounter.textContent = len + ' / 600 caracteres';
+          if (len >= 550) {
+            charCounter.classList.add('text-secondary', 'font-bold');
+          } else {
+            charCounter.classList.remove('text-secondary', 'font-bold');
+          }
+        });
+      }
+
+      // Checkbox "Trabajo actualmente aquí" disables/clears Fecha Fin
+      if (checkboxActual && inputFechaFin) {
+        checkboxActual.addEventListener('change', function() {
+          if (this.checked) {
+            inputFechaFin.disabled = true;
+            inputFechaFin.value = '';
+            inputFechaFin.classList.add('opacity-50', 'cursor-not-allowed');
+          } else {
+            inputFechaFin.disabled = false;
+            inputFechaFin.classList.remove('opacity-50', 'cursor-not-allowed');
+          }
+        });
+      }
+
+      // Quick toast/alert feedback for preview
+      if (btnPreview) {
+        btnPreview.addEventListener('click', function() {
+          const originalText = btnPreview.innerHTML;
+          btnPreview.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Generando vista PA-GTH-F-10...';
+          setTimeout(() => {
+            btnPreview.innerHTML = originalText;
+          }, 1800);
+        });
+      }
+    })();
+  </script>
+</div></div></main><footer class="w-full bg-surface-container text-on-surface mt-space-2xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex flex-col gap-space-xxs text-center md:text-left"><p class="font-label-md text-label-md text-on-surface font-semibold">© 2025 FET - Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez</p><p class="text-on-surface-variant">Dirección de Prácticas Profesionales y Coordinación de Empleabilidad e Innovación</p><p class="text-[11px] text-outline">Integración tecnológica y sincronización de expediente impulsada por Q10 Solutions</p></div><div class="flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Mesa de Ayuda</a><a class="hover:text-primary transition-colors" href="#">Normativa PA-GTH-F-10</a><a class="hover:text-primary transition-colors" href="#">Convenios Empresariales</a><a class="hover:text-primary transition-colors" href="#">Tratamiento de Datos</a></div></div></footer></body></html>

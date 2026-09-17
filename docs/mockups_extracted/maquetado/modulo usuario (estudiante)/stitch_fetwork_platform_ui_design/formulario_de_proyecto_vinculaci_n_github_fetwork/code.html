@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f7f9fb","on-secondary":"#ffffff","surface-variant":"#e0e3e5","on-secondary-fixed":"#002204","error":"#ba1a1a","surface-tint":"#2a6b2c","surface":"#f7f9fb","on-tertiary-fixed-variant":"#005236","tertiary-fixed":"#6ffbbe","surface-container":"#eceef0","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","surface-container-high":"#e6e8ea","secondary":"#1b6d24","inverse-on-surface":"#eff1f3","outline-variant":"#c0c9bb","error-container":"#ffdad6","primary-fixed-dim":"#91d78a","on-primary-container":"#90d689","on-tertiary-container":"#4ddda2","surface-bright":"#f7f9fb","primary-fixed":"#acf4a4","on-secondary-fixed-variant":"#005312","secondary-container":"#a0f399","on-tertiary":"#ffffff","secondary-fixed":"#a3f69c","on-secondary-container":"#217128","on-tertiary-fixed":"#002113","primary-container":"#1b5e20","on-primary-fixed-variant":"#0c5216","on-primary-fixed":"#002203","on-error-container":"#93000a","on-background":"#191c1e","secondary-fixed-dim":"#88d982","tertiary-container":"#005e3f","outline":"#717a6d","on-surface":"#191c1e","primary":"#00450d","inverse-primary":"#91d78a","on-surface-variant":"#41493e","inverse-surface":"#2d3133","surface-dim":"#d8dadc","on-primary":"#ffffff","tertiary":"#00442d","tertiary-fixed-dim":"#4edea3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","space-2xl":"3rem","space-xxs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter-mobile":"1rem","container-max":"1280px","space-sm":"0.75rem","space-xs":"0.5rem","space-xl":"2rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-primary-container text-on-primary shadow-[0_2px_10px_rgba(0,0,0,0.12)]"><div class="h-28 max-w-[1280px] mx-auto px-gutter-desktop flex flex-col justify-between pt-space-xs pb-space-xxs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="FETWork Institutional Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO54wG_yWAqeuqjvS4LH1d-wS7yK3CYaU6VtdFzOWksXe5ENmQA4igcOTZTq4cfErGrZ_XIeEk2P1Sq9lXy97_s483oUZrsWoFbF7ZkR7lferUEWswQeNvtsT5bG4aG9HI5wI6ha_Se8rC9sohAqT_ONqCDLYzVHF8JoxnEmeElSo0KUbTCQ6iMW1LUUYQi_q-WIFlseNJqew7HJ_ETwY2DBNElR4Yf6y9XiBkCZ3Ak5JysDNNlWtA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-primary leading-tight">FETWork</span><span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Portal de Empleabilidad FET</span></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-primary px-space-sm py-space-xxs rounded-lg text-on-primary text-body-sm font-body-sm gap-space-xs"><span class="material-symbols-outlined text-[18px]">search</span><span>Buscar convocatorias...</span><kbd class="text-[10px] bg-primary-container/60 px-1.5 py-0.5 rounded text-on-primary-container">Ctrl+K</kbd></div><button class="relative p-space-xs text-on-primary hover:bg-primary rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-primary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-on-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1H-OH2LKoEHmhxc-VpowWJJLnwzZ3AQoBilDp3lpCxbJSlEEHoA8Je5ergwnbQX-b2coiF64dNsIlEKSg48h8s6-svrgiH-Q3A8czCmxYGpfr-i7uOM3-3a2DRbERP3fkpwnrQg1ZDedd__Yb_DKKmcUr_JW91XLg4K3NdZ7BKJnQmogNQiJNs5V4MaURTFM-IrkcMIErtn-cqWH59adKHUotLsZEBExm4JGuqAHrEoA-I3E4vSVjQ"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-primary leading-none">Andrés David</span><span class="font-label-sm text-label-sm text-on-primary-container leading-none mt-1">Ing. de Software</span></div><span class="material-symbols-outlined text-[18px] text-on-primary-container hidden lg:inline">expand_more</span></div></div></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1 scrollbar-none" data-active-classes="text-on-primary font-bold bg-primary rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-1.5 transition-colors whitespace-nowrap text-on-primary font-bold bg-primary rounded-lg shadow-sm" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mi-perfil-y-q10" href="#">Mi Perfil &amp; Q10</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="habilidades-y-cv" href="#">Habilidades &amp; CV</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mis-proyectos" href="#">Mis Proyectos</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="hoja-de-vida" href="#">Hoja de Vida (PA-GTH-F-10)</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="explorar-vacantes" href="#">Explorar Vacantes</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="visibilidad" href="#">Visibilidad</a></nav></div><div class="bg-surface-container-low text-on-surface py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">sync</span><span class="text-secondary font-semibold">Sincronizado con Q10 Académico</span><span class="text-outline-variant">•</span><span>Registro Oficial Estudiantil</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface px-space-xs py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Semestre VIII - 2025-1</span><span class="text-on-surface-variant hidden sm:inline">Sede Neiva (Huila)</span></div></div></div></header><main class="w-full pt-28 bg-background min-h-screen"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-lg"><div class="flex flex-col w-full">
+<!-- Breadcrumb & Top Bar Navigation -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<nav aria-label="Ruta de navegación" class="flex items-center gap-space-xxs text-body-sm font-body-sm text-on-surface-variant flex-wrap">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span>Inicio</span>
+</a>
+<span class="text-outline-variant font-semibold">/</span>
+<a class="hover:text-primary transition-colors" href="#">Mis Proyectos</a>
+<span class="text-outline-variant font-semibold">/</span>
+<span class="text-secondary font-semibold font-label-md text-label-md">Registrar Proyecto (CU-04, CU-05)</span>
+</nav>
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-secondary hover:text-primary transition-colors self-start sm:self-auto py-1 px-space-xs rounded-lg hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al Portafolio</span>
+</a>
+</div>
+<!-- Page Header Title Block -->
+<div class="mb-space-xl relative overflow-hidden bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md relative z-10">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Expediente de Empleabilidad FET • Registro Curricular Oficial</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Registrar Proyecto en Portafolio Institucional</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          Documenta la solución técnica desarrollada, el rol desempeñado y vincula los repositorios de GitHub con validación y trazabilidad en tiempo real.
+        </p>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-low px-space-md py-space-xs rounded-lg shrink-0">
+<span class="material-symbols-outlined text-secondary text-[24px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Validación Activa Q10</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Código Estudiante: FET-2021-0842</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Layout (70% Form, 30% Right Lateral Panel) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Main Detailed Form (8 cols ~ 67-70%) -->
+<form class="lg:col-span-8 flex flex-col gap-space-lg" id="portfolio-form">
+<!-- Section 1: Información General del Proyecto -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">1. Información General del Proyecto</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Metadatos primarios y descripción del problema resuelto</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-semibold">Obligatorio</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Nombre del Proyecto -->
+<div class="md:col-span-2 space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center gap-1" for="project-name">
+              Nombre del Proyecto <span class="text-error">*</span>
+</label>
+<input class="w-full h-11 px-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="project-name" name="project-name" placeholder="Ej. Sistema IoT de Monitoreo Piscícola" required="" type="text" value="AgroTrace Huila - Trazabilidad Cafetera"/>
+</div>
+<!-- Tipo de Proyecto -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface" for="project-type">
+              Tipo de Proyecto <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="project-type" name="project-type">
+<option selected="" value="semillero">Semillero de Investigación FET</option>
+<option value="aula">Proyecto de Aula Integrador</option>
+<option value="personal">Iniciativa Personal &amp; Portafolio</option>
+<option value="pasantia">Pasantía Empresarial / Convenio</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Periodo / Semestre de Ejecución -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface">
+              Período de Ejecución <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-2 gap-2">
+<div class="relative">
+<input class="w-full h-11 px-2.5 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary" id="date-start" type="month" value="2024-08"/>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-2.5 bg-surface-container rounded-lg font-body-sm text-body-sm text-on-surface-variant shadow-sm cursor-not-allowed opacity-60" disabled="" id="date-end" type="month" value="2025-05"/>
+</div>
+</div>
+<label class="inline-flex items-center gap-2 mt-1 cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary accent-primary rounded cursor-pointer" id="project-ongoing" onchange="toggleOngoing(this)" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Proyecto actualmente en desarrollo (Activo)</span>
+</label>
+</div>
+<!-- Breve Resumen / Tagline -->
+<div class="md:col-span-2 space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface" for="project-tagline">
+                Breve Resumen / Tagline Promocional
+              </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="char-counter">78 / 120</span>
+</div>
+<input class="w-full h-11 px-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="project-tagline" maxlength="120" oninput="updateCharCount(this)" placeholder="Una frase de impacto para los reclutadores institucionales..." type="text" value="Trazabilidad y certificación de origen de café especial con códigos QR."/>
+</div>
+<!-- Descripción Técnica Detallada -->
+<div class="md:col-span-2 space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface" for="project-description">
+                Descripción Técnica Detallada <span class="text-error">*</span>
+</label>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="p-1 hover:bg-surface-container rounded transition-colors" title="Negrita" type="button"><span class="material-symbols-outlined text-[16px]">format_bold</span></button>
+<button class="p-1 hover:bg-surface-container rounded transition-colors" title="Lista con viñetas" type="button"><span class="material-symbols-outlined text-[16px]">format_list_bulleted</span></button>
+<button class="p-1 hover:bg-surface-container rounded transition-colors" title="Fragmento de código" type="button"><span class="material-symbols-outlined text-[16px]">code</span></button>
+</div>
+</div>
+<textarea class="w-full p-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary leading-relaxed transition-all resize-y" id="project-description" placeholder="Detalla el problema que resuelve, arquitectura implementada, rol del estudiante y métricas de impacto alcanzadas en el contexto regional de Neiva..." rows="5">El proyecto resuelve el problema de la asimetría de información en la cadena de comercialización de cafés especiales en la cuenca del Río Las Ceibas (Neiva, Huila). Se diseñó una arquitectura cliente-servidor distribuida compuesta por microservicios desacoplados en Node.js/Express y una Single Page Application en React.js con soporte offline (PWA).
+
+Como Líder Técnico, coordiné el modelado de la base de datos relacional en PostgreSQL para garantizar la inmutabilidad de los registros de cosecha, fermentación y catación SCA. El sistema genera credenciales criptográficas mediante códigos QR dinámicos verificables por compradores internacionales.</textarea>
+</div>
+</div>
+</section>
+<!-- Section 2: Tecnologías y Habilidades Aplicadas (CU-04) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">2. Tecnologías y Habilidades Aplicadas (CU-04)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Competencias técnicas vinculadas a los descriptores de egreso FET</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-secondary-container/40 text-on-secondary-container font-semibold">CU-04 Acreditado</span>
+</div>
+<!-- Selector Multitag -->
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface">
+            Stack Tecnológico &amp; Lenguajes
+          </label>
+<div class="p-2.5 bg-surface-container-lowest rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-secondary transition-all">
+<div class="flex flex-wrap items-center gap-1.5" id="tech-tag-container">
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>React.js</span>
+<button class="hover:text-error transition-colors ml-0.5" onclick="removeTag(this)" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Node.js</span>
+<button class="hover:text-error transition-colors ml-0.5" onclick="removeTag(this)" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>PostgreSQL</span>
+<button class="hover:text-error transition-colors ml-0.5" onclick="removeTag(this)" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Docker</span>
+<button class="hover:text-error transition-colors ml-0.5" onclick="removeTag(this)" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>TypeScript</span>
+<button class="hover:text-error transition-colors ml-0.5" onclick="removeTag(this)" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<input class="flex-1 min-w-[200px] h-8 px-2 bg-transparent text-body-sm font-body-sm text-on-surface focus:outline-none" id="tech-input" onkeydown="handleTagKeydown(event)" placeholder="+ Escribir tecnología y presionar Enter..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-on-surface-variant flex-wrap pt-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Sugerencias rápidas:</span>
+<button class="px-2 py-0.5 bg-surface-container rounded hover:bg-surface-container-high text-on-surface transition-colors font-label-sm text-label-sm" onclick="addSuggestedTag('Tailwind CSS')" type="button">+ Tailwind CSS</button>
+<button class="px-2 py-0.5 bg-surface-container rounded hover:bg-surface-container-high text-on-surface transition-colors font-label-sm text-label-sm" onclick="addSuggestedTag('Python / FastAPI')" type="button">+ Python</button>
+<button class="px-2 py-0.5 bg-surface-container rounded hover:bg-surface-container-high text-on-surface transition-colors font-label-sm text-label-sm" onclick="addSuggestedTag('Redis')" type="button">+ Redis</button>
+<button class="px-2 py-0.5 bg-surface-container rounded hover:bg-surface-container-high text-on-surface transition-colors font-label-sm text-label-sm" onclick="addSuggestedTag('AWS S3')" type="button">+ AWS S3</button>
+</div>
+</div>
+<!-- Rol técnico desempeñado -->
+<div class="space-y-1.5 pt-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="tech-role">
+            Nivel de Participación &amp; Rol Técnico Desempeñado <span class="text-error">*</span>
+</label>
+<input class="w-full h-11 px-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="tech-role" placeholder="Ej. Desarrollador Full Stack, DevOps Engineer, Diseñador UI/UX" type="text" value="Líder Técnico &amp; Desarrollador Backend"/>
+</div>
+</section>
+<!-- Section 3: Vinculación de Repositorios y Enlaces (CU-05) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">3. Vinculación de Repositorios y Enlaces (CU-05)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Conectores de código fuente y despliegues en vivo</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm bg-secondary-container/40 px-2.5 py-0.5 rounded font-semibold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>API Conectada</span>
+</div>
+</div>
+<!-- Campo URL GitHub -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center justify-between" for="github-url">
+<span class="flex items-center gap-1.5">
+<svg class="w-4 h-4 fill-current text-on-surface" viewbox="0 0 24 24">
+<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
+</svg>
+              URL Repositorio GitHub <span class="text-error">*</span>
+</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Repositorio Público Verificado
+            </span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-10 pr-10 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="github-url" placeholder="https://github.com/usuario/nombre-repositorio" type="url" value="https://github.com/andres-fet/agrotrace-huila"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant text-[20px]">code</span>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary text-[20px]">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sincroniza commits, branches y estadísticas del repositorio automáticamente.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Campo URL Demo en Vivo -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center gap-1" for="demo-url">
+<span class="material-symbols-outlined text-[18px] text-secondary">open_in_new</span>
+              URL de Despliegue / Demo en Vivo
+            </label>
+<input class="w-full h-11 px-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="demo-url" placeholder="https://mi-proyecto.fet.edu.co o Vercel/Render" type="url" value="https://agrotrace-demo.fet.edu.co"/>
+</div>
+<!-- Campo URL Video / Documentación -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-label-lg text-on-surface flex items-center gap-1" for="docs-url">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">smart_display</span>
+              Video Demostrativo (Loom / YouTube)
+            </label>
+<input class="w-full h-11 px-3.5 bg-surface-container-lowest rounded-lg font-body-md text-body-md text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary transition-all" id="docs-url" placeholder="https://www.loom.com/share/..." type="url"/>
+</div>
+</div>
+</section>
+<!-- Section 4: Archivos Multimedia y Capturas del Software -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">4. Archivos Multimedia y Capturas del Software</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Adjunta mockups o capturas de la interfaz gráfica y dashboard</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline font-semibold">PNG, JPG, WebP hasta 5MB</span>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="bg-surface-container-low rounded-xl p-space-xl flex flex-col items-center justify-center text-center hover:bg-surface-container transition-colors cursor-pointer group shadow-inner">
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-secondary mb-space-xs group-hover:scale-110 transition-transform shadow-sm">
+<span class="material-symbols-outlined text-[28px]">cloud_upload</span>
+</div>
+<p class="font-label-lg text-label-lg text-on-surface">
+            Arrastra y suelta capturas de pantalla de la interfaz
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            o haz clic para explorar tus archivos locales del proyecto
+          </p>
+<button class="mt-space-sm px-space-md py-1.5 bg-surface-container-lowest text-secondary rounded-lg font-label-md text-label-md shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+            Seleccionar Imágenes
+          </button>
+</div>
+<!-- Uploaded items grid mockup -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Thumbnail Card 1 -->
+<div class="bg-surface-container-low rounded-lg p-space-xs flex items-center gap-space-sm shadow-sm relative group overflow-hidden">
+<div class="w-20 h-14 rounded overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern clean software web interface of an agricultural dashboard showing coffee batch traceability metrics and charts in green tones on an institutional laptop display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLPoPfE47QBe2klwsDnOMvIoRi4UKa57E4PzjswrpMID2A3otaZ9Zlepzn2N7rH0NrTc_R8XFrdzep0KAjetOF5zLKzNdBYWtjjG6Bbr4q5AdGzEklEuhXUJJzmtC_5RgObfRUrExcO0iLPerEXDMzrFGSiyRt8GU8Uwlml1_19tpNkuw4HPNs9yaRWgWsgzwN-R-RsEZH9VHbkqRY3E0Lu9OAF1eOGbb61NNo2q_pGhb6oVkNeTQ77A"/>
+</div>
+<div class="min-w-0 flex-1">
+<span class="font-label-md text-label-md text-on-surface truncate block">dashboard-trazabilidad.png</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1.4 MB • Subido</span>
+</div>
+<button class="text-on-surface-variant hover:text-error p-1.5 rounded transition-colors" title="Eliminar captura" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<!-- Thumbnail Card 2 -->
+<div class="bg-surface-container-low rounded-lg p-space-xs flex items-center gap-space-sm shadow-sm relative group overflow-hidden">
+<div class="w-20 h-14 rounded overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Mobile responsive interface view of QR code scanner for specialty coffee certifications in Huila Colombia, clean professional UX design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM_jZOlJv-1kmmr4vrPIOhR1A4zzFA-4qea27Nz0_m_jcPEjQQNqYS6px2zBDML9c--oKbRgwhnpshQP55-GIgtSOfR5oT5SrspRrF9o86KWLhAG3SS5r49jpymw-helMOa0v1u5qPaH9JK7wg-FnDigwuXI9LIAYNukLFo0jbXDhYm7VHOcpXG6foHn_QSyUKsyGV-7kk5e-Jbli4JITX-EyBcyIcgtU4bhna7NVBrpH1Kt4nDsEEQA"/>
+</div>
+<div class="min-w-0 flex-1">
+<span class="font-label-md text-label-md text-on-surface truncate block">lector-qr-movil.png</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">890 KB • Subido</span>
+</div>
+<button class="text-on-surface-variant hover:text-error p-1.5 rounded transition-colors" title="Eliminar captura" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Action Buttons Footer Section -->
+<div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-sm pt-space-xs pb-space-xl">
+<button class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-lg text-label-lg transition-colors text-center" type="button">
+          Cancelar
+        </button>
+<button class="w-full sm:w-auto px-space-lg py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg transition-colors text-center shadow-sm" type="button">
+          Guardar como Borrador
+        </button>
+<button class="w-full sm:w-auto px-space-xl py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-colors flex items-center justify-center gap-space-xs shadow-md" type="submit">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Guardar Proyecto en Portafolio</span>
+</button>
+</div>
+</form>
+<!-- RIGHT COLUMN: Lateral Help, GitHub Sync & Compliance Panel (4 cols ~ 30-33%) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg sticky top-32">
+<!-- Card 1: Sincronización con GitHub -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<svg class="w-6 h-6 fill-current text-on-surface" viewbox="0 0 24 24">
+<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path>
+</svg>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">GitHub Sync</h3>
+<p class="font-label-sm text-label-sm text-secondary font-semibold">Cuenta @andres-fet conectada</p>
+</div>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" title="Conexión en tiempo real activa"></span>
+</div>
+<!-- Repository Snapshot -->
+<div class="bg-surface-container-low rounded-lg p-space-sm space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface truncate">andres-fet/agrotrace-huila</span>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm shrink-0">
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">star</span> 14</span>
+<span class="flex items-center gap-0.5"><span class="material-symbols-outlined text-[14px]">fork_right</span> 4</span>
+</div>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant pt-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block mb-1">Últimos Commits Validados:</span>
+<ul class="space-y-1.5 text-body-sm">
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary mt-0.5 shrink-0">commit</span>
+<span class="line-clamp-1 font-mono text-[12px] text-on-surface">feat(qr): implement dynamic payload verification</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary mt-0.5 shrink-0">commit</span>
+<span class="line-clamp-1 font-mono text-[12px] text-on-surface">fix(db): optimize batch lookup indexing</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary mt-0.5 shrink-0">commit</span>
+<span class="line-clamp-1 font-mono text-[12px] text-on-surface">docs: update PA-GTH-F-10 technical specifications</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="p-space-xs bg-secondary-container/20 rounded-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<p class="font-body-sm text-body-sm text-on-secondary-container">
+            El repositorio cumple con los estándares institucionales de código abierto FET.
+          </p>
+</div>
+</div>
+<!-- Card 2: Criterios de Evaluación PA-GTH-F-10 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-xs text-primary">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Normativa PA-GTH-F-10</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Este registro tributa directamente a la sección de <strong>'Experiencia Académica e Investigativa'</strong> de la Hoja de Vida Universitaria Oficial generada para las empresas aliadas del Huila.
+        </p>
+<div class="p-space-xs bg-surface-container-low rounded-lg text-body-sm font-body-sm text-on-surface-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5">school</span>
+<span>Acredita horas prácticas del Componente de Formación Investigativa y Desarrollo Tecnológico (CIDT).</span>
+</div>
+</div>
+<!-- Card 3: Checklist de Calidad del Portafolio -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Checklist de Calidad</h3>
+<span class="font-label-md text-label-md text-secondary font-bold">75% Completado</span>
+</div>
+<!-- Progress Indicator -->
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 75%;"></div>
+</div>
+<ul class="space-y-space-xs font-body-sm text-body-sm">
+<li class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Repositorio público y accesible</span>
+</li>
+<li class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Tecnologías especificadas</span>
+</li>
+<li class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Demo en vivo funcional</span>
+</li>
+<li class="flex items-center gap-space-xs text-on-surface-variant opacity-80">
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+<span>Al menos 2 capturas de interfaz adjuntas</span>
+</li>
+</ul>
+<div class="pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary hover:text-primary font-semibold" href="#">
+<span>Guía de Buenas Prácticas de Portafolio FET</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<script>
+  function toggleOngoing(checkbox) {
+    const endInput = document.getElementById('date-end');
+    if (checkbox.checked) {
+      endInput.disabled = true;
+      endInput.classList.add('opacity-60', 'cursor-not-allowed', 'bg-surface-container');
+      endInput.classList.remove('bg-surface-container-lowest');
+    } else {
+      endInput.disabled = false;
+      endInput.classList.remove('opacity-60', 'cursor-not-allowed', 'bg-surface-container');
+      endInput.classList.add('bg-surface-container-lowest');
+    }
+  }
+
+  function updateCharCount(input) {
+    const counter = document.getElementById('char-counter');
+    counter.textContent = `${input.value.length} / 120`;
+  }
+
+  function removeTag(button) {
+    const tag = button.closest('span');
+    if (tag) tag.remove();
+  }
+
+  function handleTagKeydown(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const input = event.target;
+      const text = input.value.trim();
+      if (text) {
+        addTagElement(text);
+        input.value = '';
+      }
+    }
+  }
+
+  function addSuggestedTag(name) {
+    addTagElement(name);
+  }
+
+  function addTagElement(name) {
+    const container = document.getElementById('tech-tag-container');
+    const input = document.getElementById('tech-input');
+    
+    // Check duplicate
+    const existing = Array.from(container.querySelectorAll('span > span:nth-child(2)')).map(s => s.textContent.trim());
+    if (existing.includes(name)) return;
+
+    const span = document.createElement('span');
+    span.className = 'inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-2.5 py-1 rounded-md font-label-md text-label-md';
+    span.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-secondary"></span>
+      <span>${name}</span>
+      <button type="button" onclick="removeTag(this)" class="hover:text-error transition-colors ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button>
+    `;
+    container.insertBefore(span, input);
+  }
+</script></div></main><footer class="w-full bg-surface-container text-on-surface mt-space-2xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex flex-col gap-space-xxs text-center md:text-left"><p class="font-label-md text-label-md text-on-surface font-semibold">© 2025 FET - Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez</p><p class="text-on-surface-variant">Dirección de Prácticas Profesionales y Coordinación de Empleabilidad e Innovación</p><p class="text-[11px] text-outline">Integración tecnológica y sincronización de expediente impulsada por Q10 Solutions</p></div><div class="flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Mesa de Ayuda</a><a class="hover:text-primary transition-colors" href="#">Normativa PA-GTH-F-10</a><a class="hover:text-primary transition-colors" href="#">Convenios Empresariales</a><a class="hover:text-primary transition-colors" href="#">Tratamiento de Datos</a></div></div></footer></body></html>

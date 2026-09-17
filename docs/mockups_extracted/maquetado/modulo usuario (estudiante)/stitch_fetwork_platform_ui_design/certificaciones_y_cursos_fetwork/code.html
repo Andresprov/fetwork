@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f7f9fb","on-secondary":"#ffffff","surface-variant":"#e0e3e5","on-secondary-fixed":"#002204","error":"#ba1a1a","surface-tint":"#2a6b2c","surface":"#f7f9fb","on-tertiary-fixed-variant":"#005236","tertiary-fixed":"#6ffbbe","surface-container":"#eceef0","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","surface-container-high":"#e6e8ea","secondary":"#1b6d24","inverse-on-surface":"#eff1f3","outline-variant":"#c0c9bb","error-container":"#ffdad6","primary-fixed-dim":"#91d78a","on-primary-container":"#90d689","on-tertiary-container":"#4ddda2","surface-bright":"#f7f9fb","primary-fixed":"#acf4a4","on-secondary-fixed-variant":"#005312","secondary-container":"#a0f399","on-tertiary":"#ffffff","secondary-fixed":"#a3f69c","on-secondary-container":"#217128","on-tertiary-fixed":"#002113","primary-container":"#1b5e20","on-primary-fixed-variant":"#0c5216","on-primary-fixed":"#002203","on-error-container":"#93000a","on-background":"#191c1e","secondary-fixed-dim":"#88d982","tertiary-container":"#005e3f","outline":"#717a6d","on-surface":"#191c1e","primary":"#00450d","inverse-primary":"#91d78a","on-surface-variant":"#41493e","inverse-surface":"#2d3133","surface-dim":"#d8dadc","on-primary":"#ffffff","tertiary":"#00442d","tertiary-fixed-dim":"#4edea3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","space-2xl":"3rem","space-xxs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter-mobile":"1rem","container-max":"1280px","space-sm":"0.75rem","space-xs":"0.5rem","space-xl":"2rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-primary-container text-on-primary shadow-[0_2px_10px_rgba(0,0,0,0.12)]"><div class="h-28 max-w-[1280px] mx-auto px-gutter-desktop flex flex-col justify-between pt-space-xs pb-space-xxs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="FETWork Institutional Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO54wG_yWAqeuqjvS4LH1d-wS7yK3CYaU6VtdFzOWksXe5ENmQA4igcOTZTq4cfErGrZ_XIeEk2P1Sq9lXy97_s483oUZrsWoFbF7ZkR7lferUEWswQeNvtsT5bG4aG9HI5wI6ha_Se8rC9sohAqT_ONqCDLYzVHF8JoxnEmeElSo0KUbTCQ6iMW1LUUYQi_q-WIFlseNJqew7HJ_ETwY2DBNElR4Yf6y9XiBkCZ3Ak5JysDNNlWtA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-primary leading-tight">FETWork</span><span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Portal de Empleabilidad FET</span></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-primary px-space-sm py-space-xxs rounded-lg text-on-primary text-body-sm font-body-sm gap-space-xs"><span class="material-symbols-outlined text-[18px]">search</span><span>Buscar convocatorias...</span><kbd class="text-[10px] bg-primary-container/60 px-1.5 py-0.5 rounded text-on-primary-container">Ctrl+K</kbd></div><button class="relative p-space-xs text-on-primary hover:bg-primary rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-primary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-on-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1H-OH2LKoEHmhxc-VpowWJJLnwzZ3AQoBilDp3lpCxbJSlEEHoA8Je5ergwnbQX-b2coiF64dNsIlEKSg48h8s6-svrgiH-Q3A8czCmxYGpfr-i7uOM3-3a2DRbERP3fkpwnrQg1ZDedd__Yb_DKKmcUr_JW91XLg4K3NdZ7BKJnQmogNQiJNs5V4MaURTFM-IrkcMIErtn-cqWH59adKHUotLsZEBExm4JGuqAHrEoA-I3E4vSVjQ"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-primary leading-none">Andrés David</span><span class="font-label-sm text-label-sm text-on-primary-container leading-none mt-1">Ing. de Software</span></div><span class="material-symbols-outlined text-[18px] text-on-primary-container hidden lg:inline">expand_more</span></div></div></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1 scrollbar-none" data-active-classes="text-on-primary font-bold bg-primary rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-1.5 transition-colors whitespace-nowrap text-on-primary font-bold bg-primary rounded-lg shadow-sm" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mi-perfil-y-q10" href="#">Mi Perfil &amp; Q10</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="habilidades-y-cv" href="#">Habilidades &amp; CV</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mis-proyectos" href="#">Mis Proyectos</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="hoja-de-vida" href="#">Hoja de Vida (PA-GTH-F-10)</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="explorar-vacantes" href="#">Explorar Vacantes</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="visibilidad" href="#">Visibilidad</a></nav></div><div class="bg-surface-container-low text-on-surface py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">sync</span><span class="text-secondary font-semibold">Sincronizado con Q10 Académico</span><span class="text-outline-variant">•</span><span>Registro Oficial Estudiantil</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface px-space-xs py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Semestre VIII - 2025-1</span><span class="text-on-surface-variant hidden sm:inline">Sede Neiva (Huila)</span></div></div></div></header><main class="w-full pt-28 bg-background min-h-screen"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-lg"><div class="flex flex-col w-full">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-xl">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xxs">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+          Módulo Académico CU-03
+        </span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Expediente Complementario</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+        Certificaciones, Cursos y Diplomados
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-3xl">
+        Acredita tu formación complementaria, cursos extracurriculares y certificaciones tecnológicas reconocidas por la FET y la industria para potenciar tus postulaciones laborales.
+      </p>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="inline-flex items-center gap-2 bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg px-space-md py-2.5 rounded-lg shadow-sm transition-all duration-200 cursor-pointer" onclick="document.getElementById('modal-registro').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+        Registrar Certificación / Curso
+      </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col sm:flex-row gap-space-sm items-stretch sm:items-center justify-between">
+<div class="flex items-center gap-space-xs bg-surface-container-low px-3 py-2 rounded-lg flex-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent font-body-sm text-body-sm text-on-surface placeholder:text-outline w-full outline-none" placeholder="Buscar por certificado, entidad o tecnología..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container font-label-sm text-label-sm text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+            Todas las Entidades
+          </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+            Recientes
+          </button>
+</div>
+</div>
+<div class="flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">military_tech</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                    Certificación Profesional Scrum Master (PSM I)
+                  </h2>
+<span class="inline-flex items-center gap-1 bg-secondary-container/40 text-on-secondary-fixed-variant px-2 py-0.5 rounded font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                    Verificado
+                  </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+                  Emitido por <span class="font-semibold text-on-surface">Scrum.org</span>
+</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant self-start">
+<span class="material-symbols-outlined text-[15px] text-secondary">devices</span>
+              Modalidad Virtual
+            </span>
+</div>
+<div class="mt-space-md pt-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-sm text-on-surface-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Fecha de Emisión</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Nov 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Vigencia</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">No expira</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Intensidad</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">40 Horas</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">ID Credencial</span>
+<span class="font-body-sm text-body-sm text-on-surface font-mono font-medium">#SM-98213-COL</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Agile</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Scrum Framework</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Gestión de Proyectos</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-sm text-label-sm text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                Credencial
+              </a>
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                Validación Externa
+              </a>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container text-on-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">school</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                    Diplomado en Desarrollo Backend y Microservicios
+                  </h2>
+<span class="inline-flex items-center gap-1 bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">domain_verification</span>
+                    Acreditación FET
+                  </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+                  Emitido por <span class="font-semibold text-on-surface">Fundación Escuela Tecnológica de Neiva - FET</span>
+</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant self-start">
+<span class="material-symbols-outlined text-[15px] text-secondary">laptop_chromebook</span>
+              Modalidad Híbrida
+            </span>
+</div>
+<div class="mt-space-md pt-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-sm text-on-surface-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Fecha de Emisión</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Jun 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Resolución Académica</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">FET-EXT-2024-88</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Intensidad</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium font-semibold text-secondary">120 Horas</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Verificación Q10</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync_saved_locally</span>
+                Sincronizado
+              </span>
+</div>
+</div>
+<div class="mt-space-md flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">NodeJS / NestJS</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Docker</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Arquitectura Hexagonal</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-sm text-label-sm text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+                Descargar Acta PDF
+              </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all duration-200">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">database</span>
+</div>
+<div class="flex flex-col">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                    Especialización en SQL y Modelado de Datos
+                  </h2>
+<span class="inline-flex items-center gap-1 bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                    En Revisión FET
+                  </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+                  Emitido por <span class="font-semibold text-on-surface">Oracle Academy</span>
+</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant self-start">
+<span class="material-symbols-outlined text-[15px] text-secondary">public</span>
+              Modalidad Virtual
+            </span>
+</div>
+<div class="mt-space-md pt-space-sm grid grid-cols-2 sm:grid-cols-4 gap-space-sm text-on-surface-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Fecha de Emisión</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Mar 2024</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Vigencia</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">No expira</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Intensidad</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">60 Horas</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">ID Credencial</span>
+<span class="font-body-sm text-body-sm text-on-surface font-mono font-medium">#ORA-DB-881923</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">PL/SQL</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Normalización</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">Data Warehouse</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container font-label-sm text-label-sm text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">link</span>
+                Ver Credencial Digital
+              </a>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col md:flex-row items-center gap-space-lg">
+<div class="w-full md:w-48 h-32 rounded-lg bg-cover bg-center shrink-0 shadow-sm" data-alt="Estudiantes universitarios en un laboratorio de computo moderno de la FET en Neiva, analizando datos y programación en equipo, con luz natural y tonos verdes institucionales cálidos" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2rmJP8jog8vNxGCIGb7N7xbAgOUZI902LQhLTSu4hxS-fBocBMz4ly7Ucvm4R_WxW3rU5knyi6EZfnesxpD5iJHGxTpayLlvYhEvfFO8O5I9FuxVg8Tu37Tm8V-qmKS_hadTV8-ho3hkEjJVCnwJFVl7943nmNYYiFX8w8xshucC8FF5BX_VEd5Y9UFNvg07PmLT1T_k6EL7BZ0f-Dr62DYwuDysapUA0sb0HXWO3aMZ-zNOrlgRZDA')"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Acreditación Institucional</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-1">¿Completaste un semillero o curso de Extensión FET?</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Si tu formación fue cursada en convenios institucionales de la FET, puedes sincronizar directamente los créditos utilizando tu código de estudiante sin necesidad de subir archivos manuales.
+          </p>
+<div class="mt-3">
+<button class="inline-flex items-center gap-2 text-secondary font-label-sm text-label-sm hover:underline">
+<span class="material-symbols-outlined text-[18px]">sync_alt</span>
+              Consultar cursos pendientes en Q10 Extensión
+            </button>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Resumen de Formación</h3>
+<span class="material-symbols-outlined text-secondary text-[24px]">history_edu</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Horas de formación complementaria acreditadas en tu expediente institucional FET.</p>
+<div class="mt-space-md p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Horas Totales</span>
+<span class="font-headline-xl text-headline-xl text-primary font-bold">220 <span class="font-headline-sm text-headline-sm font-normal text-on-surface-variant">hrs</span></span>
+</div>
+<div class="h-12 w-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">timelapse</span>
+</div>
+</div>
+<div class="mt-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm font-body-sm">
+<span class="text-on-surface-variant">Meta complementaria de grado (200h)</span>
+<span class="font-semibold text-secondary">110% Cumplida</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-full"></div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex flex-col gap-2 font-body-sm text-body-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Certificados Verificados</span>
+<span class="font-bold text-on-surface">2 de 3</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Emisores Externos</span>
+<span class="font-bold text-on-surface">Scrum.org, Oracle</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Acreditaciones FET</span>
+<span class="font-bold text-on-surface">1 Diplomado</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Compatibilidad Laboral</h3>
+<span class="material-symbols-outlined text-secondary text-[24px]">hub</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+          Aporte de tus certificaciones al perfil de egreso y vacantes TIC en el Huila y región Surcolombiana.
+        </p>
+<div class="flex items-center justify-center py-2">
+<div class="relative flex items-center justify-center">
+<svg class="w-28 h-28 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">88%</span>
+<span class="font-label-sm text-label-sm text-outline">Match TIC</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs mt-space-sm">
+<div class="p-space-xs rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Desarrollador Backend Junior</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary">94%</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Scrum Master / Agile Coach</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary">90%</span>
+</div>
+<div class="p-space-xs rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface">Administrador de Bases de Datos</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-secondary">82%</span>
+</div>
+</div>
+<button class="mt-space-md w-full py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant font-label-sm text-label-sm font-semibold transition-colors flex items-center justify-center gap-1">
+          Ver Convocatorias Compatibles (14)
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="bg-primary-container text-on-primary rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+<div class="relative z-10 flex flex-col gap-space-xs">
+<div class="flex items-center gap-2 text-primary-fixed">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Validación Oficial</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary/95 mt-1 leading-relaxed">
+            Los certificados emitidos por la FET se validan automáticamente con el área de <strong class="text-white">Extensión y Proyección Social</strong>, agilizando la inclusión oficial en tu Hoja de Vida PA-GTH-F-10.
+          </p>
+<div class="mt-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">Coordinación de Empleabilidad FET</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-4 overflow-y-auto" id="modal-registro">
+<div class="bg-surface-container-lowest w-full max-w-2xl rounded-xl shadow-xl overflow-hidden my-8">
+<div class="bg-primary-container text-on-primary px-space-lg py-space-md flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold">Registrar Nueva Certificación o Curso</h2>
+</div>
+<button class="text-on-primary/80 hover:text-on-primary cursor-pointer" onclick="document.getElementById('modal-registro').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-space-lg flex flex-col gap-space-md" onsubmit="event.preventDefault(); document.getElementById('modal-registro').classList.add('hidden');">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+            Nombre del Certificado / Curso / Diplomado *
+          </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" placeholder="Ej. AWS Certified Cloud Practitioner o Diplomado en Ciberseguridad" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              Entidad Emisora / Institución *
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" placeholder="Ej. Cisco Networking Academy, Platzi, FET, SENA" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              Modalidad de Estudio *
+            </label>
+<select class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary">
+<option value="virtual">Virtual / 100% Online</option>
+<option value="presencial">Presencial (Campus)</option>
+<option value="hibrida">Híbrida / Mixta</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              Fecha de Emisión *
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" required="" type="date"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              Fecha de Expiración
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" id="input-expiracion" type="date"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              Horas de Duración *
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" min="1" placeholder="Ej. 40, 120" required="" type="number"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded text-secondary focus:ring-secondary cursor-pointer" id="check-no-expira" onchange="document.getElementById('input-expiracion').disabled = this.checked;" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface select-none cursor-pointer" for="check-no-expira">
+            Esta credencial o certificado no tiene fecha de expiración
+          </label>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              ID Credencial / Código de Verificación
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" placeholder="Ej. AWS-7829-XP" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+              URL de Verificación Digital
+            </label>
+<input class="h-10 px-3 rounded-lg bg-surface-container-low font-body-sm text-body-sm text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary" placeholder="https://certificados.empresa.com/verify/..." type="url"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">
+            Adjuntar Soporte Digital (PDF o Imagen)
+          </label>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[32px] text-secondary">cloud_upload</span>
+<p class="font-body-sm text-body-sm text-on-surface font-medium mt-1">Haz clic para seleccionar o arrastra tu archivo aquí</p>
+<span class="font-label-sm text-label-sm text-outline">Formatos permitidos: PDF, PNG, JPG (Máximo 5MB)</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm mt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface-container font-label-md text-label-md text-on-surface hover:bg-surface-variant transition-colors cursor-pointer" onclick="document.getElementById('modal-registro').classList.add('hidden')" type="button">
+            Cancelar
+          </button>
+<button class="px-space-md py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-colors cursor-pointer flex items-center gap-1.5" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+            Guardar y Solicitar Acreditación
+          </button>
+</div>
+</form>
+</div>
+</div>
+</div></div></main><footer class="w-full bg-surface-container text-on-surface mt-space-2xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex flex-col gap-space-xxs text-center md:text-left"><p class="font-label-md text-label-md text-on-surface font-semibold">© 2025 FET - Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez</p><p class="text-on-surface-variant">Dirección de Prácticas Profesionales y Coordinación de Empleabilidad e Innovación</p><p class="text-[11px] text-outline">Integración tecnológica y sincronización de expediente impulsada por Q10 Solutions</p></div><div class="flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Mesa de Ayuda</a><a class="hover:text-primary transition-colors" href="#">Normativa PA-GTH-F-10</a><a class="hover:text-primary transition-colors" href="#">Convenios Empresariales</a><a class="hover:text-primary transition-colors" href="#">Tratamiento de Datos</a></div></div></footer></body></html>

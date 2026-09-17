@@ -1,0 +1,443 @@
+**Documento de Arquitectura de Software**
+
+**FETWork V1.0**
+
+Fundacion Escuela Tecnologica de Neiva - FET
+
+Asignatura: Ingenieria de Software II
+
+Version: 1.1 (revisada para consistencia con requisitos v1.2 y maquetado: nota CU-16/CU-17, correccion de nombramiento CU-18/CU-19, y actualizacion de conclusiones)
+
+Fecha: Septiembre de 2026
+
+# 1. Introduccion
+
+Este documento describe la arquitectura de software propuesta para FETWork V1.0, la plataforma web de la Fundacion Escuela Tecnologica de Neiva (FET) que conecta el perfil profesional de los estudiantes con las empresas interesadas en su talento.
+
+El objetivo es dejar registrada la decision arquitectonica, su justificacion, el mapeo de responsabilidades por capa y modulo, y la estrategia de resiliencia (aislamiento de fallos y respaldo) que el sistema debera implementar.
+
+# 2. Estilo arquitectonico
+
+**Decision: **monolito modular organizado en tres capas (presentacion, logica de negocio y datos), desplegado como una unica aplicacion backend pero internamente dividido en modulos independientes por dominio.
+
+Se descarta una arquitectura de microservicios para la version 1.0. Aunque ofrece mayor independencia entre componentes, introduce complejidad de despliegue, comunicacion entre servicios y orquestacion que no se justifica para el alcance y el tiempo disponible (11 semanas, equipo reducido). El monolito modular ofrece un balance adecuado: mantiene el codigo organizado y desacoplado internamente, y deja la puerta abierta para dividir modulos en servicios independientes en versiones futuras si el crecimiento del proyecto lo justifica.
+
+## 2.1 Diagrama general de la arquitectura
+
+## 2.2 Mapeo de capas y responsabilidades
+
+| **Capa** | **Responsabilidad** | **Tecnologia** |
+| --- | --- | --- |
+| Presentacion | Interfaz con la que interactuan estudiantes, empresas y administrador. | React (Vite) + Tailwind CSS |
+| Controladores | Reciben las peticiones HTTP, validan datos de entrada y las enrutan al servicio correspondiente. | Node.js + Express (routers) |
+| Servicios | Contiene la logica de negocio: reglas de visibilidad de perfiles, filtros de busqueda, validaciones. | Node.js (clases/servicios) |
+| Repositorios | Encapsulan el acceso a datos; son el unico punto que consulta la base de datos. | Prisma ORM |
+| Persistencia | Almacena de forma permanente la informacion de usuarios, perfiles, proyectos y empresas. | PostgreSQL |
+
+# 3. Autenticacion e integracion con la plataforma institucional Q10
+
+La FET ya gestiona el registro y la identidad de estudiantes y docentes a traves de Q10, su plataforma academica institucional. Por esta razon, FETWork V1.0 no duplica ese registro: solo las empresas se registran directamente en FETWork. El modulo de Usuarios maneja entonces dos flujos de autenticacion distintos:
+
+- Estudiantes y docentes: inician sesion mediante Q10 (que ya ofrece inicio de sesion unico - SSO - y una API abierta para integraciones externas). Al autenticarse por primera vez, FETWork sincroniza una cuenta local (tabla usuarios) vinculada al codigo institucional del usuario en Q10, sin almacenar contrasena propia.
+
+- Empresas: se registran directamente en FETWork con correo y contrasena (JWT + bcrypt), como se describio en las fases anteriores. Su cuenta queda en estado pendiente hasta ser revisada.
+
+## 3.1 Roles administrativos
+
+El rol de Administrador ya no es una cuenta independiente: son docentes (ya existentes en Q10) a quienes FETWork les otorga permisos adicionales. Esta asignacion se realiza de forma directa durante la configuracion del sistema, dado que corresponde a un numero reducido y conocido de personas:
+
+- Coordinador de pasantias: docente encargado de asignar que docente audita a cada estudiante, y de administrar el catalogo de categorias de habilidades.
+
+- Validador de empresas: docente encargado de aprobar o rechazar el registro de las empresas antes de que puedan buscar y consultar estudiantes.
+
+- Docente auditor: docente que hace seguimiento al proceso de practica o pasantia de los estudiantes que el coordinador le asigno.
+
+La hoja de vida institucional (seccion 7.3) no requiere aprobacion de ningun validador; el estudiante la diligencia y exporta libremente.
+
+## 3.2 Diagrama de autenticacion
+
+# 4. Stack tecnologico
+
+La siguiente tabla resume las tecnologias seleccionadas para cada componente del sistema, junto con la justificacion de la eleccion.
+
+| **Componente** | **Tecnologia elegida** | **Justificacion breve** |
+| --- | --- | --- |
+| Frontend | React (Vite) + Tailwind CSS | Componentes reutilizables, curva de aprendizaje suave, documentacion amplia. |
+| Backend | Node.js + Express (API REST) | Mismo lenguaje que el frontend; ecosistema maduro; ideal para equipos pequenos. |
+| ORM | Prisma | Migraciones simples y tipadas, se integra muy bien con PostgreSQL. |
+| Base de datos | PostgreSQL | Relacional, adecuada para las relaciones estudiante-proyectos-habilidades-empresas. |
+| Autenticacion | JWT + bcrypt | Estandar de la industria; se usa solo para las cuentas de empresas (registro local). |
+| Integracion institucional | Q10 (SSO / API abierta) | Valida la identidad de estudiantes y docentes; Q10 ya ofrece SSO y una API abierta para integraciones externas. |
+| Archivos (hoja de vida) | Cloudinary o almacenamiento local | Evita complejizar el backend con manejo pesado de archivos. |
+| Base de datos administrada | Neon o Supabase (plan gratuito) | Incluyen backups automaticos diarios sin configuracion adicional. |
+| Control de version por modulo | Variables de entorno / archivo de configuracion | Permite alternar manualmente entre la version en linea y la de respaldo de cada modulo. |
+| Despliegue | Render o Railway (instancia unica) | Un solo servidor es suficiente; la resiliencia se maneja a nivel de modulo, no de infraestructura. |
+| Generacion de documentos | docxtemplater (Node.js) | Permite generar la hoja de vida en el formato institucional exacto, usando la plantilla oficial con marcadores. |
+
+# 5. Modularidad e independencia entre modulos
+
+Uno de los requisitos de diseno de FETWork V1.0 es que los modulos del sistema puedan activarse o desactivarse de forma independiente, y que una falla en un modulo no afecte el funcionamiento de los demas. Esto se logra sin recurrir a microservicios, mediante las siguientes decisiones de diseno:
+
+- Cada modulo (Usuarios, Perfiles, Proyectos, Empresas, Administracion) se implementa como un router de Express independiente, registrado de forma condicional segun un archivo de configuracion o variables de entorno.
+
+- Los modulos no acceden entre si directamente a la base de datos; toda comunicacion entre modulos pasa por servicios con una interfaz definida, evitando el acoplamiento directo.
+
+- Cada router cuenta con su propio middleware de manejo de errores, ademas de un manejador global de ultima instancia, de forma que un error no controlado en un modulo no interrumpe las peticiones que estan siendo atendidas por otros modulos.
+
+- Esta separacion logica facilita, si en el futuro se requiere, extraer cualquier modulo como un servicio desplegable de forma independiente.
+
+## 5.1 Diagrama de modularidad
+
+## 5.2 Versionado interno de cada modulo: version en linea y de respaldo
+
+Ademas de poder activarse o desactivarse por completo, cada modulo mantiene internamente dos versiones de su codigo:
+
+- Version en linea (actual): la version mas reciente, donde el equipo continua desarrollando y mejorando funcionalidades.
+
+- Version de respaldo (estable): la ultima version confirmada como estable, que permanece congelada mientras se trabaja en la version en linea, lista para entrar en funcionamiento si se necesita.
+
+Un archivo de configuracion (o variable de entorno) determina, por modulo, cual de las dos versiones atiende las peticiones. En esta primera etapa el cambio es manual: si el equipo detecta que la version en linea de un modulo presenta errores, cambia la configuracion para que ese modulo vuelva a servir desde su version de respaldo, sin afectar a los demas modulos y sin necesidad de un segundo servidor ni infraestructura adicional.
+
+**Mejora futura (fuera del alcance de V1.0): **automatizar esta decision mediante el patron Circuit Breaker (por ejemplo con la libreria opossum para Node.js), que detectaria fallos repetidos en la version en linea de un modulo y cambiaria automaticamente hacia la version de respaldo, reintentando de forma periodica la version en linea hasta confirmar que vuelve a funcionar.
+
+## 5.3 Diagrama de version en linea y de respaldo
+
+# 6. Estrategia de resiliencia y respaldo
+
+La resiliencia de FETWork V1.0 se resuelve a nivel de software (base de datos y modulos), sin depender de infraestructura duplicada como un segundo servidor. Esto mantiene la solucion simple y viable para el tiempo de desarrollo disponible.
+
+## 6.1 Respaldo de base de datos
+
+- Uso de un proveedor de PostgreSQL administrado (Neon o Supabase, plan gratuito), que realiza backups automaticos diarios sin configuracion adicional.
+
+- Complementariamente, se programa un respaldo periodico (pg_dump) exportado a un almacenamiento externo, como evidencia adicional para la documentacion del proyecto.
+
+## 6.2 Respaldo por modulo
+
+Como se describe en la seccion 5.2, cada modulo cuenta con una version en linea y una version de respaldo. Ante una falla, el equipo cambia manualmente la configuracion del modulo afectado para que sirva desde su version estable, mientras se corrige el problema en la version en linea. Este mecanismo reemplaza la necesidad de un servidor de respaldo completo, concentrando la resiliencia donde realmente ocurre el riesgo: en el codigo de cada modulo.
+
+# 7. Modelo de base de datos
+
+A continuacion se presenta el modelo entidad-relacion (ERD) de FETWork V1.0, derivado directamente de los requisitos funcionales y del Product Backlog. El modelo es relacional (PostgreSQL) y refleja las relaciones entre estudiantes, empresas, catalogos administrables y la informacion propia del perfil profesional (habilidades, experiencia, certificaciones y proyectos).
+
+## 7.1 Diagrama entidad-relacion
+
+## 7.2 Diccionario de datos
+
+Se detalla a continuacion cada entidad del modelo, con sus campos, tipos de dato y descripcion.
+
+### usuarios
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_usuario (PK) | int | Identificador unico del usuario. |
+| codigo_institucional_q10 | varchar | Identificador del usuario en la plataforma Q10 (nulo para empresas). |
+| correo | varchar | Correo electronico del usuario. |
+| contrasena_hash | varchar | Contrasena cifrada. Solo aplica para empresas; nula para estudiantes y docentes autenticados via Q10. |
+| rol | enum | Rol del usuario: estudiante, docente o empresa. |
+| origen_autenticacion | enum | Origen de la autenticacion: q10 (institucional) o local (empresas). |
+| fecha_creacion | datetime | Fecha de creacion o primera sincronizacion del usuario. |
+| activo | boolean | Indica si la cuenta esta activa. |
+
+### programas_academicos
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_programa (PK) | int | Identificador unico del programa academico. |
+| nombre | varchar | Nombre del programa academico. |
+
+### estudiantes
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_estudiante (PK) | int | Identificador unico del estudiante. |
+| id_usuario (FK) | int | Referencia al usuario asociado. |
+| id_programa (FK) | int | Referencia al programa academico del estudiante. |
+| nombres / apellidos | varchar | Nombre completo del estudiante. |
+| semestre | int | Semestre academico actual. |
+| telefono | varchar | Numero de contacto. |
+| foto_url | varchar | Enlace a la foto de perfil. |
+| hoja_vida_url | varchar | Enlace o archivo de la hoja de vida. |
+| portafolio_url | varchar | Enlace al portafolio profesional. |
+| github_url | varchar | Enlace al perfil de GitHub. |
+| mostrar_experiencia | boolean | Define si la experiencia es visible en el perfil publico. |
+| mostrar_certificaciones | boolean | Define si las certificaciones son visibles publicamente. |
+| mostrar_proyectos | boolean | Define si los proyectos son visibles publicamente. |
+| mostrar_contacto | boolean | Define si el contacto es visible publicamente. |
+
+### empresas
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_empresa (PK) | int | Identificador unico de la empresa. |
+| id_usuario (FK) | int | Referencia al usuario asociado. |
+| nombre_empresa | varchar | Nombre de la organizacion. |
+| descripcion | text | Descripcion general de la empresa. |
+| sector | varchar | Sector economico de la empresa. |
+| sitio_web | varchar | Sitio web de la empresa. |
+| telefono | varchar | Numero de contacto de la empresa. |
+| estado_validacion | enum | Estado del registro: pendiente, aprobada o rechazada. |
+| id_validador (FK) | int | Docente-administrador (validador) que reviso el registro. |
+| fecha_validacion | datetime | Fecha en que se aprobo o rechazo el registro. |
+| comentario_validacion | text | Observaciones del validador (por ejemplo, motivo de rechazo). |
+
+### categorias_habilidades
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_categoria (PK) | int | Identificador unico de la categoria. |
+| nombre | varchar | Nombre de la categoria de habilidad. |
+
+### habilidades
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_habilidad (PK) | int | Identificador unico de la habilidad. |
+| id_categoria (FK) | int | Referencia a la categoria de la habilidad. |
+| nombre | varchar | Nombre de la habilidad. |
+
+### estudiante_habilidades
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| id_habilidad (FK) | int | Referencia a la habilidad. |
+| nivel | varchar | Nivel de dominio de la habilidad (opcional). |
+
+### experiencias
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_experiencia (PK) | int | Identificador unico del registro. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| cargo | varchar | Cargo desempenado. |
+| entidad | varchar | Entidad o empresa donde se realizo. |
+| direccion | varchar | Direccion de la entidad. |
+| telefono | varchar | Telefono de contacto de la entidad. |
+| jefe_inmediato | varchar | Nombre del jefe inmediato. |
+| dedicacion | varchar | Tipo de dedicacion (tiempo completo, medio tiempo, etc.). |
+| fecha_inicio / fecha_fin | date | Periodo en el que se realizo la experiencia. |
+| descripcion | text | Funciones desempenadas. |
+
+### certificaciones
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_certificacion (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| nombre | varchar | Nombre o tema de la certificacion, diplomado o curso. |
+| entidad_emisora | varchar | Entidad que emitio la certificacion. |
+| fecha | date | Fecha de obtencion. |
+| duracion | varchar | Duracion del curso o diplomado. |
+| modalidad | varchar | Modalidad de estudio (presencial, virtual, etc.). |
+
+### proyectos
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_proyecto (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| nombre | varchar | Nombre del proyecto. |
+| descripcion | text | Descripcion del proyecto. |
+| fecha | date | Fecha o periodo de realizacion. |
+| repositorio_github_url | varchar | Enlace al repositorio de GitHub del proyecto. |
+
+### proyecto_tecnologias
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_tecnologia (PK) | int | Identificador unico. |
+| id_proyecto (FK) | int | Referencia al proyecto. |
+| tecnologia | varchar | Tecnologia utilizada en el proyecto. |
+
+### proyecto_enlaces
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_enlace (PK) | int | Identificador unico. |
+| id_proyecto (FK) | int | Referencia al proyecto. |
+| url | varchar | Enlace relacionado con el proyecto. |
+| tipo | varchar | Tipo de enlace (demo, articulo, video, entre otros). |
+
+### datos_personales_cv
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_datos_personales (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante (relacion 1 a 1). |
+| documento_identidad | varchar | Numero de documento de identidad. |
+| fecha_nacimiento | date | Fecha de nacimiento. |
+| lugar_nacimiento | varchar | Ciudad y pais de nacimiento. |
+| estado_civil | varchar | Estado civil. |
+| lugar_residencia | varchar | Ciudad de residencia. |
+| direccion | varchar | Direccion de residencia. |
+| rh | varchar | Grupo sanguineo y factor RH. |
+| contacto_emergencia_nombre | varchar | Nombre de la persona de contacto en caso de emergencia. |
+| contacto_emergencia_telefono | varchar | Telefono de la persona de contacto en caso de emergencia. |
+
+### titulos_academicos
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_titulo (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| nivel | enum | Nivel del titulo: pregrado, tecnologo, tecnico, especializacion o maestria. |
+| fecha_grado | date | Fecha de grado. |
+| institucion | varchar | Institucion que otorgo el titulo. |
+| pais_ciudad | varchar | Pais y ciudad de la institucion. |
+| titulo_obtenido | varchar | Nombre del titulo obtenido. |
+| modalidad_estudio | varchar | Modalidad de estudio (presencial, virtual, etc.). |
+
+### actividades_investigativas
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_actividad (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| tipo | enum | Tipo de actividad: grupo de investigacion, proyecto, tutoria, jurado, publicacion, ponencia u organizacion. |
+| descripcion | text | Descripcion de la actividad. |
+| periodo | varchar | Periodo o tiempo de vinculacion. |
+
+### referencias
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_referencia (PK) | int | Identificador unico. |
+| id_estudiante (FK) | int | Referencia al estudiante. |
+| tipo | enum | Tipo de referencia: familiar o personal. |
+| nombre_completo | varchar | Nombre completo de la persona de referencia. |
+| profesion_ocupacion | varchar | Profesion u ocupacion de la persona de referencia. |
+| parentesco | varchar | Parentesco (solo aplica para referencias familiares). |
+| telefono | varchar | Telefono de contacto. |
+
+### asignaciones_administrativas
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_asignacion (PK) | int | Identificador unico. |
+| id_docente (FK) | int | Referencia al usuario (docente) con rol administrativo. |
+| tipo | enum | Tipo de asignacion: coordinador_pasantias o validador_empresas. |
+| fecha_asignacion | date | Fecha en que se otorgo la asignacion. |
+
+### auditorias
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_auditoria (PK) | int | Identificador unico. |
+| id_docente (FK) | int | Docente auditor asignado. |
+| id_estudiante (FK) | int | Estudiante auditado. |
+| asignado_por (FK) | int | Coordinador de pasantias que realizo la asignacion. |
+| fecha_asignacion | date | Fecha en que se realizo la asignacion. |
+
+### vacantes
+
+| **Campo** | **Tipo** | **Descripcion** |
+| --- | --- | --- |
+| id_vacante (PK) | int | Identificador unico. |
+| id_empresa (FK) | int | Empresa que publica la vacante. |
+| titulo | varchar | Titulo de la vacante. |
+| tipo | enum | Tipo de vacante: pasantia o empleo. |
+| descripcion | text | Descripcion de la vacante. |
+| requisitos | text | Requisitos para aplicar. |
+| modalidad | varchar | Modalidad de trabajo (presencial, remoto, hibrido). |
+| fecha_limite | date | Fecha limite para aplicar. |
+| estado | enum | Estado de la vacante: activa o cerrada. |
+| fecha_publicacion | datetime | Fecha en que se publico la vacante. |
+| contacto | varchar | Correo o enlace externo para que el estudiante aplique. |
+
+## 7.3 Modulo de hoja de vida institucional
+
+A solicitud del docente, se incorpora al modelo la captura de datos para generar la Hoja de Vida en el formato institucional de la FET (codigo PA-GTH-F-10). El estudiante diligencia esta informacion dentro de FETWork y puede exportarla como documento Word, generado automaticamente a partir de la plantilla oficial.
+
+- Las entidades datos_personales_cv, titulos_academicos, actividades_investigativas y referencias corresponden a las secciones de dicho formato: datos personales, formacion academica, experiencia academica investigativa y referencias. La experiencia laboral y los cursos/diplomados reutilizan las tablas experiencias y certificaciones, ampliadas con los campos adicionales que exige el formato.
+
+**Privacidad: **los datos de este modulo (documento de identidad, RH, contacto de emergencia y referencias) son de uso exclusivo para generar el documento; no se muestran en el perfil publico ni en los resultados de busqueda de las empresas, independientemente de la configuracion de visibilidad del resto del perfil.
+
+**Generacion del documento: **se recomienda usar la libreria docxtemplater (Node.js), que toma el archivo .docx institucional original como plantilla con marcadores y lo rellena con los datos capturados, produciendo un documento .docx fiel al formato oficial, listo para descargar.
+
+## 7.4 Modulo de vacantes
+
+Se incorpora al modelo la publicacion de vacantes por parte de las empresas, y su busqueda por parte de los estudiantes. Una empresa (ya aprobada por el Validador) puede publicar vacantes de tipo pasantia o empleo; los estudiantes pueden explorarlas y filtrarlas dentro de la plataforma.
+
+- La tabla vacantes se relaciona 1 a N con empresas: cada empresa puede publicar varias vacantes, cada vacante pertenece a una sola empresa.
+
+- El alcance de V1.0 no incluye un flujo formal de postulacion dentro de la plataforma: el campo contacto (correo o enlace externo) es el mecanismo para que el estudiante aplique. Un flujo de postulacion con seguimiento de estado queda como mejora futura.
+
+# 8. Casos de uso principales
+
+Los casos de uso se organizan por actor: Estudiante, Empresa, Docente, Coordinador de Pasantias y Validador de Empresas. Cada uno agrupa uno o varios requisitos funcionales del documento de requisitos.
+
+## 8.1 Actor: Estudiante
+
+## 8.2 Actor: Empresa
+
+## 8.3 Actor: Docente (auditor)
+
+## 8.4 Actor: Coordinador de Pasantias
+
+## 8.5 Actor: Validador de Empresas
+
+## 8.6 Tabla resumen de casos de uso
+
+| **ID** | **Actor** | **Caso de uso** | **RF relacionado** |
+| --- | --- | --- | --- |
+| CU-01 | Estudiante | Iniciar sesion (via Q10) | RF-03 (modificado) |
+| CU-02 | Estudiante | Gestionar perfil profesional | RF-06, RF-07 |
+| CU-03 | Estudiante | Gestionar habilidades, experiencia y certificaciones | RF-08, RF-09, RF-10 |
+| CU-04 | Estudiante | Gestionar proyectos y portafolio | RF-11, RF-13 |
+| CU-05 | Estudiante | Vincular GitHub | RF-12 |
+| CU-06 | Estudiante | Configurar visibilidad del perfil publico | RF-16 |
+| CU-07 | Estudiante | Consultar vista publica de su perfil | RF-15 |
+| CU-08 | Estudiante | Diligenciar hoja de vida institucional | RF-14 (ampliado) |
+| CU-09 | Estudiante | Exportar hoja de vida en formato institucional | RF-14 (ampliado) |
+| CU-10 | Estudiante | Explorar y buscar vacantes | RF-28 (nuevo) |
+| CU-11 | Empresa | Registrarse | RF-02 |
+| CU-12 | Empresa | Iniciar sesion | RF-03 |
+| CU-13 | Empresa | Recuperar contrasena | RF-05 |
+| CU-14 | Empresa | Gestionar perfil empresarial | RF-17 |
+| CU-15 | Empresa | Buscar y filtrar estudiantes | RF-18, RF-19 |
+| CU-16 | Empresa | Consultar perfil publico de un estudiante | RF-20 |
+| CU-17 | Empresa | Consultar proyectos y enlaces profesionales | RF-21, RF-22 |
+| CU-18 | Empresa | Publicar vacante | RF-29 (nuevo) |
+| CU-19 | Empresa | Gestionar mis vacantes publicadas | RF-29 (nuevo) |
+| CU-20 | Docente | Iniciar sesion (via Q10) | RF-03 (modificado) |
+| CU-21 | Docente | Consultar estudiantes asignados | RF-25 (nuevo) |
+| CU-22 | Docente | Consultar perfil y progreso del estudiante auditado | RF-25 (nuevo) |
+| CU-23 | Coordinador de Pasantias | Iniciar sesion (via Q10) | RF-03 (modificado) |
+| CU-24 | Coordinador de Pasantias | Asignar docente auditor a estudiante | RF-26 (nuevo) |
+| CU-25 | Coordinador de Pasantias | Gestionar categorias de habilidades | RF-24 |
+| CU-26 | Validador de Empresas | Iniciar sesion (via Q10) | RF-03 (modificado) |
+| CU-27 | Validador de Empresas | Validar registro de empresas | RF-27 (nuevo) |
+| CU-28 | Validador de Empresas | Gestionar cuentas de empresas | RF-23 (modificado) |
+
+**Nota sobre CU-16 y CU-17 (reutilizacion de pantalla):**
+
+CU-16 (Consultar perfil publico de un estudiante) y CU-17 (Consultar proyectos y enlaces profesionales) no requieren una pantalla propia para la Empresa. Ambos casos de uso reutilizan la misma pantalla que implementa CU-07 (Consultar vista publica de su perfil, del lado Estudiante): cuando una empresa hace clic en "Ver Perfil" desde el buscador de talento (CU-15), el sistema le muestra la vista publica del perfil del estudiante seleccionado, incluyendo sus proyectos y enlaces profesionales (GitHub, portafolio). No se requiere maquetar ni desarrollar una vista adicional para estos dos casos de uso; basta con controlar, a nivel de backend, que la empresa solo pueda acceder a la informacion marcada como publica por el estudiante.
+
+## 8.7 Especificacion detallada (ejemplo): Buscar y filtrar estudiantes
+
+- Actor principal: Empresa.
+
+- Precondicion: la empresa debe tener una cuenta registrada y haber iniciado sesion.
+
+- Flujo principal: 1) La empresa accede al modulo de busqueda. 2) Ingresa un termino de busqueda y/o selecciona filtros (programa academico, habilidades, entre otros). 3) El sistema consulta los perfiles de estudiantes que cumplen los criterios y cuyan informacion este marcada como publica. 4) El sistema muestra la lista de resultados.
+
+- Flujo alterno: si no hay estudiantes que cumplan los criterios, el sistema muestra un mensaje indicando que no se encontraron resultados.
+
+- Postcondicion: la empresa obtiene una lista de perfiles de estudiantes que puede consultar en detalle.
+
+# 9. Conclusiones y proximos pasos
+
+La arquitectura propuesta (monolito modular en capas, con modulos independientes por configuracion, version en linea/respaldo por modulo, y autenticacion integrada con Q10 para estudiantes y docentes) cumple con los requisitos funcionales y no funcionales definidos en el documento de requisitos de FETWork V1.0, manteniendo un alcance viable para el tiempo de desarrollo disponible.
+
+Estado actual y siguientes pasos:
+
+- COMPLETADO: el documento de requisitos (v1.2) ya actualiza RF-01 (obsoleto), RF-03, RF-05, RF-23 y RF-24, e incorpora RF-25 a RF-29 (auditoria docente, asignacion de auditorias, validacion de empresas y publicacion/busqueda de vacantes), junto con las historias de usuario HU-14 a HU-21 correspondientes.
+
+- COMPLETADO: el maquetado (mockups) de las 26 pantallas de estudiante, empresa, docente/roles administrativos, autenticacion e identidad visual ya fue elaborado y validado contra esta arquitectura y el documento de requisitos.
+
+- Corregido: dos pantallas del zip de "empresas" tenían el numero de CU invertido en el nombre del archivo ("publicar_nueva_vacante..." estaba etiquetada como CU-19 y "gestion_de_vacantes_publicadas..." como CU-18); se corrigió el nombramiento para que coincida con la tabla de la sección 8.6 (CU-18 = Publicar vacante, CU-19 = Gestionar mis vacantes publicadas).
+
+- CU-16 y CU-17 (Empresa) no requieren mockup propio: reutilizan la pantalla de CU-07 (vista publica del perfil del estudiante), como se documenta al final de la sección 8.6.
+
+- PENDIENTE (Fase 4): iniciar el desarrollo siguiendo el cronograma de 7 sprints definido en la sección 11 del documento de requisitos v1.2, comenzando por el Sprint 1 (Gestión de usuarios: autenticación Q10 y empresas).

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f7f9fb","on-secondary":"#ffffff","surface-variant":"#e0e3e5","on-secondary-fixed":"#002204","error":"#ba1a1a","surface-tint":"#2a6b2c","surface":"#f7f9fb","on-tertiary-fixed-variant":"#005236","tertiary-fixed":"#6ffbbe","surface-container":"#eceef0","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","surface-container-high":"#e6e8ea","secondary":"#1b6d24","inverse-on-surface":"#eff1f3","outline-variant":"#c0c9bb","error-container":"#ffdad6","primary-fixed-dim":"#91d78a","on-primary-container":"#90d689","on-tertiary-container":"#4ddda2","surface-bright":"#f7f9fb","primary-fixed":"#acf4a4","on-secondary-fixed-variant":"#005312","secondary-container":"#a0f399","on-tertiary":"#ffffff","secondary-fixed":"#a3f69c","on-secondary-container":"#217128","on-tertiary-fixed":"#002113","primary-container":"#1b5e20","on-primary-fixed-variant":"#0c5216","on-primary-fixed":"#002203","on-error-container":"#93000a","on-background":"#191c1e","secondary-fixed-dim":"#88d982","tertiary-container":"#005e3f","outline":"#717a6d","on-surface":"#191c1e","primary":"#00450d","inverse-primary":"#91d78a","on-surface-variant":"#41493e","inverse-surface":"#2d3133","surface-dim":"#d8dadc","on-primary":"#ffffff","tertiary":"#00442d","tertiary-fixed-dim":"#4edea3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","space-2xl":"3rem","space-xxs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter-mobile":"1rem","container-max":"1280px","space-sm":"0.75rem","space-xs":"0.5rem","space-xl":"2rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-primary-container text-on-primary shadow-[0_2px_10px_rgba(0,0,0,0.12)]"><div class="h-28 max-w-[1280px] mx-auto px-gutter-desktop flex flex-col justify-between pt-space-xs pb-space-xxs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="FETWork Institutional Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO54wG_yWAqeuqjvS4LH1d-wS7yK3CYaU6VtdFzOWksXe5ENmQA4igcOTZTq4cfErGrZ_XIeEk2P1Sq9lXy97_s483oUZrsWoFbF7ZkR7lferUEWswQeNvtsT5bG4aG9HI5wI6ha_Se8rC9sohAqT_ONqCDLYzVHF8JoxnEmeElSo0KUbTCQ6iMW1LUUYQi_q-WIFlseNJqew7HJ_ETwY2DBNElR4Yf6y9XiBkCZ3Ak5JysDNNlWtA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-primary leading-tight">FETWork</span><span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Portal de Empleabilidad FET</span></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-primary px-space-sm py-space-xxs rounded-lg text-on-primary text-body-sm font-body-sm gap-space-xs"><span class="material-symbols-outlined text-[18px]">search</span><span>Buscar convocatorias...</span><kbd class="text-[10px] bg-primary-container/60 px-1.5 py-0.5 rounded text-on-primary-container">Ctrl+K</kbd></div><button class="relative p-space-xs text-on-primary hover:bg-primary rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-primary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-on-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1H-OH2LKoEHmhxc-VpowWJJLnwzZ3AQoBilDp3lpCxbJSlEEHoA8Je5ergwnbQX-b2coiF64dNsIlEKSg48h8s6-svrgiH-Q3A8czCmxYGpfr-i7uOM3-3a2DRbERP3fkpwnrQg1ZDedd__Yb_DKKmcUr_JW91XLg4K3NdZ7BKJnQmogNQiJNs5V4MaURTFM-IrkcMIErtn-cqWH59adKHUotLsZEBExm4JGuqAHrEoA-I3E4vSVjQ"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-primary leading-none">Andrés David</span><span class="font-label-sm text-label-sm text-on-primary-container leading-none mt-1">Ing. de Software</span></div><span class="material-symbols-outlined text-[18px] text-on-primary-container hidden lg:inline">expand_more</span></div></div></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1 scrollbar-none" data-active-classes="text-on-primary font-bold bg-primary rounded-lg shadow-sm"><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mi-perfil-y-q10" href="#">Mi Perfil &amp; Q10</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="habilidades-y-cv" href="#">Habilidades &amp; CV</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mis-proyectos" href="#">Mis Proyectos</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="hoja-de-vida" href="#">Hoja de Vida (PA-GTH-F-10)</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="explorar-vacantes" href="#">Explorar Vacantes</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="visibilidad" href="#">Visibilidad</a></nav></div><div class="bg-surface-container-low text-on-surface py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">sync</span><span class="text-secondary font-semibold">Sincronizado con Q10 Académico</span><span class="text-outline-variant">•</span><span>Registro Oficial Estudiantil</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface px-space-xs py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Semestre VIII - 2025-1</span><span class="text-on-surface-variant hidden sm:inline">Sede Neiva (Huila)</span></div></div></div></header><main class="w-full pt-28 bg-background min-h-screen"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-lg"><div class="flex flex-col w-full">
+<div class="w-full mb-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-space-xxs text-primary font-label-sm text-label-sm uppercase tracking-wider bg-secondary-container/40 px-space-xs py-0.5 rounded mb-space-xs">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Competencias Estudiantiles • Formato PA-GTH-F-10</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight">
+        Habilidades del Estudiante
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xxs">
+        Gestiona tus competencias técnicas, metodológicas e idiomáticas para que el algoritmo de búsqueda de empresas aliadas FET identifique tu perfil.
+      </p>
+</div>
+<div class="flex items-center gap-space-xs self-start md:self-auto">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded-xl shadow-sm hover:bg-primary-container transition-all" id="saveSkillsTopBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar Cambios</span>
+</button>
+<a class="inline-flex items-center gap-space-xs px-space-md py-2.5 bg-surface-container-highest text-on-surface font-label-md text-label-md rounded-xl shadow-sm hover:bg-surface-container-high transition-colors" data-path="explorar-vacantes" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary">explore</span>
+<span>Ver Vacantes Compatibles</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-md md:p-space-lg rounded-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 bg-primary-fixed/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-space-xs mb-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">add_task</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Agregar Nueva Competencia</h3>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-space-sm items-end" id="addSkillForm" onsubmit="return false;">
+<div class="md:col-span-4 flex flex-col gap-space-xxs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="categorySelect">Categoría</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-secondary pr-8 cursor-pointer" id="categorySelect">
+<option value="tech">Tecnologías &amp; Software</option>
+<option value="devops">Herramientas &amp; DevOps</option>
+<option value="soft">Habilidades Blandas</option>
+<option value="methodologies">Metodologías Ágiles</option>
+<option value="languages">Idiomas</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[20px] text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col gap-space-xxs relative">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="skillInput">Nombre de Habilidad</label>
+<div class="relative">
+<input autocomplete="off" class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-secondary pl-9" id="skillInput" list="skillSuggestions" placeholder="Ej. Docker, TypeScript..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-2.5 text-[18px] text-on-surface-variant">search</span>
+</div>
+<datalist id="skillSuggestions">
+<option value="Docker"></option>
+<option value="Kubernetes"></option>
+<option value="AWS Cloud"></option>
+<option value="FastAPI"></option>
+<option value="Spring Boot"></option>
+<option value="Figma UI/UX"></option>
+<option value="CI/CD Pipelines"></option>
+<option value="Inteligencia Artificial"></option>
+<option value="Francés"></option>
+<option value="Design Thinking"></option>
+</datalist>
+</div>
+<div class="md:col-span-2 flex flex-col gap-space-xxs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="levelSelect">Nivel</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2.5 rounded-lg outline-none focus:ring-2 focus:ring-secondary pr-8 cursor-pointer" id="levelSelect">
+<option value="Avanzado">Avanzado</option>
+<option selected="" value="Intermedio">Intermedio</option>
+<option value="Básico">Básico</option>
+<option value="Nativo">Nativo</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2.5 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="md:col-span-2">
+<button class="w-full inline-flex items-center justify-center gap-space-xxs px-space-xs py-2.5 bg-secondary text-on-secondary font-label-md text-label-md rounded-lg shadow hover:bg-primary transition-all" id="addSkillBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="truncate">Agregar</span>
+</button>
+</div>
+</form>
+<div class="flex items-center gap-space-xs mt-space-sm pt-space-xs text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low/70 px-space-sm py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-secondary">tips_and_updates</span>
+<span>Sugerencia: vincula competencias afines a proyectos académicos de tu repositorio Q10 para obtener la insignia de validación técnica.</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-md" id="skillsMatrixContainer">
+<!-- Category 1: Tecnologías y Software -->
+<section class="bg-surface-container-lowest p-space-md md:p-space-lg rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Tecnologías &amp; Lenguajes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Frameworks, bases de datos y desarrollo backend/frontend</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-space-xs py-0.5 rounded-full" id="count-tech">6 registrados</span>
+</div>
+<div class="flex flex-wrap gap-space-xs" id="group-tech">
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="JavaScript">
+<span class="font-label-md text-label-md text-on-surface">JavaScript</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar JavaScript" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="Python">
+<span class="font-label-md text-label-md text-on-surface">Python</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar Python" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="React.js">
+<span class="font-label-md text-label-md text-on-surface">React.js</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar React.js" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="PostgreSQL">
+<span class="font-label-md text-label-md text-on-surface">PostgreSQL</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar PostgreSQL" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="HTML/CSS">
+<span class="font-label-md text-label-md text-on-surface">HTML/CSS</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar HTML/CSS" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Básico" data-name="Node.js">
+<span class="font-label-md text-label-md text-on-surface">Node.js</span>
+<span class="px-space-xxs py-0.5 bg-amber-100 text-amber-900 font-label-sm text-[10px] rounded uppercase font-bold">Básico</span>
+<button aria-label="Eliminar Node.js" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Category 2: Habilidades Blandas -->
+<section class="bg-surface-container-lowest p-space-md md:p-space-lg rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Habilidades Blandas &amp; Gestión</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Relacionamiento interpersonal, ética laboral y resolución</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-space-xs py-0.5 rounded-full" id="count-soft">5 registradas</span>
+</div>
+<div class="flex flex-wrap gap-space-xs" id="group-soft">
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="Trabajo en equipo">
+<span class="font-label-md text-label-md text-on-surface">Trabajo en equipo</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar Trabajo en equipo" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="Liderazgo">
+<span class="font-label-md text-label-md text-on-surface">Liderazgo</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar Liderazgo" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="Comunicación asertiva">
+<span class="font-label-md text-label-md text-on-surface">Comunicación asertiva</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar Comunicación asertiva" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="Pensamiento analítico">
+<span class="font-label-md text-label-md text-on-surface">Pensamiento analítico</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar Pensamiento analítico" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="Resolución de problemas">
+<span class="font-label-md text-label-md text-on-surface">Resolución de problemas</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar Resolución de problemas" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Category 3: Metodologías -->
+<section class="bg-surface-container-lowest p-space-md md:p-space-lg rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Metodologías &amp; Prácticas de Ingeniería</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Flujos organizacionales, control de versiones y patrones</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-space-xs py-0.5 rounded-full" id="count-methodologies">3 registradas</span>
+</div>
+<div class="flex flex-wrap gap-space-xs" id="group-methodologies">
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Intermedio" data-name="Scrum / Kanban">
+<span class="font-label-md text-label-md text-on-surface">Scrum / Kanban</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">Intermedio</span>
+<button aria-label="Eliminar Scrum / Kanban" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Avanzado" data-name="Git / GitHub Flow">
+<span class="font-label-md text-label-md text-on-surface">Git / GitHub Flow</span>
+<span class="px-space-xxs py-0.5 bg-emerald-100 text-secondary font-label-sm text-[10px] rounded uppercase font-bold">Avanzado</span>
+<button aria-label="Eliminar Git / GitHub Flow" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Básico" data-name="Clean Architecture">
+<span class="font-label-md text-label-md text-on-surface">Clean Architecture</span>
+<span class="px-space-xxs py-0.5 bg-amber-100 text-amber-900 font-label-sm text-[10px] rounded uppercase font-bold">Básico</span>
+<button aria-label="Eliminar Clean Architecture" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Category 4: Idiomas -->
+<section class="bg-surface-container-lowest p-space-md md:p-space-lg rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">translate</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Idiomas &amp; Bilingüismo</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Competencias comunicativas certificadas o nativas</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface px-space-xs py-0.5 rounded-full" id="count-languages">2 registrados</span>
+</div>
+<div class="flex flex-wrap gap-space-xs" id="group-languages">
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="Nativo" data-name="Español">
+<span class="font-label-md text-label-md text-on-surface">Español</span>
+<span class="px-space-xxs py-0.5 bg-purple-100 text-purple-800 font-label-sm text-[10px] rounded uppercase font-bold">Nativo</span>
+<button aria-label="Eliminar Español" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all" data-level="B1 Intermedio" data-name="Inglés">
+<span class="font-label-md text-label-md text-on-surface">Inglés</span>
+<span class="px-space-xxs py-0.5 bg-blue-100 text-blue-800 font-label-sm text-[10px] rounded uppercase font-bold">B1 Intermedio</span>
+<button aria-label="Eliminar Inglés" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Footer -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">cloud_done</span>
+<span>Último autoguardado local hace 3 minutos</span>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto">
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-lg py-2.5 bg-primary-container text-on-primary font-label-md text-label-md rounded-lg shadow hover:bg-primary transition-all" id="saveSkillsBottomBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>Guardar Habilidades</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sidebar Right: Analytics, Match & Institutional Verification -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Card: Institutional Matching Score -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Afinidad con Convocatorias</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">stars</span>
+</div>
+<div class="flex items-center gap-space-md my-space-xxs">
+<div class="relative w-20 h-20 flex-shrink-0">
+<svg class="w-20 h-20 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="84, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-none">84%</span>
+<span class="font-label-sm text-[9px] text-on-surface-variant uppercase">Match</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Excelente Perfil</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tus habilidades coinciden con <strong>14 ofertas</strong> vigentes en el sector tecnológico del Huila.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-xs rounded-lg flex flex-col gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between items-center text-[12px]">
+<span>Desarrollo Web &amp; App</span>
+<span class="font-semibold text-secondary">92%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92%"></div>
+</div>
+<div class="flex justify-between items-center text-[12px] mt-1">
+<span>Bases de Datos &amp; SQL</span>
+<span class="font-semibold text-secondary">78%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<a class="w-full text-center py-2 bg-secondary/10 hover:bg-secondary/20 text-secondary font-label-md text-label-md rounded-lg transition-colors flex items-center justify-center gap-space-xxs mt-space-xxs" data-path="explorar-vacantes" href="#">
+<span class="material-symbols-outlined text-[16px]">work_outline</span>
+<span>Ver vacantes compatibles</span>
+</a>
+</div>
+<!-- Card: Photo / Academic Validation Evidence -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Validación Q10 • FET</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Semestre VIII</span>
+</div>
+<div class="relative rounded-lg overflow-hidden h-36 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A modern university computer engineering laboratory in Neiva Huila Colombia with students analyzing software architecture diagrams on glowing dual monitors with green institutional accents and bright ambient sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1RdRmrE6YacUQmRrPBZVaKU4Cp4Uo2oAF9Hu-iJraCWGlBkxEsUel-Bqww-rkw8bt1uREwpEgaE1KAO5c559g7gMFvXslpys0oLqtPqf75jPXBwCZbwiQ3CZs4HVdd0ewMIiIEeZEPXoorAOYutTP4fFyHkOZL3mYiGyx4TtJeCLJZO4WRCbqjwVHezYdZVATBlbl4gnxjR9hHkRYWdpDeb2UWO5ivAEuDCjs_jVbAExtSYlrll6JZg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex flex-col justify-end p-space-xs text-on-primary">
+<span class="font-label-md text-label-md font-bold">Laboratorio de Software FET</span>
+<span class="font-label-sm text-[11px] text-on-primary-container">Competencias avaladas curricularmente</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
+<span>Créditos aprobados de programación: <strong>100%</strong></span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">military_tech</span>
+<span>Docente tutor asignado: <strong>Ing. Roberto Vargas</strong></span>
+</div>
+</div>
+</div>
+<!-- Card: PA-GTH-F-10 Institutional Tip -->
+<div class="bg-primary-container text-on-primary p-space-md rounded-xl shadow-sm relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-28 h-28 bg-secondary-container/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center gap-space-xs mb-space-xxs">
+<span class="material-symbols-outlined text-secondary-fixed text-[22px]">assignment</span>
+<h5 class="font-headline-sm text-headline-sm text-on-primary">Formato PA-GTH-F-10</h5>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary-container">
+          Las competencias aquí registradas se exportarán automáticamente a tu Hoja de Vida institucional exigida para la postulación a pasantías y contratos de aprendizaje.
+        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary-fixed hover:underline mt-space-xs" data-path="hoja-de-vida" href="#">
+<span>Revisar vista previa de Hoja de Vida</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-inverse-surface text-inverse-on-surface px-space-md py- space-sm rounded-xl shadow-xl flex items-center gap-space-xs" id="toastNotification">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-label-md text-label-md" id="toastMessage">Habilidades actualizadas correctamente</span>
+</div>
+</div>
+<script>
+  (function() {
+    const addSkillBtn = document.getElementById('addSkillBtn');
+    const skillInput = document.getElementById('skillInput');
+    const categorySelect = document.getElementById('categorySelect');
+    const levelSelect = document.getElementById('levelSelect');
+    const saveTopBtn = document.getElementById('saveSkillsTopBtn');
+    const saveBottomBtn = document.getElementById('saveSkillsBottomBtn');
+    const toast = document.getElementById('toastNotification');
+    const toastMessage = document.getElementById('toastMessage');
+
+    function showToast(msg, isError = false) {
+      if (!toast) return;
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      const icon = document.getElementById('toastIcon');
+      if (icon) {
+        icon.textContent = isError ? 'error' : 'check_circle';
+        icon.className = isError ? 'material-symbols-outlined text-error text-[20px]' : 'material-symbols-outlined text-secondary-fixed text-[20px]';
+      }
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    }
+
+    function updateCounter(categoryId) {
+      const group = document.getElementById('group-' + categoryId);
+      const counter = document.getElementById('count-' + categoryId);
+      if (group && counter) {
+        const total = group.querySelectorAll('.skill-chip').length;
+        const noun = (categoryId === 'languages' || categoryId === 'tech') ? 'registrados' : 'registradas';
+        counter.textContent = `${total} ${noun}`;
+      }
+    }
+
+    function attachRemoveEvents() {
+      document.querySelectorAll('.remove-chip-btn').forEach(btn => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          const chip = this.closest('.skill-chip');
+          if (chip) {
+            const container = chip.parentElement;
+            chip.remove();
+            if (container && container.id) {
+              const catId = container.id.replace('group-', '');
+              updateCounter(catId);
+            }
+            showToast('Competencia removida de la lista.');
+          }
+        };
+      });
+    }
+
+    attachRemoveEvents();
+
+    if (addSkillBtn && skillInput) {
+      addSkillBtn.addEventListener('click', function() {
+        const val = skillInput.value.trim();
+        if (!val) {
+          showToast('Ingresa el nombre de la habilidad.', true);
+          skillInput.focus();
+          return;
+        }
+
+        let cat = categorySelect.value;
+        let groupKey = cat;
+        if (cat === 'devops') {
+          groupKey = 'tech';
+        }
+
+        const targetGroup = document.getElementById('group-' + groupKey);
+        if (!targetGroup) return;
+
+        const level = levelSelect.value;
+        let badgeColor = 'bg-blue-100 text-blue-800';
+        if (level === 'Avanzado') badgeColor = 'bg-emerald-100 text-secondary';
+        else if (level === 'Básico') badgeColor = 'bg-amber-100 text-amber-900';
+        else if (level === 'Nativo') badgeColor = 'bg-purple-100 text-purple-800';
+
+        const chip = document.createElement('div');
+        chip.className = 'skill-chip inline-flex items-center gap-space-xs bg-surface-container-low text-on-surface px-space-sm py-1.5 rounded-lg shadow-sm hover:bg-surface-container transition-all';
+        chip.setAttribute('data-name', val);
+        chip.setAttribute('data-level', level);
+        chip.innerHTML = `
+          <span class="font-label-md text-label-md text-on-surface">${val}</span>
+          <span class="px-space-xxs py-0.5 ${badgeColor} font-label-sm text-[10px] rounded uppercase font-bold">${level}</span>
+          <button type="button" class="remove-chip-btn text-outline hover:text-error transition-colors flex items-center" aria-label="Eliminar ${val}">
+            <span class="material-symbols-outlined text-[16px]">close</span>
+          </button>
+        `;
+
+        targetGroup.appendChild(chip);
+        attachRemoveEvents();
+        updateCounter(groupKey);
+        skillInput.value = '';
+        showToast(`'${val}' agregada a tus competencias.`);
+      });
+
+      skillInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addSkillBtn.click();
+        }
+      });
+    }
+
+    function saveAll() {
+      showToast('¡Habilidades sincronizadas con el expediente FET (PA-GTH-F-10)!');
+    }
+
+    if (saveTopBtn) saveTopBtn.addEventListener('click', saveAll);
+    if (saveBottomBtn) saveBottomBtn.addEventListener('click', saveAll);
+  })();
+</script></div></main><footer class="w-full bg-surface-container text-on-surface mt-space-2xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex flex-col gap-space-xxs text-center md:text-left"><p class="font-label-md text-label-md text-on-surface font-semibold">© 2025 FET - Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez</p><p class="text-on-surface-variant">Dirección de Prácticas Profesionales y Coordinación de Empleabilidad e Innovación</p><p class="text-[11px] text-outline">Integración tecnológica y sincronización de expediente impulsada por Q10 Solutions</p></div><div class="flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Mesa de Ayuda</a><a class="hover:text-primary transition-colors" href="#">Normativa PA-GTH-F-10</a><a class="hover:text-primary transition-colors" href="#">Convenios Empresariales</a><a class="hover:text-primary transition-colors" href="#">Tratamiento de Datos</a></div></div></footer></body></html>

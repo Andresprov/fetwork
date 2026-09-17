@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f7f9fb","on-secondary":"#ffffff","surface-variant":"#e0e3e5","on-secondary-fixed":"#002204","error":"#ba1a1a","surface-tint":"#2a6b2c","surface":"#f7f9fb","on-tertiary-fixed-variant":"#005236","tertiary-fixed":"#6ffbbe","surface-container":"#eceef0","on-error":"#ffffff","surface-container-lowest":"#ffffff","surface-container-highest":"#e0e3e5","surface-container-low":"#f2f4f6","surface-container-high":"#e6e8ea","secondary":"#1b6d24","inverse-on-surface":"#eff1f3","outline-variant":"#c0c9bb","error-container":"#ffdad6","primary-fixed-dim":"#91d78a","on-primary-container":"#90d689","on-tertiary-container":"#4ddda2","surface-bright":"#f7f9fb","primary-fixed":"#acf4a4","on-secondary-fixed-variant":"#005312","secondary-container":"#a0f399","on-tertiary":"#ffffff","secondary-fixed":"#a3f69c","on-secondary-container":"#217128","on-tertiary-fixed":"#002113","primary-container":"#1b5e20","on-primary-fixed-variant":"#0c5216","on-primary-fixed":"#002203","on-error-container":"#93000a","on-background":"#191c1e","secondary-fixed-dim":"#88d982","tertiary-container":"#005e3f","outline":"#717a6d","on-surface":"#191c1e","primary":"#00450d","inverse-primary":"#91d78a","on-surface-variant":"#41493e","inverse-surface":"#2d3133","surface-dim":"#d8dadc","on-primary":"#ffffff","tertiary":"#00442d","tertiary-fixed-dim":"#4edea3"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-md":"1rem","space-2xl":"3rem","space-xxs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter-mobile":"1rem","container-max":"1280px","space-sm":"0.75rem","space-xs":"0.5rem","space-xl":"2rem"},"fontFamily":{"label-md":["Inter"],"headline-xl":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"headline-lg":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","fontWeight":"700"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-primary-container text-on-primary shadow-[0_2px_10px_rgba(0,0,0,0.12)]"><div class="h-28 max-w-[1280px] mx-auto px-gutter-desktop flex flex-col justify-between pt-space-xs pb-space-xxs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="FETWork Institutional Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfXO54wG_yWAqeuqjvS4LH1d-wS7yK3CYaU6VtdFzOWksXe5ENmQA4igcOTZTq4cfErGrZ_XIeEk2P1Sq9lXy97_s483oUZrsWoFbF7ZkR7lferUEWswQeNvtsT5bG4aG9HI5wI6ha_Se8rC9sohAqT_ONqCDLYzVHF8JoxnEmeElSo0KUbTCQ6iMW1LUUYQi_q-WIFlseNJqew7HJ_ETwY2DBNElR4Yf6y9XiBkCZ3Ak5JysDNNlWtA"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-primary leading-tight">FETWork</span><span class="font-label-sm text-label-sm text-on-primary-container tracking-wider uppercase">Portal de Empleabilidad FET</span></div></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-primary px-space-sm py-space-xxs rounded-lg text-on-primary text-body-sm font-body-sm gap-space-xs"><span class="material-symbols-outlined text-[18px]">search</span><span>Buscar convocatorias...</span><kbd class="text-[10px] bg-primary-container/60 px-1.5 py-0.5 rounded text-on-primary-container">Ctrl+K</kbd></div><button class="relative p-space-xs text-on-primary hover:bg-primary rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-primary-container"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-on-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1H-OH2LKoEHmhxc-VpowWJJLnwzZ3AQoBilDp3lpCxbJSlEEHoA8Je5ergwnbQX-b2coiF64dNsIlEKSg48h8s6-svrgiH-Q3A8czCmxYGpfr-i7uOM3-3a2DRbERP3fkpwnrQg1ZDedd__Yb_DKKmcUr_JW91XLg4K3NdZ7BKJnQmogNQiJNs5V4MaURTFM-IrkcMIErtn-cqWH59adKHUotLsZEBExm4JGuqAHrEoA-I3E4vSVjQ"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-primary leading-none">Andrés David</span><span class="font-label-sm text-label-sm text-on-primary-container leading-none mt-1">Ing. de Software</span></div><span class="material-symbols-outlined text-[18px] text-on-primary-container hidden lg:inline">expand_more</span></div></div></div><nav class="flex items-center gap-space-xs overflow-x-auto py-1 scrollbar-none" data-active-classes="text-on-primary font-bold bg-primary rounded-lg shadow-sm"><a aria-current="page" class="px-space-sm py-1.5 transition-colors whitespace-nowrap text-on-primary font-bold bg-primary rounded-lg shadow-sm" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mi-perfil-y-q10" href="#">Mi Perfil &amp; Q10</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="habilidades-y-cv" href="#">Habilidades &amp; CV</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="mis-proyectos" href="#">Mis Proyectos</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="hoja-de-vida" href="#">Hoja de Vida (PA-GTH-F-10)</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="explorar-vacantes" href="#">Explorar Vacantes</a><a class="px-space-sm py-1.5 rounded-lg font-label-md text-label-md text-on-primary/80 hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" data-path="visibilidad" href="#">Visibilidad</a></nav></div><div class="bg-surface-container-low text-on-surface py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop flex flex-wrap items-center justify-between gap-space-xs font-label-sm text-label-sm"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">sync</span><span class="text-secondary font-semibold">Sincronizado con Q10 Académico</span><span class="text-outline-variant">•</span><span>Registro Oficial Estudiantil</span></div><div class="flex items-center gap-space-xs"><span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface px-space-xs py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Semestre VIII - 2025-1</span><span class="text-on-surface-variant hidden sm:inline">Sede Neiva (Huila)</span></div></div></div></header><main class="w-full pt-28 bg-background min-h-screen"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-lg"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full">
+<!-- Header Institucional & Título Operativo -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col max-w-2xl">
+<div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm uppercase tracking-wider mb-space-xxs">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span>Sistema de Gestión de Talento Humano • CU-09</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Exportación de Hoja de Vida Institucional
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Documento estandarizado de la Fundación Escuela Tecnológica de Neiva para radicación inmediata ante la Coordinación de Prácticas Profesionales y empresas aliadas del Huila. No requiere autorizaciones previas de terceros.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<div class="flex items-center bg-surface-container-highest rounded-lg px-space-sm py-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-secondary mr-1.5">history</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mr-1">Versión:</span>
+<select class="bg-transparent font-label-md text-label-md text-on-surface outline-none cursor-pointer">
+<option value="v4">PA-GTH-F-10 (Rev. 4.0 - Mayo 2025)</option>
+<option value="v3.9">PA-GTH-F-10 (Rev. 3.9 - Enero 2025)</option>
+</select>
+</div>
+<a class="inline-flex items-center gap-space-xxs px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">edit_document</span>
+<span>Editar Datos (PA-GTH-F-10)</span>
+</a>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-all shadow-md active:scale-95" id="downloadBtn" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Descargar Hoja de Vida (PDF Oficial)</span>
+</button>
+</div>
+</div>
+<!-- Barra de Alerta / Estado de Emisión Rápida -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-xs p-space-sm rounded-lg bg-secondary-container/40 text-on-secondary-container shadow-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<span class="font-label-md text-label-md">Sincronización Q10 Académica aprobada. Expediente validado para Prácticas Empresariales 2025-I.</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-secondary px-space-xs py-0.5 rounded shadow-sm">
+        Firma Digital Criptográfica FET-SHA256 Activa
+      </span>
+</div>
+<!-- Contenedor Principal en Grid Asimétrico: Documento Membretado + Panel Técnico -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Visor de Hoja de Papel Bond Membretada (Col 1-8 / 66%) -->
+<div class="lg:col-span-8 flex flex-col items-center">
+<!-- Control de visualización zoom rápido -->
+<div class="w-full flex items-center justify-between px-space-xs pb-space-xxs text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Vista Preliminar de Impresión (Página 1 de 2 • Tamaño Carta)</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface" title="Aumentar zoom" type="button">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+</button>
+<span class="font-mono text-[11px]">100%</span>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface" title="Reducir zoom" type="button">
+<span class="material-symbols-outlined text-[16px]">zoom_out</span>
+</button>
+<button class="p-1 hover:bg-surface-container-high rounded text-on-surface ml-1" title="Imprimir directamente" type="button">
+<span class="material-symbols-outlined text-[16px]">print</span>
+</button>
+</div>
+</div>
+<!-- Hoja Carta Física Representada -->
+<div class="w-full bg-surface-container-lowest shadow-xl rounded-sm p-6 sm:p-10 md:p-12 text-on-surface relative transition-shadow hover:shadow-2xl">
+<!-- Sello de Agua Traslúcido de Seguridad -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
+<span class="font-headline-xl text-[120px] font-black uppercase text-primary -rotate-45">FET OFICIAL</span>
+</div>
+<!-- Encabezado Membretado Institucional Estandarizado (Tabla Estructurada con Color Institucional) -->
+<div class="bg-surface-container-low rounded-t-sm p-3 mb-space-md">
+<div class="grid grid-cols-12 gap-3 items-center">
+<!-- Escudo y Nombre FET -->
+<div class="col-span-12 sm:col-span-4 flex items-center gap-3">
+<img class="w-14 h-14 object-contain" data-alt="Official seal of Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez FET, green and gold institutional insignia, sharp vector emblem high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaF8INebJkPZ3krD3FQlDLZSFMMlBnevmQLGIzh3E_4AQlQGyCNZbEwAyR8K097CmA4INIw3CctNn6swKgVMXQlLczTHlHv5rdEGeSvxw4i141tQnONPhI1_nzFzffDOYb7Ml5t9iqBeM67WQ9ovilFOrag3FgcnWxj7SlYoWbj3ArSIzLQT0hbRtksHjzIwyi32AsD5bILkv6ZUqZ67o7Y5nLEIQYDZQuKdv3624NUxsjCYbOreRMaQ"/>
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] uppercase font-bold text-primary tracking-wider">Fundación Escuela Tecnológica</span>
+<span class="font-label-sm text-[9px] text-on-surface-variant uppercase leading-none">Jesús Oviedo Pérez • FET</span>
+<span class="font-label-sm text-[8px] text-outline mt-0.5">Personería Jurídica MinEducación</span>
+</div>
+</div>
+<!-- Título Central del Formato -->
+<div class="col-span-12 sm:col-span-5 text-center px-2 py-1 bg-surface-container-lowest rounded shadow-sm">
+<span class="font-label-sm text-[10px] block text-on-surface-variant uppercase font-bold">Sistema de Gestión Integrado (SGI)</span>
+<h2 class="font-label-md text-label-md font-bold text-primary tracking-tight uppercase leading-snug">
+                  Formato Institucional de Hoja de Vida Estudiantes y Egresados
+                </h2>
+</div>
+<!-- Metadatos de Calidad y Codificación -->
+<div class="col-span-12 sm:col-span-3 flex flex-col text-right justify-center font-label-sm text-[10px] text-on-surface-variant space-y-0.5">
+<div class="flex justify-between sm:justify-end gap-2">
+<span class="text-outline">Código:</span>
+<strong class="font-mono text-primary font-bold">PA-GTH-F-10</strong>
+</div>
+<div class="flex justify-between sm:justify-end gap-2">
+<span class="text-outline">Versión:</span>
+<strong class="font-mono">4.0</strong>
+</div>
+<div class="flex justify-between sm:justify-end gap-2">
+<span class="text-outline">Vigencia:</span>
+<strong class="font-mono">2025-01</strong>
+</div>
+<div class="flex justify-between sm:justify-end gap-2">
+<span class="text-outline">Radicación:</span>
+<strong class="font-mono text-secondary">FET-2025-8841</strong>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 1: DATOS PERSONALES -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider flex items-center justify-between rounded-t-sm">
+<span>1. Datos Personales y de Identificación</span>
+<span class="text-[10px] font-normal text-on-primary-container">Verificado Q10 Académico</span>
+</div>
+<div class="p-4 bg-surface-container-low/50 rounded-b-sm flex flex-col md:flex-row gap-4 items-start">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 gap-x-4 w-full font-body-sm text-body-sm">
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Nombres y Apellidos:</span>
+<span class="font-bold text-on-surface">Andrés David Pérez Gómez</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Documento de Identidad:</span>
+<span class="text-on-surface font-mono">C.C. 1.075.298.412 de Neiva</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Grupo Sanguíneo (RH):</span>
+<span class="text-on-surface font-semibold">O Positivo (O+)</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Fecha de Nacimiento:</span>
+<span class="text-on-surface">14 de Agosto de 2002 (22 años)</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Dirección de Residencia:</span>
+<span class="text-on-surface">Calle 21 # 5-40, Barrio Ipanema</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Ciudad / Departamento:</span>
+<span class="text-on-surface">Neiva, Huila (Colombia)</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Teléfono / Celular:</span>
+<span class="text-on-surface font-mono">+57 318 642 9015</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Correo Electrónico FET:</span>
+<span class="text-primary font-medium underline">andres.perez@fet.edu.co</span>
+</div>
+<div>
+<span class="font-label-sm text-[11px] text-on-surface-variant uppercase block">Contacto de Emergencia:</span>
+<span class="text-on-surface">Martha Gómez (Madre) - 315 889 0041</span>
+</div>
+</div>
+<!-- Foto Formal Estudiantil -->
+<div class="flex-shrink-0 flex flex-col items-center">
+<div class="w-24 h-32 bg-surface-container-high rounded-sm overflow-hidden shadow-sm relative">
+<img class="w-full h-full object-cover" data-alt="Official corporate academic student ID portrait of a 22-year-old young Colombian male software engineering student wearing navy blue blazer, clean white background, studio neutral lighting, serious and professional demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKjnlg5ZId1R286D5GntH9RrpA_4eVeeMuRxyNPpw1tdSIfqvyqlJu_Pb9nEAR448r6WokN7vfGOmS41B5QZAakH_oUC-yaI4fgAreEAn4uoTuMMWAZFhW01PcxGaLuu5s0HjAuXjYCfYZcAk_nCQg4nmm2KQms45vZOZBp4vu3lmPXxOVzrRM4yBUBTrYWqleYomfBVLKFVDT7w1F_E0nxRlSUwnthEhXJteKj7b_cracvE0b2UrnWw"/>
+</div>
+<span class="font-label-sm text-[9px] text-outline mt-1 uppercase">Foto Digital FET</span>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 2: PERFIL OCUPACIONAL -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              2. Perfil Ocupacional Institucional
+            </div>
+<div class="p-4 bg-surface-container-low/50 rounded-b-sm font-body-sm text-body-sm text-on-surface text-justify leading-relaxed">
+              Estudiante de octavo semestre de <strong>Ingeniería de Software de la FET</strong>, con énfasis en arquitectura de aplicaciones web seguras, gestión de bases de datos relacionales y análisis de requerimientos. Experiencia práctica en metodologías ágiles (Scrum), desarrollo Backend con Python/Django y Frontend con interfaces orientadas a la experiencia de usuario. Destacada capacidad analítica, liderazgo en semilleros de investigación regional enfocados en el sector agroindustrial del Huila y compromiso con la optimización de procesos tecnológicos sostenibles.
+            </div>
+</div>
+<!-- SECCIÓN 3: FORMACIÓN ACADÉMICA -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              3. Formación Académica Superior y Complementaria
+            </div>
+<div class="p-3 bg-surface-container-low/50 rounded-b-sm space-y-3 font-body-sm text-body-sm">
+<div class="flex flex-col sm:flex-row justify-between bg-surface-container-lowest p-2.5 rounded shadow-sm">
+<div class="flex flex-col">
+<strong class="text-primary font-headline-sm text-[14px]">Ingeniería de Software</strong>
+<span class="text-on-surface-variant text-[12px]">Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez (FET)</span>
+<span class="text-outline text-[11px]">SNIES 104928 • Registro Calificado Vigente</span>
+</div>
+<div class="sm:text-right mt-1 sm:mt-0 font-mono text-[12px]">
+<span class="inline-block px-2 py-0.5 rounded bg-secondary-container/50 text-on-secondary-container font-semibold">Semestre VIII (En Curso)</span>
+<span class="block text-on-surface-variant text-[11px] mt-1">2021 - Actualidad (Neiva)</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-between bg-surface-container-lowest p-2.5 rounded shadow-sm">
+<div class="flex flex-col">
+<strong class="text-on-surface font-headline-sm text-[14px]">Bachiller Técnico en Sistemas e Informática</strong>
+<span class="text-on-surface-variant text-[12px]">Institución Educativa Técnico Superior de Neiva</span>
+</div>
+<div class="sm:text-right mt-1 sm:mt-0 font-mono text-[12px]">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-[11px]">Graduado</span>
+<span class="block text-on-surface-variant text-[11px] mt-1">Promoción 2020</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 4: EXPERIENCIA LABORAL Y PRÁCTICAS -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              4. Experiencia Laboral y Prácticas Empresariales
+            </div>
+<div class="p-3 bg-surface-container-low/50 rounded-b-sm space-y-3 font-body-sm text-body-sm">
+<div class="bg-surface-container-lowest p-3 rounded shadow-sm">
+<div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+<div>
+<h3 class="font-bold text-on-surface">TechHuila Soluciones S.A.S.</h3>
+<span class="text-secondary font-medium text-[13px]">Desarrollador Junior Pasante (Convenio Empresarial FET)</span>
+</div>
+<span class="font-mono text-[12px] text-on-surface-variant">Junio 2024 - Diciembre 2024 (6 meses)</span>
+</div>
+<p class="text-on-surface-variant mt-1.5 text-[13px] leading-normal">
+<strong>Funciones:</strong> Apoyo en el levantamiento de requerimientos y desarrollo de módulos para control de inventarios agropecuarios. Pruebas unitarias de software y documentación técnica de APIs RESTful.
+                </p>
+<div class="mt-2 text-[11px] text-outline flex items-center gap-2">
+<span>Jefe Inmediato: Ing. Carlos Mauricio Dussán</span>
+<span>•</span>
+<span>Contacto: 311 450 9921</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 5: INVESTIGACIÓN Y RECONOCIMIENTOS -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              5. Trayectoria Académica, Semilleros y Monitorías
+            </div>
+<div class="p-3 bg-surface-container-low/50 rounded-b-sm grid grid-cols-1 md:grid-cols-2 gap-3 font-body-sm text-body-sm">
+<div class="p-2.5 bg-surface-container-lowest rounded shadow-sm">
+<span class="font-label-sm text-[11px] text-secondary uppercase font-bold block">Semillero de Investigación FET</span>
+<span class="font-bold text-on-surface text-[13px]">AgroTrace Huila - Trazabilidad de Café Especial</span>
+<p class="text-on-surface-variant text-[12px] mt-1">Investigador estudiantil en aplicación de contratos inteligentes y sensores IoT para fincas cafeteras en Pitalito y Gigante.</p>
+</div>
+<div class="p-2.5 bg-surface-container-lowest rounded shadow-sm">
+<span class="font-label-sm text-[11px] text-secondary uppercase font-bold block">Monitoría Universitaria Oficial</span>
+<span class="font-bold text-on-surface text-[13px]">Monitor Académico de Algoritmia y POO</span>
+<p class="text-on-surface-variant text-[12px] mt-1">Designado por la Coordinación de Ingeniería durante 2 semestres consecutivos (2024-1 y 2024-2) con calificación 4.8/5.0.</p>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 6: COMPETENCIAS TÉCNICAS -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              6. Competencias y Habilidades Técnicas
+            </div>
+<div class="p-3 bg-surface-container-low/50 rounded-b-sm font-body-sm text-body-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">Python (Django / FastAPI)</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">JavaScript / TypeScript</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">PostgreSQL / MySQL</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">Git / GitHub Workflow</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">Metodologías Ágiles (Scrum)</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">Docker (Nivel Básico)</span>
+<span class="bg-surface-container-lowest text-on-surface px-2 py-1 rounded text-[11px] font-medium shadow-sm">Inglés Técnico B1 (FET Idiomas)</span>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 7: REFERENCIAS -->
+<div class="mb-space-md">
+<div class="bg-primary-container text-on-primary px-3 py-1 text-label-sm font-bold uppercase tracking-wider rounded-t-sm">
+              7. Referencias Personales y Académicas Verificables
+            </div>
+<div class="p-3 bg-surface-container-low/50 rounded-b-sm grid grid-cols-1 sm:grid-cols-2 gap-3 font-body-sm text-body-sm">
+<div class="bg-surface-container-lowest p-2.5 rounded shadow-sm">
+<span class="font-bold text-on-surface block text-[13px]">Ing. Julián Camilo Trujillo Ramos</span>
+<span class="text-on-surface-variant text-[12px] block">Coordinador Programa Ingeniería de Software - FET</span>
+<span class="text-primary font-mono text-[11px]">julian.trujillo@fet.edu.co • Tel. Ext. 104</span>
+</div>
+<div class="bg-surface-container-lowest p-2.5 rounded shadow-sm">
+<span class="font-bold text-on-surface block text-[13px]">Dra. Adriana Marcela Ortiz Cabrera</span>
+<span class="text-on-surface-variant text-[12px] block">Directora Administrativa • CoopHuila Neiva</span>
+<span class="text-on-surface font-mono text-[11px]">Cel: +57 312 904 5518</span>
+</div>
+</div>
+</div>
+<!-- CIERRE LEGAL, JURAMENTADA Y FIRMA DIGITALIZADA -->
+<div class="mt-space-lg pt-4 bg-surface-container-low rounded p-4">
+<p class="text-[10px] text-on-surface-variant leading-tight text-justify mb-4">
+<strong>Declaración Juramentada:</strong> Para todos los efectos legales, certifico bajo la gravedad de juramento que la información suministrada en el presente formato institucional PA-GTH-F-10 es veraz, completa y verificable ante las instancias académicas y empresariales correspondientes. Autorizo el tratamiento de mis datos personales según Ley 1581 de 2012 y políticas vigentes de la FET y Q10 Académico.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end pt-2">
+<!-- Firma Digitalizada Alumno -->
+<div class="flex flex-col items-center sm:items-start">
+<div class="w-48 h-12 flex items-center justify-center relative">
+<!-- SVG Representativo de Firma Caligráfica Vectorial -->
+<svg class="w-44 h-10 text-primary" fill="none" viewbox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 40 Q 30 10, 50 35 T 90 20 T 130 45 Q 150 15, 170 30 T 190 25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M40 48 Q 90 52, 170 45" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="w-56 h-0.5 bg-outline-variant mb-1"></div>
+<span class="font-bold text-on-surface text-[12px]">Andrés David Pérez Gómez</span>
+<span class="text-[11px] text-on-surface-variant font-mono">C.C. 1.075.298.412 de Neiva</span>
+<span class="text-[10px] text-secondary">Firma Registrada en Q10 Estudiantil</span>
+</div>
+<!-- Sello Digital de Autenticidad FET -->
+<div class="flex flex-col items-center sm:items-end text-center sm:text-right">
+<div class="inline-flex items-center gap-1 text-[11px] font-mono text-primary font-semibold bg-surface-container-highest px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">qr_code_2</span>
+<span>ID-VERIF: FET-Q10-8841-2025</span>
+</div>
+<span class="text-[9px] text-outline mt-1 max-w-[200px]">Documento original expedido por la plataforma oficial FETWork sin necesidad de refrendación física.</span>
+</div>
+</div>
+</div>
+<!-- Pie de Página Institucional del Formato -->
+<div class="mt-4 pt-2 flex flex-col sm:flex-row justify-between items-center text-[9px] text-outline">
+<span>PA-GTH-F-10 Formato Hoja de Vida Estudiantil • FET Neiva</span>
+<span>Aprobado por Consejo Académico FET • Página 1 de 2</span>
+</div>
+</div>
+</div>
+<!-- Panel Lateral Derecho: Ficha Técnica y Acciones de Trámite (Col 9-12 / 33%) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Tarjeta: Estado de Validación -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs mb-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Ficha Técnica de Emisión</span>
+<span class="bg-secondary-container text-on-secondary-container text-label-sm font-label-sm px-space-xs py-0.5 rounded font-bold">
+              100% Verificado
+            </span>
+</div>
+<!-- Métricas del Archivo -->
+<div class="grid grid-cols-2 gap-space-xs py-space-xs">
+<div class="p-space-xs bg-surface-container-low rounded-lg">
+<span class="font-label-sm text-label-sm text-outline block">Formato Salida</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">PDF / A-1b</span>
+</div>
+<div class="p-space-xs bg-surface-container-low rounded-lg">
+<span class="font-label-sm text-label-sm text-outline block">Peso Estimado</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">1.42 MB</span>
+</div>
+</div>
+<div class="space-y-2.5 mt-space-xs text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex justify-between items-center">
+<span class="text-outline">Compilación automática:</span>
+<span class="font-mono text-on-surface text-[12px]">Hoy, 10:42 AM</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-outline">Norma Técnica:</span>
+<span class="text-primary font-semibold text-[12px]">PA-GTH-F-10 Rev. 4</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-outline">Validez institucional:</span>
+<span class="text-on-surface text-[12px]">Semestre 2025-I / II</span>
+</div>
+</div>
+<!-- Checklist de Requisitos FET -->
+<div class="mt-space-md pt-space-sm bg-surface-container-low/50 -mx-space-md -mb-space-md p-space-md rounded-b-xl">
+<span class="font-label-sm text-label-sm font-bold text-on-surface uppercase tracking-wider block mb-space-xs">
+              Checklist Requisitos Prácticas FET
+            </span>
+<ul class="space-y-2 font-label-sm text-label-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_box</span>
+<span>Créditos aprobados &gt;= 70% (82% alcanzado)</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_box</span>
+<span>Póliza Estudiantil de Accidentes Activa</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_box</span>
+<span>Cédula y EPS actualizadas en Q10</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_box</span>
+<span>Perfil ocupacional aprobado por Coordinador</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Acciones Directas de Trámite Empresarial -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold">
+            Radicación y Compartición Externa
+          </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Puedes generar un enlace temporal y cifrado para que el equipo de Recursos Humanos o tu tutor empresarial descargue el archivo directamente sin ingresar a FETWork.
+          </p>
+<div class="flex items-center bg-surface-container-low p-2 rounded-lg gap-2">
+<input class="bg-transparent text-[11px] font-mono text-on-surface w-full outline-none select-all" readonly="" type="text" value="https://fet.edu.co/cv/verif?token=9f82c40a1"/>
+<button class="p-1.5 hover:bg-surface-container-high rounded text-primary" id="copyLinkBtn" title="Copiar enlace seguro" type="button">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+</div>
+<button class="w-full flex items-center justify-center gap-space-xs py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md transition-colors" id="shareModalBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Compartir enlace seguro temporal (7 días)</span>
+</button>
+</div>
+<!-- Guía de Procedimiento FET -->
+<div class="bg-surface-container-high/40 rounded-xl p-space-md shadow-sm">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md mb-2">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<span>¿Qué sigue tras la descarga?</span>
+</div>
+<ol class="list-decimal list-inside space-y-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<li>Adjunta este PDF descargado en tu postulación a convocatorias dentro de <strong>FETWork</strong>.</li>
+<li>Si postulas por convenio directo propio, radica este formato impreso o digital ante la Coordinación de Prácticas FET (Sede Neiva).</li>
+<li>No modifiques la tipografía ni su estructura para conservar su validez legal PA-GTH-F-10.</li>
+</ol>
+</div>
+<!-- Banner de Soporte FET -->
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-xl shadow-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[22px]">contact_support</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Mesa de Ayuda de Prácticas</span>
+<span class="text-[11px]">practicas@fet.edu.co • Neiva</span>
+</div>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Consultar</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Dinámico -->
+<div class="fixed bottom-6 right-6 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-50 flex items-center gap-space-xs bg-primary-container text-on-primary px-space-md py-space-sm rounded-lg shadow-xl" id="toastNotification">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">check_circle</span>
+<span class="font-label-md text-label-md" id="toastMsg">Enlace de verificación copiado al portapapeles.</span>
+</div>
+</div>
+<script>
+  // Micro-interacción: Simulación de Descarga de PDF y Copiado de Link Seguro
+  (function() {
+    const downloadBtn = document.getElementById('downloadBtn');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const shareModalBtn = document.getElementById('shareModalBtn');
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMsg');
+
+    function showToast(message) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        const originalContent = this.innerHTML;
+        this.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">sync</span><span>Generando PA-GTH-F-10 PDF...</span>';
+        this.disabled = true;
+
+        setTimeout(() => {
+          this.innerHTML = originalContent;
+          this.disabled = false;
+          showToast('¡Descarga iniciada! Formato PA-GTH-F-10_Andres_Perez.pdf listo.');
+        }, 1200);
+      });
+    }
+
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', function() {
+        navigator.clipboard?.writeText('https://fet.edu.co/cv/verif?token=9f82c40a1');
+        showToast('Enlace de verificación copiado al portapapeles.');
+      });
+    }
+
+    if (shareModalBtn) {
+      shareModalBtn.addEventListener('click', function() {
+        showToast('Enlace temporal para reclutadores generado con vigencia de 7 días.');
+      });
+    }
+  })();
+</script></div></main><footer class="w-full bg-surface-container text-on-surface mt-space-2xl shadow-[0_-1px_6px_rgba(0,0,0,0.03)]"><div class="max-w-[1280px] mx-auto px-gutter-desktop py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="flex flex-col gap-space-xxs text-center md:text-left"><p class="font-label-md text-label-md text-on-surface font-semibold">© 2025 FET - Fundación Escuela Tecnológica de Neiva Jesús Oviedo Pérez</p><p class="text-on-surface-variant">Dirección de Prácticas Profesionales y Coordinación de Empleabilidad e Innovación</p><p class="text-[11px] text-outline">Integración tecnológica y sincronización de expediente impulsada por Q10 Solutions</p></div><div class="flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Mesa de Ayuda</a><a class="hover:text-primary transition-colors" href="#">Normativa PA-GTH-F-10</a><a class="hover:text-primary transition-colors" href="#">Convenios Empresariales</a><a class="hover:text-primary transition-colors" href="#">Tratamiento de Datos</a></div></div></footer></body></html>
