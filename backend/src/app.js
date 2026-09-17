@@ -16,6 +16,7 @@ app.get("/api/health", async (req, res) => {
     db = "connected";
   } catch (err) {
     db = "disconnected";
+    console.error("[health] fallo la conexion a la base de datos:", err);
   }
 
   res.json({ status: "ok", db, timestamp: new Date().toISOString() });

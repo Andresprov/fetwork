@@ -3,12 +3,19 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+// Prisma 7 ya no admite `url`/`directUrl` en el datasource de schema.prisma
+// (ver error P1012 "no longer supported in schema files"): la conexion vive
+// aqui. `datasource.url` solo lo usa el CLI (migrate/introspect/studio), por
+// eso apunta a DIRECT_URL (conexion sin pooler de Neon, necesaria para que
+// el motor de migraciones tome locks de advisory correctamente). El runtime
+// de la app NO usa este archivo: src/lib/prisma.js crea su propio
+// @prisma/adapter-pg con DATABASE_URL (conexion pooled) para servir queries.
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
   },
 });
