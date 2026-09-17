@@ -1,13 +1,376 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Prisma schema de FETWork V1.0
+// Fuente: Arquitectura_FETWork_v1.1.docx, seccion 7.2 (Diccionario de datos), 19 entidades del ERD.
+// La URL de conexion NO va aqui (Prisma 7): se define en prisma.config.ts via DATABASE_URL.
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// ---------- Enums ----------
+
+enum RolUsuario {
+  estudiante
+  docente
+  empresa
+}
+
+enum OrigenAutenticacion {
+  q10
+  local
+}
+
+enum EstadoValidacionEmpresa {
+  pendiente
+  aprobada
+  rechazada
+}
+
+enum NivelTitulo {
+  pregrado
+  tecnologo
+  tecnico
+  especializacion
+  maestria
+}
+
+enum TipoActividadInvestigativa {
+  grupo_investigacion
+  proyecto
+  tutoria
+  jurado
+  publicacion
+  ponencia
+  organizacion
+}
+
+enum TipoReferencia {
+  familiar
+  personal
+}
+
+enum TipoAsignacionAdministrativa {
+  coordinador_pasantias
+  validador_empresas
+}
+
+enum TipoVacante {
+  pasantia
+  empleo
+}
+
+enum EstadoVacante {
+  activa
+  cerrada
+}
+
+// ---------- Entidades del ERD (seccion 7.2) ----------
+
+model Usuario {
+  id_usuario               Int      @id @default(autoincrement())
+  codigo_institucional_q10 String?  @unique
+  correo                   String   @unique
+  contrasena_hash          String?
+  rol                      RolUsuario
+  origen_autenticacion     OrigenAutenticacion
+  fecha_creacion           DateTime @default(now())
+  activo                   Boolean  @default(true)
+
+  estudiante                  Estudiante?
+  empresa                     Empresa?
+  empresas_validadas          Empresa[]                  @relation("EmpresaValidador")
+  asignaciones_administrativas AsignacionAdministrativa[]
+  auditorias_como_docente     Auditoria[]                @relation("AuditoriaDocente")
+  auditorias_asignadas_por    Auditoria[]                @relation("AuditoriaAsignadoPor")
+  password_reset_tokens       PasswordResetToken[]
+
+  @@map("usuarios")
+}
+
+model ProgramaAcademico {
+  id_programa Int    @id @default(autoincrement())
+  nombre      String
+
+  estudiantes Estudiante[]
+
+  @@map("programas_academicos")
+}
+
+model Estudiante {
+  id_estudiante            Int      @id @default(autoincrement())
+  id_usuario               Int      @unique
+  id_programa              Int
+  nombres                  String
+  apellidos                String
+  semestre                 Int?
+  telefono                 String?
+  foto_url                 String?
+  hoja_vida_url            String?
+  portafolio_url           String?
+  github_url               String?
+  mostrar_experiencia      Boolean  @default(true)
+  mostrar_certificaciones  Boolean  @default(true)
+  mostrar_proyectos        Boolean  @default(true)
+  mostrar_contacto         Boolean  @default(true)
+
+  usuario   Usuario           @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade)
+  programa  ProgramaAcademico @relation(fields: [id_programa], references: [id_programa])
+
+  habilidades              EstudianteHabilidad[]
+  experiencias             Experiencia[]
+  certificaciones          Certificacion[]
+  proyectos                Proyecto[]
+  datos_personales_cv      DatosPersonalesCv?
+  titulos_academicos       TituloAcademico[]
+  actividades_investigativas ActividadInvestigativa[]
+  referencias              Referencia[]
+  auditorias               Auditoria[]
+
+  @@map("estudiantes")
+}
+
+model Empresa {
+  id_empresa             Int                     @id @default(autoincrement())
+  id_usuario              Int                     @unique
+  nombre_empresa           String
+  descripcion              String?
+  sector                   String?
+  sitio_web                String?
+  telefono                 String?
+  estado_validacion        EstadoValidacionEmpresa @default(pendiente)
+  id_validador             Int?
+  fecha_validacion         DateTime?
+  comentario_validacion    String?
+
+  usuario   Usuario  @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade)
+  validador Usuario? @relation("EmpresaValidador", fields: [id_validador], references: [id_usuario])
+  vacantes  Vacante[]
+
+  @@map("empresas")
+}
+
+model CategoriaHabilidad {
+  id_categoria Int    @id @default(autoincrement())
+  nombre       String
+
+  habilidades Habilidad[]
+
+  @@map("categorias_habilidades")
+}
+
+model Habilidad {
+  id_habilidad Int    @id @default(autoincrement())
+  id_categoria Int
+  nombre       String
+
+  categoria   CategoriaHabilidad   @relation(fields: [id_categoria], references: [id_categoria])
+  estudiantes EstudianteHabilidad[]
+
+  @@map("habilidades")
+}
+
+model EstudianteHabilidad {
+  id_estudiante Int
+  id_habilidad  Int
+  nivel         String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+  habilidad  Habilidad  @relation(fields: [id_habilidad], references: [id_habilidad], onDelete: Cascade)
+
+  @@id([id_estudiante, id_habilidad])
+  @@map("estudiante_habilidades")
+}
+
+model Experiencia {
+  id_experiencia  Int       @id @default(autoincrement())
+  id_estudiante   Int
+  cargo           String
+  entidad         String
+  direccion       String?
+  telefono        String?
+  jefe_inmediato  String?
+  dedicacion      String?
+  fecha_inicio    DateTime?
+  fecha_fin       DateTime?
+  descripcion     String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("experiencias")
+}
+
+model Certificacion {
+  id_certificacion Int       @id @default(autoincrement())
+  id_estudiante    Int
+  nombre           String
+  entidad_emisora  String?
+  fecha            DateTime?
+  duracion         String?
+  modalidad        String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("certificaciones")
+}
+
+model Proyecto {
+  id_proyecto             Int       @id @default(autoincrement())
+  id_estudiante           Int
+  nombre                  String
+  descripcion             String?
+  fecha                   DateTime?
+  repositorio_github_url  String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+  tecnologias ProyectoTecnologia[]
+  enlaces     ProyectoEnlace[]
+
+  @@map("proyectos")
+}
+
+model ProyectoTecnologia {
+  id_tecnologia Int    @id @default(autoincrement())
+  id_proyecto   Int
+  tecnologia    String
+
+  proyecto Proyecto @relation(fields: [id_proyecto], references: [id_proyecto], onDelete: Cascade)
+
+  @@map("proyecto_tecnologias")
+}
+
+model ProyectoEnlace {
+  id_enlace   Int    @id @default(autoincrement())
+  id_proyecto Int
+  url         String
+  tipo        String?
+
+  proyecto Proyecto @relation(fields: [id_proyecto], references: [id_proyecto], onDelete: Cascade)
+
+  @@map("proyecto_enlaces")
+}
+
+// Privado: nunca se expone en perfil publico ni en busquedas de empresa (seccion 7.3).
+model DatosPersonalesCv {
+  id_datos_personales           Int       @id @default(autoincrement())
+  id_estudiante                 Int       @unique
+  documento_identidad           String?
+  fecha_nacimiento               DateTime?
+  lugar_nacimiento                String?
+  estado_civil                    String?
+  lugar_residencia                String?
+  direccion                       String?
+  rh                              String?
+  contacto_emergencia_nombre      String?
+  contacto_emergencia_telefono    String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("datos_personales_cv")
+}
+
+// Privado: solo para la hoja de vida institucional (seccion 7.3).
+model TituloAcademico {
+  id_titulo          Int          @id @default(autoincrement())
+  id_estudiante       Int
+  nivel               NivelTitulo
+  fecha_grado          DateTime?
+  institucion          String?
+  pais_ciudad          String?
+  titulo_obtenido      String
+  modalidad_estudio    String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("titulos_academicos")
+}
+
+// Privado: solo para la hoja de vida institucional (seccion 7.3).
+model ActividadInvestigativa {
+  id_actividad  Int                        @id @default(autoincrement())
+  id_estudiante Int
+  tipo          TipoActividadInvestigativa
+  descripcion   String?
+  periodo       String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("actividades_investigativas")
+}
+
+// Privado: solo para la hoja de vida institucional (seccion 7.3).
+model Referencia {
+  id_referencia        Int            @id @default(autoincrement())
+  id_estudiante         Int
+  tipo                  TipoReferencia
+  nombre_completo        String
+  profesion_ocupacion    String?
+  parentesco             String?
+  telefono               String?
+
+  estudiante Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+
+  @@map("referencias")
+}
+
+model AsignacionAdministrativa {
+  id_asignacion   Int                          @id @default(autoincrement())
+  id_docente      Int
+  tipo            TipoAsignacionAdministrativa
+  fecha_asignacion DateTime                     @default(now())
+
+  docente Usuario @relation(fields: [id_docente], references: [id_usuario], onDelete: Cascade)
+
+  @@map("asignaciones_administrativas")
+}
+
+model Auditoria {
+  id_auditoria     Int      @id @default(autoincrement())
+  id_docente        Int
+  id_estudiante      Int
+  asignado_por       Int
+  fecha_asignacion   DateTime @default(now())
+
+  docente         Usuario    @relation("AuditoriaDocente", fields: [id_docente], references: [id_usuario])
+  estudiante      Estudiante @relation(fields: [id_estudiante], references: [id_estudiante], onDelete: Cascade)
+  asignado_por_usuario Usuario @relation("AuditoriaAsignadoPor", fields: [asignado_por], references: [id_usuario])
+
+  @@map("auditorias")
+}
+
+model Vacante {
+  id_vacante        Int           @id @default(autoincrement())
+  id_empresa         Int
+  titulo              String
+  tipo                 TipoVacante
+  descripcion          String?
+  requisitos           String?
+  modalidad            String?
+  fecha_limite         DateTime?
+  estado               EstadoVacante @default(activa)
+  fecha_publicacion    DateTime      @default(now())
+  contacto             String
+
+  empresa Empresa @relation(fields: [id_empresa], references: [id_empresa], onDelete: Cascade)
+
+  @@map("vacantes")
+}
+
+// ---------- Infraestructura de autenticacion (no es entidad del ERD de negocio) ----------
+// Necesaria para CU-13 (recuperar contrasena de empresa): guarda el hash del token de
+// un solo uso enviado (simulado por consola en Sprint 1) para poder validarlo despues.
+model PasswordResetToken {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int
+  token_hash  String   @unique
+  expires_at  DateTime
+  used        Boolean  @default(false)
+  creado_en   DateTime @default(now())
+
+  usuario Usuario @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade)
+
+  @@map("password_reset_tokens")
 }
