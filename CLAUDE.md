@@ -85,28 +85,63 @@ Puntos clave a no olvidar:
 - 🔜 **Fase 4 (actual)**: desarrollo, siguiendo el cronograma de 7 sprints
   (`cronograma.xlsx`). Sprint 1 = Gestión de usuarios (autenticación Q10 y
   empresas).
-  - ✅ Frontend inicializado en `/frontend` (Vite + React + Tailwind v3 +
-    react-router-dom + axios). Tokens de diseño (colores, tipografía Inter,
-    spacing, radios) configurados en `tailwind.config.js` a partir del
-    `DESIGN.md` de los mockups de Stitch, con los mismos nombres de clase para
-    poder portar el maquetado HTML directo a JSX.
-  - ✅ Mockups extraídos en `docs/mockups_extracted/maquetado/` (uno por rol:
-    autenticacion, empresas, docentes, modulo usuario (estudiante), Logo y
-    estilo). Cada pantalla trae `code.html` (maquetado Tailwind) + `screen.png`.
-  - ✅ Router base (`src/router/AppRouter.jsx`) con placeholders para las 6
-    pantallas de autenticación: `/login` (Q10, CU-01/20/23/26),
-    `/empresas/login` (CU-12/13), `/empresas/registro` (CU-11),
-    `/empresas/pendiente`, `/empresas/rechazada` (CU-13/27), `/auth/callback`.
-  - ✅ Las 6 pantallas de autenticación están convertidas a componentes React
-    reales (no placeholders): Iniciar sesión Q10, Login empresa (+ modal de
-    recuperación CU-13), Registro de empresa (validación de fuerza de
-    contraseña), Cuenta pendiente, Cuenta rechazada (+ recuperación CU-13),
-    Transición/error Q10 (con countdown y simulación de error). Interactividad
-    migrada de scripts vanilla JS del mockup a `useState`/`useEffect` de React.
-    Layout compartido en `src/components/layout/` (Header, Footer, AuthLayout).
-  - 🔜 Siguiente paso: conectar los formularios a un backend real (por ahora
-    los `onSubmit` solo simulan la respuesta con `TODO` marcados en el código:
-    login/registro/recuperación de empresa, y el redirect real a Q10 SAML).
+  - ✅ **Acta de Reunión No. 003 — "proyecto base funcionando"**: backend +
+    frontend + base de datos conectados de punta a punta (backend/frontend
+    arrancan sin errores, login Q10 mock y registro/login de empresa
+    funcionan de extremo a extremo en la interfaz real). Detalle abajo.
+  - ✅ **Backend** (`/backend`, Express 5 + Prisma 7.10.0):
+    - `prisma/schema.prisma` con las 19 entidades del ERD (sección 7.2 del
+      docx de arquitectura) + una tabla auxiliar `password_reset_tokens`
+      (infraestructura de auth para CU-13, no es entidad de negocio del ERD).
+    - Prisma 7 cambia el flujo de conexión respecto a versiones previas: la
+      URL va en `prisma.config.ts` (no en el `datasource` de schema.prisma,
+      como ya indicaba este archivo) y además exige un *driver adapter*
+      explícito (`@prisma/adapter-pg`) en el `PrismaClient`. El cliente
+      generado (`generator client { provider = "prisma-client" }`) se emite
+      como TypeScript/ESM puro sin `index.js` compilado, así que el backend
+      corre con `tsx` (`npm run dev` / `npm run start`) en vez de `node`
+      directo — no es un cambio de stack, solo de runtime de ejecución.
+    - Estructura de módulos `src/modules/{usuarios,perfiles,proyectos,
+      empresas,administracion}/` (routes/controller/service/repository).
+      `usuarios` y `empresas` completos; `perfiles`, `proyectos` y
+      `administracion` son esqueletos (501, listos para Sprint 2+).
+    - `usuarios`: proveedor Q10 **mock** tras una interfaz
+      (`providers/q10Provider.interface.js` + `.mock.js`) con roster fijo de
+      3 estudiantes y 2 docentes de prueba. `GET /api/usuarios/q10/roster` y
+      `POST /api/usuarios/q10/login` simulan el selector de cuentas y el
+      callback SSO; hacen upsert real en `usuarios`/`estudiantes` y devuelven
+      JWT propio de FETWork. Sustituir por la integración real solo requiere
+      un nuevo archivo `q10Provider.real.js` con la misma interfaz.
+    - `empresas`: `POST /registro` (JWT+bcrypt, queda `estado_validacion =
+      'pendiente'`), `POST /login` (devuelve `estado` pendiente/rechazada/
+      aprobada), `POST /recuperar-contrasena` y `POST /resetear-contrasena`
+      (CU-13, token real de un solo uso en `password_reset_tokens`; el envío
+      de correo queda simulado con `console.log` del enlace).
+    - `src/config/modulos.config.js`: flags por variable de entorno para
+      activar/desactivar cada módulo. El versionado interno "en línea /
+      respaldo" (sección 5.2) queda preparado a nivel de config pero **sin**
+      una segunda implementación paralela todavía (fuera de alcance Sprint 1).
+    - `GET /api/health` (backend + estado real de conexión a Prisma) y
+      middleware de errores global (un módulo no controlado no tumba a los
+      demás).
+  - ✅ **Frontend** (`/frontend`, Vite + React + Tailwind v3 + react-router-dom
+    + axios). Tokens de diseño en `tailwind.config.js` desde el `DESIGN.md`
+    de los mockups. Las 6 pantallas de autenticación (Iniciar sesión Q10,
+    Login empresa + modal recuperación CU-13, Registro de empresa con
+    checklist de fuerza de contraseña, Cuenta pendiente, Cuenta rechazada +
+    recuperación CU-13, Transición/error Q10 con countdown) están conectadas
+    a los endpoints reales del backend vía `src/api/{client,auth}.js` — ya no
+    simulan la respuesta. Único TODO que queda intacto a propósito: el
+    redirect real a Q10 SAML (`IniciarSesionQ10.jsx` usa el roster mock en su
+    lugar, ya que no hay acceso real a Q10 todavía).
+  - ⚠️ **Base de datos**: `backend/.env` (gitignored) todavía tiene una
+    `DATABASE_URL` placeholder de Postgres local — la URL real de Neon aún no
+    se ha configurado en este entorno. `npx prisma generate` sí se corrió
+    (cliente generado y verificado). `npx prisma migrate dev --name init`
+    **no** se ha ejecutado — queda pendiente en cuanto se reemplace la URL.
+    Con el placeholder, el backend arranca y responde correctamente pero
+    cualquier endpoint que toque la base de datos devuelve un error 500
+    controlado (autenticación fallida contra Postgres), sin tumbar el proceso.
 - Fases 5–12: pendientes según cronograma, hasta mediados de noviembre 2026.
 
 ## Documentos de referencia (cópialos a `/docs` en este repo)
