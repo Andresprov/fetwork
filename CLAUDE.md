@@ -103,8 +103,9 @@ Puntos clave a no olvidar:
       directo — no es un cambio de stack, solo de runtime de ejecución.
     - Estructura de módulos `src/modules/{usuarios,perfiles,proyectos,
       empresas,administracion}/` (routes/controller/service/repository).
-      `usuarios` y `empresas` completos; `perfiles`, `proyectos` y
-      `administracion` son esqueletos (501, listos para Sprint 2+).
+      `usuarios`, `empresas` y `perfiles` completos; `proyectos` solo expone
+      una lectura interna para la vista publica y `administracion` sigue
+      como esqueleto (501).
     - `usuarios`: proveedor Q10 **mock** tras una interfaz
       (`providers/q10Provider.interface.js` + `.mock.js`) con roster fijo de
       3 estudiantes y 2 docentes de prueba. `GET /api/usuarios/q10/roster` y
@@ -150,6 +151,61 @@ Puntos clave a no olvidar:
     fila en `usuarios`+`empresas` con `estado_validacion='pendiente'`; login
     de empresa devuelve el estado correcto (pendiente/rechazada/aprobada);
     recuperar/resetear contraseña genera y valida un token real end-to-end.
+  - ✅ **Sprint 2 — Módulo de Perfiles (CU-02, CU-03, CU-06, CU-07)**:
+    - Backend `src/modules/perfiles/` (routes/controller/service/repository)
+      bajo `/api/perfiles`. Middleware `src/middleware/auth.js`
+      (`requireAuth` + `requireRol`) sobre el JWT emitido en el login Q10;
+      todo `/me*` exige rol `estudiante` y cada consulta de escritura filtra
+      por `id_estudiante` (un estudiante no puede tocar filas de otro:
+      responde 404).
+      - `GET/PUT /me`: el PUT solo acepta `telefono`, `foto_url`,
+        `hoja_vida_url`, `portafolio_url`, `github_url` (URLs http/https
+        validadas); cualquier otro campo (nombres, apellidos, programa,
+        semestre) se rechaza con 400 porque vienen de Q10.
+      - `GET /habilidades/catalogo` (público), `GET/POST /me/habilidades`,
+        `DELETE /me/habilidades/:idHabilidad`. Nivel opcional:
+        `basico | intermedio | avanzado`. El POST hace upsert.
+      - CRUD `/me/experiencias` y `/me/certificaciones` (fechas AAAA-MM-DD,
+        fin >= inicio).
+      - `PUT /me/visibilidad`: los 4 toggles, solo booleanos.
+      - `GET /:idEstudiante/publico` (sin sesión): lista blanca de campos.
+        Siempre visibles: nombre, programa, semestre, foto y habilidades.
+        `mostrar_experiencia` → experiencias SIN teléfono/dirección/jefe
+        inmediato; `mostrar_certificaciones` → certificaciones;
+        `mostrar_proyectos` → proyectos + enlaces GitHub/portafolio;
+        `mostrar_contacto` → correo, teléfono y enlace de hoja de vida.
+        `datos_personales_cv`, `titulos_academicos`,
+        `actividades_investigativas` y `referencias` nunca se consultan.
+      - Los proyectos se leen vía `proyectos.service.listarPublicosPorEstudiante`
+        (sin acceso directo entre módulos).
+      - `prisma/seed.js` (`npm run prisma:seed`, idempotente): catálogo de
+        6 categorías / 54 habilidades, y normaliza con tildes los nombres de
+        programas creados en Sprint 1. Ya se corrió contra Neon.
+      - El proveedor Q10 simulado ahora incluye `semestre` y lo sincroniza
+        en cada login.
+    - Frontend: `src/components/layout/EstudianteLayout.jsx` (cabecera
+      verde con navegación por secciones y cierre de sesión, basada en los
+      mockups de `docs/mockups_extracted/.../modulo usuario (estudiante)`),
+      guarda `src/router/RequireEstudiante.jsx`, componentes compartidos en
+      `src/components/ui/` y pantallas en `src/pages/perfil/` (Resumen,
+      Datos personales, Habilidades, Experiencia, Certificaciones,
+      Visibilidad, Vista pública). `src/components/perfil/PerfilPublicoView.jsx`
+      es la ÚNICA vista pública: la usa la vista previa del estudiante
+      (`/perfil/vista-publica`, marca secciones ocultas) y el enlace
+      público `/perfiles/:idEstudiante` (omite secciones ocultas o vacías),
+      que es el que reutilizará la empresa en CU-16/CU-17. El cliente axios
+      adjunta el JWT y cierra sesión ante un 401. El login Q10 de un
+      estudiante redirige a `/perfil`.
+    - Verificado: script de API (38 chequeos: auth 401/403, scope entre
+      estudiantes, validaciones, visibilidad y ausencia de datos privados) y
+      recorrido end-to-end en navegador headless (Edge) — login Q10, editar
+      datos, agregar/quitar habilidades, crear/editar experiencia,
+      crear/eliminar certificación, ocultar experiencia y contacto, y
+      confirmar que el enlace público respeta la configuración (23/23). Los
+      datos de prueba se limpiaron después.
+    - Convención de UI: los textos visibles no llevan referencias internas
+      (CU-xx, Sprint N, "mock"); esas referencias van solo en comentarios
+      del código.
 - Fases 5–12: pendientes según cronograma, hasta mediados de noviembre 2026.
 
 ## Documentos de referencia (cópialos a `/docs` en este repo)
