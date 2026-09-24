@@ -3,7 +3,7 @@
 // su router en app.js.
 //
 // El versionado "en linea / de respaldo" por modulo (seccion 5.2) queda preparado
-// a nivel de config (ver comentario en cada modulo), pero en Sprint 1 solo existe
+// a nivel de config (ver comentario en cada modulo), pero por ahora solo existe
 // una implementacion por modulo: no se fabrica una "version de respaldo" falsa.
 function leerFlag(nombre, porDefecto = true) {
   const valor = process.env[nombre];

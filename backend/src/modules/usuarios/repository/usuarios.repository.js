@@ -32,12 +32,14 @@ async function upsertCuentaQ10(cuenta) {
         nombres: cuenta.nombres,
         apellidos: cuenta.apellidos,
         id_programa: programa.id_programa,
+        semestre: cuenta.semestre ?? null,
       },
       create: {
         id_usuario: usuario.id_usuario,
         id_programa: programa.id_programa,
         nombres: cuenta.nombres,
         apellidos: cuenta.apellidos,
+        semestre: cuenta.semestre ?? null,
       },
     });
     return { usuario, estudiante };
