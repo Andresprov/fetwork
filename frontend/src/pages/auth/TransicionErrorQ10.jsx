@@ -44,12 +44,13 @@ export default function TransicionErrorQ10() {
   useEffect(() => {
     if (estado !== "exito") return undefined;
     if (countdown <= 0) {
-      navigate("/login");
+      // Los estudiantes entran a su perfil; el panel docente aun no existe.
+      navigate(usuario?.rol === "estudiante" ? "/perfil" : "/login", { replace: true });
       return undefined;
     }
     const timeoutId = setTimeout(() => setCountdown((c) => c - 1), 1000);
     return () => clearTimeout(timeoutId);
-  }, [estado, countdown, navigate]);
+  }, [estado, countdown, navigate, usuario]);
 
   function reintentar() {
     yaIntento.current = false;
