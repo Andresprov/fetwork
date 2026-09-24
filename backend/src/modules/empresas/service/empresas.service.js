@@ -24,12 +24,12 @@ async function registrar(datos) {
   const { correo, contrasena, nombre_empresa } = datos;
 
   if (!correo || !contrasena || !nombre_empresa) {
-    throw new ErrorPeticion(400, "correo, contrasena y nombre_empresa son requeridos.");
+    throw new ErrorPeticion(400, "El correo, la contraseña y el nombre de la empresa son obligatorios.");
   }
 
   const { valida, errores } = validarContrasena(contrasena);
   if (!valida) {
-    throw new ErrorPeticion(400, "La contrasena no cumple los requisitos minimos.", { errores });
+    throw new ErrorPeticion(400, "La contraseña no cumple los requisitos mínimos.", { errores });
   }
 
   const existente = await repository.findUsuarioPorCorreo(correo);
@@ -58,17 +58,17 @@ async function registrar(datos) {
 
 async function login({ correo, contrasena }) {
   if (!correo || !contrasena) {
-    throw new ErrorPeticion(400, "correo y contrasena son requeridos.");
+    throw new ErrorPeticion(400, "El correo y la contraseña son obligatorios.");
   }
 
   const usuario = await repository.findUsuarioPorCorreo(correo);
   if (!usuario || !usuario.empresa || !usuario.contrasena_hash) {
-    throw new ErrorPeticion(401, "Credenciales invalidas.");
+    throw new ErrorPeticion(401, "Credenciales inválidas.");
   }
 
   const coincide = await bcrypt.compare(contrasena, usuario.contrasena_hash);
   if (!coincide) {
-    throw new ErrorPeticion(401, "Credenciales invalidas.");
+    throw new ErrorPeticion(401, "Credenciales inválidas.");
   }
 
   const { estado_validacion, comentario_validacion } = usuario.empresa;
@@ -100,7 +100,7 @@ async function login({ correo, contrasena }) {
 
 async function solicitarRecuperacion(correo) {
   if (!correo) {
-    throw new ErrorPeticion(400, "correo es requerido.");
+    throw new ErrorPeticion(400, "El correo es obligatorio.");
   }
 
   const usuario = await repository.findUsuarioPorCorreo(correo);
@@ -118,7 +118,7 @@ async function solicitarRecuperacion(correo) {
       expires_at,
     });
 
-    // Simulacion del envio de correo (CU-13): en Sprint 1 no hay servicio de
+    // Simulacion del envio de correo (CU-13): aun no hay servicio de
     // correo real, se deja evidencia en consola con el enlace que se enviaria.
     console.log(
       `[empresas] Enlace de recuperacion de contrasena para ${correo}: ` +
@@ -126,30 +126,30 @@ async function solicitarRecuperacion(correo) {
     );
   }
 
-  return { mensaje: "Si el correo esta registrado, se enviaron instrucciones de recuperacion." };
+  return { mensaje: "Si el correo está registrado, se enviaron instrucciones de recuperación." };
 }
 
 async function resetearContrasena({ token, nueva_contrasena }) {
   if (!token || !nueva_contrasena) {
-    throw new ErrorPeticion(400, "token y nueva_contrasena son requeridos.");
+    throw new ErrorPeticion(400, "El token y la nueva contraseña son obligatorios.");
   }
 
   const { valida, errores } = validarContrasena(nueva_contrasena);
   if (!valida) {
-    throw new ErrorPeticion(400, "La contrasena no cumple los requisitos minimos.", { errores });
+    throw new ErrorPeticion(400, "La contraseña no cumple los requisitos mínimos.", { errores });
   }
 
   const token_hash = hashToken(token);
   const registro = await repository.buscarTokenValido(token_hash);
   if (!registro) {
-    throw new ErrorPeticion(400, "El token de recuperacion es invalido o expiro.");
+    throw new ErrorPeticion(400, "El enlace de recuperación es inválido o expiró.");
   }
 
   const contrasena_hash = await bcrypt.hash(nueva_contrasena, SALT_ROUNDS);
   await repository.actualizarContrasena(registro.id_usuario, contrasena_hash);
   await repository.marcarTokenUsado(registro.id);
 
-  return { mensaje: "Contrasena actualizada correctamente." };
+  return { mensaje: "Contraseña actualizada correctamente." };
 }
 
 module.exports = { registrar, login, solicitarRecuperacion, resetearContrasena };

@@ -58,7 +58,7 @@ export default function IniciarSesionQ10() {
               </div>
 
               {cargando && (
-                <p className="font-body-sm text-body-sm text-outline">Cargando cuentas institucionales de prueba...</p>
+                <p className="font-body-sm text-body-sm text-outline">Cargando cuentas institucionales...</p>
               )}
               {error && (
                 <p className="font-body-sm text-body-sm text-error mb-space-md">{error}</p>
@@ -67,7 +67,7 @@ export default function IniciarSesionQ10() {
               {!cargando && !error && (
                 <div className="flex flex-col gap-space-sm mb-space-lg">
                   <span className="font-label-sm text-label-sm text-outline uppercase block mb-space-xxs">
-                    Selecciona una cuenta de prueba Q10 (mock, Sprint 1):
+                    Selecciona tu cuenta institucional
                   </span>
                   {roster.map((cuenta) => (
                     <button
@@ -82,9 +82,9 @@ export default function IniciarSesionQ10() {
                             {cuenta.rol === "docente" ? "person_apron" : "school"}
                           </span>
                         </div>
-                        <span>
-                          {cuenta.nombres} {cuenta.apellidos}{" "}
-                          <span className="font-label-sm text-label-sm opacity-80">({cuenta.rol})</span>
+                        <span className="text-left">
+                          {cuenta.nombres} {cuenta.apellidos}
+                          <span className="block font-label-sm text-label-sm opacity-80 capitalize">{cuenta.rol}</span>
                         </span>
                       </div>
                       <span className="material-symbols-outlined text-primary-fixed group-hover:translate-x-1 transition-transform">

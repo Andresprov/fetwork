@@ -76,8 +76,7 @@ export default function InicioSesionEmpresa() {
             Bienvenida, {empresaConectada.nombre_empresa}
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Sesión iniciada correctamente. El panel de gestión de vacantes (CU-14 en adelante) se habilitará en
-            un sprint posterior.
+            Sesión iniciada correctamente. El panel de gestión de vacantes estará disponible próximamente.
           </p>
         </div>
       </AuthLayout>
@@ -117,7 +116,7 @@ export default function InicioSesionEmpresa() {
               <div className="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
                 <span className="material-symbols-outlined text-[22px]">bolt</span>
               </div>
-              <h3 className="font-headline-sm text-headline-sm text-on-surface">Gestión Ágil CU-12</h3>
+              <h3 className="font-headline-sm text-headline-sm text-on-surface">Gestión Ágil</h3>
               <p className="font-body-sm text-body-sm text-on-surface-variant">
                 Publicación instantánea de convocatorias, trazabilidad de postulantes y seguimiento a contratos
                 de aprendizaje.
@@ -137,9 +136,6 @@ export default function InicioSesionEmpresa() {
                     FETWork Empresas
                   </span>
                 </div>
-                <span className="px-space-xs py-space-xxs rounded-lg bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
-                  Módulo CU-12
-                </span>
               </div>
               <h2 className="font-headline-lg text-headline-lg text-on-surface font-bold mt-space-xxs">
                 Portal de Empresas y Empleadores
@@ -180,7 +176,7 @@ export default function InicioSesionEmpresa() {
                     onClick={() => setModalAbierto(true)}
                     type="button"
                   >
-                    ¿Olvidaste tu contraseña? (CU-13)
+                    ¿Olvidaste tu contraseña?
                   </button>
                 </div>
                 <div className="relative flex items-center">
@@ -237,7 +233,7 @@ export default function InicioSesionEmpresa() {
                 href="/empresas/registro"
                 className="w-full sm:w-auto px-space-md py-space-xs rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm font-semibold whitespace-nowrap shadow-sm transition-colors text-center"
               >
-                Crear cuenta de Empresa (CU-11)
+                Crear cuenta de empresa
               </a>
             </div>
 
@@ -267,7 +263,7 @@ export default function InicioSesionEmpresa() {
                 </div>
                 <div className="flex flex-col">
                   <span className="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">
-                    Recuperación de Acceso (CU-13)
+                    Recuperación de acceso
                   </span>
                   <span className="font-headline-sm text-headline-sm text-on-surface font-bold">
                     Restablecer Contraseña
@@ -291,7 +287,7 @@ export default function InicioSesionEmpresa() {
                   <p className="font-label-md text-label-md font-bold">Instrucciones enviadas</p>
                 </div>
                 <p className="font-body-sm text-body-sm mt-space-xxs">
-                  Si el correo esta registrado, revisa tu bandeja para completar la renovación de tu contraseña.
+                  Si el correo está registrado, revisa tu bandeja para completar la renovación de tu contraseña.
                 </p>
               </div>
             ) : (
@@ -334,7 +330,7 @@ export default function InicioSesionEmpresa() {
                       type="submit"
                       disabled={enviandoRecuperacion}
                     >
-                      <span>{enviandoRecuperacion ? "Enviando..." : "Enviar Instrucciones (CU-13)"}</span>
+                      <span>{enviandoRecuperacion ? "Enviando..." : "Enviar instrucciones"}</span>
                       <span className="material-symbols-outlined text-[18px]">send</span>
                     </button>
                   </div>

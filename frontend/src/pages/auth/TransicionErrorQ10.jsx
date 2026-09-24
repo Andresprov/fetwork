@@ -23,7 +23,7 @@ export default function TransicionErrorQ10() {
   useEffect(() => {
     if (!codigo) {
       setEstado("error");
-      setMensajeError("No se recibio un codigo institucional Q10 para autenticar.");
+      setMensajeError("No se recibió un código institucional Q10 para autenticar.");
       return;
     }
     if (yaIntento.current) return;
@@ -80,7 +80,7 @@ export default function TransicionErrorQ10() {
         <div className="mb-space-lg inline-flex items-center gap-space-xs px-space-md py-space-xxs rounded-full bg-surface-container-high shadow-sm">
           <span className="inline-block w-2.5 h-2.5 rounded-full bg-secondary animate-pulse" />
           <span className="font-label-sm text-label-sm text-on-surface uppercase tracking-wider">
-            CU-01 • Enlace Seguro SSO FET
+            Enlace Seguro SSO FET
           </span>
         </div>
 
@@ -120,9 +120,8 @@ export default function TransicionErrorQ10() {
                         Conectando con Q10 Académico...
                       </h1>
                       <p className="font-body-md text-body-md text-on-surface-variant mt-space-sm leading-relaxed">
-                        Validando tu identidad institucional con el codigo{" "}
-                        <strong className="text-on-surface font-semibold">{codigo}</strong> (proveedor Q10
-                        simulado, Sprint 1).
+                        Validando tu identidad institucional con el código{" "}
+                        <strong className="text-on-surface font-semibold">{codigo}</strong>.
                       </p>
                     </>
                   )}
@@ -132,7 +131,7 @@ export default function TransicionErrorQ10() {
                         ¡Bienvenido, {usuario.nombres}!
                       </h1>
                       <p className="font-body-md text-body-md text-on-surface-variant mt-space-sm leading-relaxed">
-                        Sesion iniciada correctamente como{" "}
+                        Sesión iniciada correctamente como{" "}
                         <strong className="text-on-surface font-semibold">{usuario.rol}</strong>. Redirigiendo en{" "}
                         <span className="font-bold text-on-surface">{countdown}</span> segundos...
                       </p>

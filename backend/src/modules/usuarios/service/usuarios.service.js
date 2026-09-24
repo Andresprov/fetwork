@@ -6,9 +6,9 @@ const { signToken } = require("../../../lib/jwt");
 
 class CredencialesQ10InvalidasError extends Error {
   constructor() {
-    super("Codigo institucional Q10 no reconocido.");
+    super("Código institucional Q10 no reconocido.");
     this.status = 401;
-    this.publicMessage = "Codigo institucional Q10 no reconocido.";
+    this.publicMessage = "Código institucional Q10 no reconocido.";
   }
 }
 

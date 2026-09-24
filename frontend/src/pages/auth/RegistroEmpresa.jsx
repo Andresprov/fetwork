@@ -357,7 +357,7 @@ export default function RegistroEmpresa() {
                   className="font-label-md text-label-md text-secondary hover:text-primary transition-colors flex items-center gap-1"
                   href="/empresas/login"
                 >
-                  <span>¿Ya tienes cuenta activa? Inicia sesión aquí (CU-12)</span>
+                  <span>¿Ya tienes cuenta activa? Inicia sesión aquí</span>
                   <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
               </div>

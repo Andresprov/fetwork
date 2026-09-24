@@ -8,7 +8,7 @@ async function getRosterQ10(req, res) {
 async function postLoginQ10(req, res) {
   const { codigo_institucional_q10 } = req.body || {};
   if (!codigo_institucional_q10) {
-    return res.status(400).json({ error: "codigo_institucional_q10 es requerido." });
+    return res.status(400).json({ error: "El código institucional Q10 es obligatorio." });
   }
 
   const resultado = await service.loginConQ10(codigo_institucional_q10);

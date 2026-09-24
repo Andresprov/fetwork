@@ -89,7 +89,6 @@ export default function CuentaRechazada() {
                 <span className="material-symbols-outlined text-primary text-[14px]">shield_lock</span>
                 Seguridad Empresarial
               </span>
-              <span className="font-label-sm text-label-sm text-secondary font-bold">CU-13</span>
             </div>
             <h2 className="font-headline-lg text-headline-lg text-on-surface mb-space-xs">
               Recuperación de Contraseña

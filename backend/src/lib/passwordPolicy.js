@@ -5,9 +5,9 @@
 // minimo 8 caracteres, 1 mayuscula, 1 numero, 1 simbolo.
 const REGLAS = [
   { test: (p) => p.length >= 8, mensaje: "Debe tener al menos 8 caracteres." },
-  { test: (p) => /[A-Z]/.test(p), mensaje: "Debe incluir al menos una mayuscula." },
-  { test: (p) => /[0-9]/.test(p), mensaje: "Debe incluir al menos un numero." },
-  { test: (p) => /[^A-Za-z0-9]/.test(p), mensaje: "Debe incluir al menos un caracter especial." },
+  { test: (p) => /[A-Z]/.test(p), mensaje: "Debe incluir al menos una mayúscula." },
+  { test: (p) => /[0-9]/.test(p), mensaje: "Debe incluir al menos un número." },
+  { test: (p) => /[^A-Za-z0-9]/.test(p), mensaje: "Debe incluir al menos un carácter especial." },
 ];
 
 function validarContrasena(password) {
