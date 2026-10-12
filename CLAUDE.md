@@ -206,6 +206,95 @@ Puntos clave a no olvidar:
     - Convención de UI: los textos visibles no llevan referencias internas
       (CU-xx, Sprint N, "mock"); esas referencias van solo en comentarios
       del código.
+  - ✅ **Sprint 3 — Proyectos y hoja de vida PA-GTH-F-10 (CU-04, CU-05,
+    CU-08, CU-09)**. Sin cambios de esquema: el ERD ya tenía todas las tablas.
+    - `src/lib/validacion.js`: validadores compartidos (`crearValidadores`
+      con mapa de etiquetas + `idEntero`); `perfiles.service` se refactorizó
+      para usarlos.
+    - Backend `proyectos` (`/api/proyectos/me`, solo rol estudiante): CRUD
+      con tecnologías (lista de strings, máx. 20, sin duplicados) y enlaces
+      (`demo | video | documentacion | articulo | otro`, máx. 10); en cada
+      edición se reemplazan completas (transacción). `repositorio_github_url`
+      solo acepta github.com. Resuelve el estudiante vía
+      `perfiles.service.obtenerIdEstudiante` (require diferido para evitar la
+      dependencia circular con perfiles).
+    - Backend hoja de vida (dentro del módulo perfiles, archivos
+      `hojaVida.*`): `GET /api/perfiles/me/hoja-vida` (todo + completitud por
+      paso), `PUT .../datos-personales` (upsert parcial, RH/estado civil de
+      lista cerrada, mayor de 14 años), CRUD `.../titulos`, `.../actividades`,
+      `.../referencias` (parentesco obligatorio solo en familiares; teléfono
+      obligatorio) y `GET .../exportar` (PDF). La experiencia
+      laboral y los cursos reutilizan `experiencias` y `certificaciones`
+      (sección 7.3).
+    - Generación con docxtemplater sobre el **formato oficial** de Talento
+      Humano (`backend/templates/plantilla_hoja_vida_PA-GTH-F-10.docx`,
+      versión 01 del 23/06/2018 — nunca se edita a mano y es el ÚNICO .docx
+      del repo). `hojaVida.plantilla.js` lo lee y le inserta los marcadores
+      en memoria (cacheado; no se guarda copia derivada) y
+      `hojaVida.documento.js` lo rellena. Cada párrafo tocado se valida por
+      su texto: si llega otra versión del formato, falla con un mensaje claro.
+    - **Salida en PDF** (decisión del usuario, 12/10/2026): el .docx relleno
+      se convierte con LibreOffice headless (`soffice --convert-to pdf`;
+      ruta configurable con `LIBREOFFICE_PATH`, por defecto la instalación
+      estándar). Perfil de LibreOffice reutilizado y conversiones en cola
+      (~4–5 s por PDF). Para Render/Railway se despliega con
+      `backend/Dockerfile`, que instala `libreoffice-writer-nogui` + fuentes
+      métricamente compatibles con Arial/Calibri.
+      Decisiones de mapeo (acordadas con el usuario):
+      - El programa en curso en la FET va en el bloque **Pregrado** como
+        «En curso (semestre N)» (el formato no tiene "formación en curso").
+      - Títulos agrupados por nivel en los bloques fijos del formato
+        (2.1 Maestría/Especialización/Pregrado, 2.2 Tecnólogo/Técnico);
+        nivel sin títulos → «No registra». Cursos = tabla de diplomados
+        (fecha MM/AAAA porque la columna es angosta).
+      - Experiencia: un bloque completo (con INSTITUCIÓN/EMPRESA) que se
+        repite por experiencia.
+      - Sección 4: subsecciones por tipo de actividad. Sin cambios de
+        esquema: todas las tutorías van en «pregrado» y 4.5 «Trabajos e
+        informes técnicos» queda «No registra» (no hay tipo en el enum).
+      - Recuadro de foto: lleva la foto de perfil del estudiante (si la
+        subió). docxtemplater no inserta imágenes sin módulo de pago, así que
+        `hojaVida.documento.js` la agrega tras renderizar: la ancla detrás
+        del «Rectángulo 13» del formato, con su posición/tamaño leídos del
+        propio XML, recortada tipo "cover". Sin foto, el recuadro queda vacío.
+      - Fecha: la «FECHA: 23/06/2018» del encabezado es la de aprobación de
+        la versión 01 del formato (control documental) y NO se cambia
+        (decisión del usuario, 12/10/2026). La fecha del día va aparte como
+        «Fecha de diligenciamiento: dd/mm/aaaa» debajo de la firma, en hora
+        de Colombia (America/Bogota).
+      - Habilidades y declaración juramentada no están en el formato
+        oficial: no salen en el documento.
+      - Los saltos de página del formato se convirtieron en "salto de página
+        antes" de cada sección para no generar hojas en blanco.
+    - Frontend: `/perfil/proyectos` (portafolio con búsqueda por nombre o
+      tecnología), `/perfil/proyectos/nuevo` y `/:id` (formulario con chips
+      de tecnologías, enlaces y checklist de calidad), `/perfil/hoja-vida`
+      (formulario de 5 pasos, `?paso=N`, con panel de completitud) y
+      `/perfil/hoja-vida/exportar` (la vista previa es el mismo PDF embebido
+      en un iframe, idéntico al descargado). La vista
+      pública ahora muestra también los enlaces de cada proyecto.
+    - Verificado: script de API (46 chequeos: auth, alcance entre
+      estudiantes, validaciones, exportación y ausencia de datos privados en
+      la vista pública), .docx revisado convertido a PDF, y recorrido E2E en
+      Edge headless (40/40, vista móvil sin scroll horizontal). Datos de
+      prueba limpiados. Tras el cambio a PDF se revisó el PDF generado y la
+      descarga desde la pantalla en Edge headless.
+  - ✅ **Foto de perfil como archivo** (adelantado del Sprint 4, 12/10/2026):
+    `PUT /api/perfiles/me/foto` (multipart, campo `foto`, JPG/PNG/WEBP
+    validado por firma, máx. 2 MB) y `DELETE /me/foto`. Con `sharp`
+    (`src/lib/imagen.js`) se aplica la rotación EXIF, se reduce a máx.
+    800 px y se guarda como JPEG sin metadatos (el EXIF puede traer GPS); `foto_url` ya no
+    se acepta en `PUT /me`. Almacenamiento tras interfaz
+    (`src/lib/almacenamiento/`, mismo patrón que el proveedor Q10): hoy
+    `almacenamiento.local.js` guarda en `backend/uploads/` (gitignored),
+    servido en `/uploads`; en BD queda la ruta relativa y el serializador
+    la vuelve absoluta con `PUBLIC_URL`. Las URLs absolutas antiguas se
+    devuelven tal cual. Al reemplazar o quitar la foto se borra el archivo
+    anterior. En el frontend, Datos personales sube la foto al
+    seleccionarla (Subir/Cambiar/Quitar).
+    - Pendiente para Sprint 4: proveedor Cloudinary (en Render/Railway el
+      disco local se borra en cada despliegue), sincronizar/importar repos
+      desde la API de GitHub y subir la hoja de vida como archivo (hoy URL).
 - Fases 5–12: pendientes según cronograma, hasta mediados de noviembre 2026.
 
 ## Documentos de referencia (cópialos a `/docs` en este repo)
