@@ -14,6 +14,8 @@ const SECCIONES = [
   { to: "/perfil/habilidades", label: "Habilidades", icon: "psychology" },
   { to: "/perfil/experiencia", label: "Experiencia", icon: "work_history" },
   { to: "/perfil/certificaciones", label: "Certificaciones", icon: "workspace_premium" },
+  { to: "/perfil/proyectos", label: "Proyectos", icon: "folder_special" },
+  { to: "/perfil/hoja-vida", label: "Hoja de vida", icon: "description" },
   { to: "/perfil/visibilidad", label: "Visibilidad", icon: "visibility" },
   { to: "/perfil/vista-publica", label: "Vista pública", icon: "person_search" },
 ];

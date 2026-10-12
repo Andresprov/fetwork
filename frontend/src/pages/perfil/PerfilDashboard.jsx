@@ -13,6 +13,7 @@ function calcularCompletitud(perfil) {
     { label: "Al menos 3 habilidades", ok: perfil.resumen.habilidades >= 3, to: "/perfil/habilidades" },
     { label: "Experiencia registrada", ok: perfil.resumen.experiencias > 0, to: "/perfil/experiencia" },
     { label: "Certificación registrada", ok: perfil.resumen.certificaciones > 0, to: "/perfil/certificaciones" },
+    { label: "Proyecto en el portafolio", ok: perfil.resumen.proyectos > 0, to: "/perfil/proyectos" },
   ];
   const completos = items.filter((i) => i.ok).length;
   return { items, porcentaje: Math.round((completos / items.length) * 100) };
@@ -23,6 +24,8 @@ const ACCESOS = [
   { to: "/perfil/habilidades", icon: "psychology", titulo: "Habilidades", texto: "Registra tus competencias técnicas, metodológicas, blandas e idiomas.", contador: "habilidades" },
   { to: "/perfil/experiencia", icon: "work_history", titulo: "Experiencia", texto: "Documenta pasantías, monitorías y empleos que respalden tu trayectoria.", contador: "experiencias" },
   { to: "/perfil/certificaciones", icon: "workspace_premium", titulo: "Certificaciones", texto: "Agrega cursos, diplomados y certificaciones que complementen tu formación.", contador: "certificaciones" },
+  { to: "/perfil/proyectos", icon: "folder_special", titulo: "Proyectos", texto: "Construye tu portafolio y vincula los repositorios de GitHub de tus proyectos.", contador: "proyectos", masculino: true },
+  { to: "/perfil/hoja-vida", icon: "description", titulo: "Hoja de vida PA-GTH-F-10", texto: "Diligencia y descarga tu hoja de vida en el formato oficial de la FET." },
   { to: "/perfil/visibilidad", icon: "visibility", titulo: "Visibilidad", texto: "Decide qué secciones de tu perfil pueden consultar las empresas aliadas." },
   { to: "/perfil/vista-publica", icon: "person_search", titulo: "Vista pública", texto: "Comprueba cómo ven tu perfil los reclutadores de las empresas aliadas." },
 ];
@@ -52,10 +55,11 @@ export default function PerfilDashboard() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
             <Stat icon="psychology" valor={perfil.resumen.habilidades} label="Habilidades" />
             <Stat icon="work_history" valor={perfil.resumen.experiencias} label="Experiencias" />
             <Stat icon="workspace_premium" valor={perfil.resumen.certificaciones} label="Certificaciones" />
+            <Stat icon="folder_special" valor={perfil.resumen.proyectos} label="Proyectos" />
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-space-sm p-space-sm rounded-lg bg-surface-container-low">
@@ -112,7 +116,7 @@ export default function PerfilDashboard() {
                 <div className="w-11 h-11 rounded-lg bg-surface-container-low text-primary flex items-center justify-center">
                   <span className="material-symbols-outlined text-[24px]">{a.icon}</span>
                 </div>
-                {a.contador && <Badge>{contar(perfil.resumen[a.contador], "registrada", "registradas")}</Badge>}
+                {a.contador && <Badge>{a.masculino ? contar(perfil.resumen[a.contador], "registrado", "registrados") : contar(perfil.resumen[a.contador], "registrada", "registradas")}</Badge>}
               </div>
               <h3 className="font-headline-sm text-headline-sm text-on-surface">{a.titulo}</h3>
               <p className="font-body-md text-body-md text-on-surface-variant flex-1">{a.texto}</p>

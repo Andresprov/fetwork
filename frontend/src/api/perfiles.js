@@ -10,6 +10,19 @@ export async function actualizarMiPerfil(payload) {
   return data;
 }
 
+// La foto se sube como archivo (multipart, campo "foto").
+export async function subirFoto(archivo) {
+  const formulario = new FormData();
+  formulario.append("foto", archivo);
+  const { data } = await client.put("/perfiles/me/foto", formulario, { headers: { "Content-Type": "multipart/form-data" } });
+  return data;
+}
+
+export async function eliminarFoto() {
+  const { data } = await client.delete("/perfiles/me/foto");
+  return data;
+}
+
 export async function actualizarVisibilidad(payload) {
   const { data } = await client.put("/perfiles/me/visibilidad", payload);
   return data;

@@ -5,6 +5,7 @@ import Avatar from "./Avatar";
 import { getPerfilPublico } from "../../api/perfiles";
 import { getErrorMessage } from "../../api/client";
 import { etiquetaNivel, formatearMesAnio, formatearPeriodo } from "../../lib/formato";
+import { etiquetaEnlace, iconoEnlace } from "../../lib/proyectos";
 
 // Vista publica del perfil de un estudiante. Es la misma pantalla que usa el
 // estudiante para previsualizar su perfil y la que consultaran las empresas.
@@ -118,11 +119,21 @@ export default function PerfilPublicoView({ idEstudiante, modoVistaPrevia = fals
                         ))}
                       </div>
                     )}
-                    {p.repositorio_github_url && (
-                      <a href={p.repositorio_github_url} target="_blank" rel="noopener noreferrer" className="font-label-md text-label-md text-secondary hover:text-primary flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[16px]">code</span>
-                        Repositorio
-                      </a>
+                    {(p.repositorio_github_url || p.enlaces.length > 0) && (
+                      <div className="flex flex-wrap gap-x-space-md gap-y-space-xxs">
+                        {p.repositorio_github_url && (
+                          <a href={p.repositorio_github_url} target="_blank" rel="noopener noreferrer" className="font-label-md text-label-md text-secondary hover:text-primary flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[16px]">code</span>
+                            Repositorio
+                          </a>
+                        )}
+                        {p.enlaces.map((e) => (
+                          <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer" className="font-label-md text-label-md text-secondary hover:text-primary flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[16px]">{iconoEnlace(e.tipo)}</span>
+                            {etiquetaEnlace(e.tipo)}
+                          </a>
+                        ))}
+                      </div>
                     )}
                   </div>
                 ))}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Card, { Badge, CardHeader } from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
@@ -6,10 +6,12 @@ import PageHeader from "../../components/ui/PageHeader";
 import { Alert } from "../../components/ui/Feedback";
 import { ReadOnlyField, TextField } from "../../components/ui/FormFields";
 import Avatar from "../../components/perfil/Avatar";
-import { actualizarMiPerfil } from "../../api/perfiles";
+import { actualizarMiPerfil, eliminarFoto, subirFoto } from "../../api/perfiles";
 import { getErrorMessage } from "../../api/client";
 
-const CAMPOS = ["telefono", "foto_url", "hoja_vida_url", "portafolio_url", "github_url"];
+const CAMPOS = ["telefono", "hoja_vida_url", "portafolio_url", "github_url"];
+const TIPOS_FOTO = ["image/jpeg", "image/png", "image/webp"];
+const MAX_FOTO_BYTES = 2 * 1024 * 1024;
 
 function valoresIniciales(perfil) {
   return Object.fromEntries(CAMPOS.map((c) => [c, perfil[c] || ""]));
@@ -99,20 +101,7 @@ export default function DatosPersonales() {
                 action={<Badge tone="primary" icon="edit">Editable</Badge>}
               />
 
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-space-md p-space-md rounded-lg border border-outline-variant/70">
-                <Avatar perfil={{ ...perfil, foto_url: form.foto_url }} size="w-20 h-20" texto="font-headline-md text-headline-md" />
-                <TextField
-                  id="foto_url"
-                  className="flex-1 w-full"
-                  label="Fotografía de perfil"
-                  icon="image"
-                  type="url"
-                  placeholder="https://..."
-                  value={form.foto_url}
-                  onChange={cambiar("foto_url")}
-                  help="Enlace público a una foto formal con fondo neutro."
-                />
-              </div>
+              <FotoPerfil perfil={perfil} setPerfil={setPerfil} />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                 <TextField
@@ -174,6 +163,66 @@ export default function DatosPersonales() {
           </form>
         </Card>
       </div>
+    </div>
+  );
+}
+
+// La foto se guarda al seleccionarla (no depende del boton "Guardar cambios").
+function FotoPerfil({ perfil, setPerfil }) {
+  const input = useRef(null);
+  const [ocupado, setOcupado] = useState(null); // "subiendo" | "quitando"
+  const [error, setError] = useState(null);
+
+  async function onSeleccionar(e) {
+    const archivo = e.target.files?.[0];
+    e.target.value = "";
+    if (!archivo) return;
+    setError(null);
+    if (!TIPOS_FOTO.includes(archivo.type)) return setError("La foto debe ser una imagen JPG, PNG o WEBP.");
+    if (archivo.size > MAX_FOTO_BYTES) return setError("La foto no puede pesar más de 2 MB.");
+    setOcupado("subiendo");
+    try {
+      setPerfil(await subirFoto(archivo));
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setOcupado(null);
+    }
+  }
+
+  async function onQuitar() {
+    setError(null);
+    setOcupado("quitando");
+    try {
+      setPerfil(await eliminarFoto());
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setOcupado(null);
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-space-sm p-space-md rounded-lg border border-outline-variant/70">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+        <Avatar key={perfil.foto_url || "sin-foto"} perfil={perfil} size="w-20 h-20" texto="font-headline-md text-headline-md" />
+        <div className="flex flex-col gap-space-xs flex-1">
+          <span className="font-label-lg text-label-lg text-on-surface">Fotografía de perfil</span>
+          <span className="font-body-sm text-body-sm text-on-surface-variant">Foto formal con fondo neutro. JPG, PNG o WEBP de máximo 2 MB.</span>
+          <div className="flex flex-wrap gap-space-xs">
+            <input ref={input} type="file" accept={TIPOS_FOTO.join(",")} className="hidden" onChange={onSeleccionar} />
+            <Button size="sm" icon="upload" loading={ocupado === "subiendo"} disabled={Boolean(ocupado)} onClick={() => input.current?.click()}>
+              {perfil.foto_url ? "Cambiar foto" : "Subir foto"}
+            </Button>
+            {perfil.foto_url && (
+              <Button size="sm" variant="secondary" icon="delete" loading={ocupado === "quitando"} disabled={Boolean(ocupado)} onClick={onQuitar}>
+                Quitar
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+      {error && <Alert tone="error" onClose={() => setError(null)}>{error}</Alert>}
     </div>
   );
 }

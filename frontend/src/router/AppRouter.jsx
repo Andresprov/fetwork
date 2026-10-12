@@ -15,6 +15,10 @@ import Certificaciones from "../pages/perfil/Certificaciones";
 import Visibilidad from "../pages/perfil/Visibilidad";
 import VistaPublica from "../pages/perfil/VistaPublica";
 import PerfilPublico from "../pages/perfil/PerfilPublico";
+import Proyectos from "../pages/proyectos/Proyectos";
+import ProyectoForm from "../pages/proyectos/ProyectoForm";
+import HojaVida from "../pages/hoja-vida/HojaVida";
+import ExportarHojaVida from "../pages/hoja-vida/ExportarHojaVida";
 
 export default function AppRouter() {
   return (
@@ -40,6 +44,11 @@ export default function AppRouter() {
         <Route path="habilidades" element={<Habilidades />} />
         <Route path="experiencia" element={<Experiencia />} />
         <Route path="certificaciones" element={<Certificaciones />} />
+        <Route path="proyectos" element={<Proyectos />} />
+        <Route path="proyectos/nuevo" element={<ProyectoForm />} />
+        <Route path="proyectos/:id" element={<ProyectoForm />} />
+        <Route path="hoja-vida" element={<HojaVida />} />
+        <Route path="hoja-vida/exportar" element={<ExportarHojaVida />} />
         <Route path="visibilidad" element={<Visibilidad />} />
         <Route path="vista-publica" element={<VistaPublica />} />
       </Route>
