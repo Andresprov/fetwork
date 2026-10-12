@@ -6,8 +6,14 @@ const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
-app.use(cors());
+// Content-Disposition se expone para que el frontend lea el nombre del .docx
+// exportado (CU-09).
+app.use(cors({ exposedHeaders: ["Content-Disposition"] }));
 app.use(express.json());
+
+// Archivos subidos por los usuarios (foto de perfil) cuando el proveedor de
+// almacenamiento es el disco local (src/lib/almacenamiento).
+app.use("/uploads", express.static(require("./lib/almacenamiento/almacenamiento.local").DIR_UPLOADS, { index: false, dotfiles: "deny" }));
 
 app.get("/api/health", async (req, res) => {
   let db = "disconnected";

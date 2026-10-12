@@ -8,6 +8,14 @@ async function putMiPerfil(req, res) {
   res.json(await service.actualizarMiPerfil(req.usuario.id_usuario, req.body || {}));
 }
 
+async function putFoto(req, res) {
+  res.json(await service.subirFoto(req.usuario.id_usuario, req.file));
+}
+
+async function deleteFoto(req, res) {
+  res.json(await service.eliminarFoto(req.usuario.id_usuario));
+}
+
 async function putVisibilidad(req, res) {
   res.json(await service.actualizarVisibilidad(req.usuario.id_usuario, req.body || {}));
 }
@@ -70,6 +78,8 @@ async function getPerfilPublico(req, res) {
 module.exports = {
   getMiPerfil,
   putMiPerfil,
+  putFoto,
+  deleteFoto,
   putVisibilidad,
   getCatalogoHabilidades,
   getMisHabilidades,

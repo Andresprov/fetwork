@@ -9,3 +9,6 @@ npm-debug.log*
 *.log
 dist/
 build/
+
+# Archivos subidos por usuarios (almacenamiento local)
+/uploads/

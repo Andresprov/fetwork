@@ -1,12 +1,19 @@
 const { Router } = require("express");
+const asyncHandler = require("../../../middleware/asyncHandler");
+const { requireAuth, requireRol } = require("../../../middleware/auth");
+const controller = require("../controller/proyectos.controller");
 
-// Modulo en construccion: cubrira CU-04, CU-05, CU-15 a CU-19 (portafolio,
-// GitHub, busqueda de talento y vacantes). No forma parte del alcance de
-// Sprint 1 (autenticacion).
+// Modulo proyectos: CU-04 (gestionar proyectos y portafolio) y CU-05
+// (vincular repositorio de GitHub). La busqueda de talento y las vacantes
+// (CU-15, CU-18, CU-19) se agregaran en el Sprint 5.
 const router = Router();
 
-router.use((req, res) => {
-  res.status(501).json({ error: "Modulo 'proyectos' aun no implementado." });
-});
+const soloEstudiante = [requireAuth, requireRol("estudiante")];
+
+router.get("/me", soloEstudiante, asyncHandler(controller.getMisProyectos));
+router.post("/me", soloEstudiante, asyncHandler(controller.postProyecto));
+router.get("/me/:id", soloEstudiante, asyncHandler(controller.getMiProyecto));
+router.put("/me/:id", soloEstudiante, asyncHandler(controller.putProyecto));
+router.delete("/me/:id", soloEstudiante, asyncHandler(controller.deleteProyecto));
 
 module.exports = router;

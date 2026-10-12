@@ -2,18 +2,20 @@ const repository = require("../repository/perfiles.repository");
 // Acceso a otro modulo solo a traves de su service (seccion 5 de CLAUDE.md).
 const proyectosService = require("../../proyectos/service/proyectos.service");
 const { ErrorPeticion } = require("../../../lib/errores");
+const { crearValidadores, idEntero } = require("../../../lib/validacion");
+const almacenamiento = require("../../../lib/almacenamiento");
+const { normalizarFoto } = require("../../../lib/imagen");
 
 // Campos del estudiante que el propio estudiante puede editar. Nombres,
 // apellidos, programa y semestre vienen sincronizados de Q10 y son de solo
-// lectura en FETWork.
-const CAMPOS_EDITABLES = ["telefono", "foto_url", "hoja_vida_url", "portafolio_url", "github_url"];
-const CAMPOS_URL = ["foto_url", "hoja_vida_url", "portafolio_url", "github_url"];
+// lectura en FETWork. La foto no va aqui: se sube como archivo (subirFoto).
+const CAMPOS_EDITABLES = ["telefono", "hoja_vida_url", "portafolio_url", "github_url"];
+const CAMPOS_URL = ["hoja_vida_url", "portafolio_url", "github_url"];
 const CAMPOS_VISIBILIDAD = ["mostrar_experiencia", "mostrar_certificaciones", "mostrar_proyectos", "mostrar_contacto"];
 const NIVELES_HABILIDAD = ["basico", "intermedio", "avanzado"];
 
 const ETIQUETAS = {
   telefono: "El teléfono",
-  foto_url: "La URL de la foto",
   hoja_vida_url: "La URL de la hoja de vida",
   portafolio_url: "La URL del portafolio",
   github_url: "La URL de GitHub",
@@ -29,59 +31,7 @@ const ETIQUETAS = {
   modalidad: "La modalidad",
 };
 
-// ---------- Utilidades de validacion ----------
-
-function texto(valor, campo, { requerido = false, max = 200 } = {}) {
-  if (valor === undefined || valor === null || String(valor).trim() === "") {
-    if (requerido) throw new ErrorPeticion(400, `${ETIQUETAS[campo] || campo} es obligatorio.`);
-    return null;
-  }
-  if (typeof valor !== "string") {
-    throw new ErrorPeticion(400, `${ETIQUETAS[campo] || campo} no tiene un formato válido.`);
-  }
-  const limpio = valor.trim();
-  if (limpio.length > max) {
-    throw new ErrorPeticion(400, `${ETIQUETAS[campo] || campo} no puede superar ${max} caracteres.`);
-  }
-  return limpio;
-}
-
-function url(valor, campo) {
-  const limpio = texto(valor, campo, { max: 500 });
-  if (limpio === null) return null;
-  try {
-    const parsed = new URL(limpio);
-    if (!["http:", "https:"].includes(parsed.protocol)) throw new Error();
-  } catch {
-    throw new ErrorPeticion(400, `${ETIQUETAS[campo]} debe ser un enlace válido que empiece por http:// o https://.`);
-  }
-  return limpio;
-}
-
-function telefono(valor, campo = "telefono") {
-  const limpio = texto(valor, campo, { max: 20 });
-  if (limpio === null) return null;
-  if (!/^\+?[0-9\s()-]{7,20}$/.test(limpio)) {
-    throw new ErrorPeticion(400, `${ETIQUETAS[campo] || "El teléfono"} solo puede contener números, espacios, guiones y el prefijo +.`);
-  }
-  return limpio;
-}
-
-function fecha(valor, etiqueta) {
-  if (valor === undefined || valor === null || valor === "") return null;
-  if (typeof valor !== "string" || !/^\d{4}-\d{2}-\d{2}/.test(valor)) {
-    throw new ErrorPeticion(400, `${etiqueta} debe tener el formato AAAA-MM-DD.`);
-  }
-  const d = new Date(`${valor.slice(0, 10)}T00:00:00.000Z`);
-  if (Number.isNaN(d.getTime())) throw new ErrorPeticion(400, `${etiqueta} no es una fecha válida.`);
-  return d;
-}
-
-function idEntero(valor, etiqueta = "El identificador") {
-  const n = Number(valor);
-  if (!Number.isInteger(n) || n <= 0) throw new ErrorPeticion(400, `${etiqueta} no es válido.`);
-  return n;
-}
+const { texto, url, telefono, fecha } = crearValidadores(ETIQUETAS);
 
 // ---------- Perfil ----------
 
@@ -103,7 +53,7 @@ function serializarPerfil(e) {
     programa: { id_programa: e.programa.id_programa, nombre: e.programa.nombre },
     semestre: e.semestre,
     telefono: e.telefono,
-    foto_url: e.foto_url,
+    foto_url: almacenamiento.urlPublica(e.foto_url),
     hoja_vida_url: e.hoja_vida_url,
     portafolio_url: e.portafolio_url,
     github_url: e.github_url,
@@ -120,6 +70,12 @@ function serializarPerfil(e) {
       proyectos: e._count.proyectos,
     },
   };
+}
+
+// Interfaz para otros modulos (proyectos, hoja de vida): resuelve el
+// estudiante dueño de la sesion sin que accedan a su tabla directamente.
+async function obtenerIdEstudiante(id_usuario) {
+  return (await obtenerEstudianteAutenticado(id_usuario)).id_estudiante;
 }
 
 async function obtenerMiPerfil(id_usuario) {
@@ -143,6 +99,57 @@ async function actualizarMiPerfil(id_usuario, body) {
 
   const estudiante = await obtenerEstudianteAutenticado(id_usuario);
   const actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, data);
+  return serializarPerfil(actualizado);
+}
+
+// ---------- Foto de perfil ----------
+
+const MAX_FOTO_BYTES = 2 * 1024 * 1024;
+
+// El tipo se decide por la firma del archivo, no por el nombre ni por el
+// Content-Type que manda el navegador. Se guarda siempre como JPEG
+// normalizado (lib/imagen.js).
+function esImagenPermitida(buffer) {
+  const jpg = buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  const png = buffer.length >= 8 && buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  const webp = buffer.length >= 12 && buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP";
+  return jpg || png || webp;
+}
+
+async function subirFoto(id_usuario, archivo) {
+  if (!archivo?.buffer?.length) {
+    throw new ErrorPeticion(400, "Selecciona una imagen para tu foto de perfil.");
+  }
+  if (archivo.buffer.length > MAX_FOTO_BYTES) {
+    throw new ErrorPeticion(400, "La foto no puede pesar más de 2 MB.");
+  }
+  if (!esImagenPermitida(archivo.buffer)) {
+    throw new ErrorPeticion(400, "La foto debe ser una imagen JPG, PNG o WEBP.");
+  }
+  let foto;
+  try {
+    foto = await normalizarFoto(archivo.buffer);
+  } catch {
+    throw new ErrorPeticion(400, "No fue posible leer la imagen. Prueba con otra foto.");
+  }
+
+  const estudiante = await obtenerEstudianteAutenticado(id_usuario);
+  const referencia = await almacenamiento.guardar(foto.buffer, { carpeta: "fotos", extension: "jpg" });
+  let actualizado;
+  try {
+    actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, { foto_url: referencia });
+  } catch (err) {
+    await almacenamiento.eliminar(referencia);
+    throw err;
+  }
+  await almacenamiento.eliminar(estudiante.foto_url).catch(() => {});
+  return serializarPerfil(actualizado);
+}
+
+async function eliminarFoto(id_usuario) {
+  const estudiante = await obtenerEstudianteAutenticado(id_usuario);
+  const actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, { foto_url: null });
+  await almacenamiento.eliminar(estudiante.foto_url).catch(() => {});
   return serializarPerfil(actualizado);
 }
 
@@ -328,7 +335,7 @@ async function obtenerPerfilPublico(idEstudianteParam) {
     apellidos: e.apellidos,
     programa: e.programa.nombre,
     semestre: e.semestre,
-    foto_url: e.foto_url,
+    foto_url: almacenamiento.urlPublica(e.foto_url),
     habilidades,
     secciones: {
       experiencia: e.mostrar_experiencia,
@@ -381,8 +388,13 @@ async function obtenerPerfilPublico(idEstudianteParam) {
 }
 
 module.exports = {
+  obtenerIdEstudiante,
+  obtenerEstudianteAutenticado,
+  serializarHabilidadEstudiante,
   obtenerMiPerfil,
   actualizarMiPerfil,
+  subirFoto,
+  eliminarFoto,
   actualizarVisibilidad,
   obtenerCatalogoHabilidades,
   listarMisHabilidades,
