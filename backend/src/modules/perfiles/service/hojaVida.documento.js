@@ -130,13 +130,13 @@ function armarDatos({ estudiante, datos, titulos, experiencias, certificaciones,
       descripcion: e.descripcion || "",
     })),
 
-    // 4. Experiencia academica e investigativa. El modelo no distingue
-    // tutorias de posgrado/pregrado (todas van a pregrado) ni tiene tipo
-    // para 4.5 "Trabajos e informes tecnicos" (queda «No registra»).
+    // 4. Experiencia academica e investigativa ("tutoria" = pregrado).
     grupos: porTipo("grupo_investigacion").map((a) => ({ nombre: a.descripcion, tiempo: a.periodo || "" })),
     act_proyecto: porTipo("proyecto").map(actividad),
     act_tutoria: porTipo("tutoria").map(actividad),
+    act_tutoria_posgrado: porTipo("tutoria_posgrado").map(actividad),
     act_jurado: porTipo("jurado").map(actividad),
+    act_informe_tecnico: porTipo("informe_tecnico").map(actividad),
     act_publicacion: porTipo("publicacion").map(actividad),
     act_organizacion: porTipo("organizacion").map(actividad),
     act_ponencia: porTipo("ponencia").map(actividad),

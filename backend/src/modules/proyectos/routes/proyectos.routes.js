@@ -12,6 +12,11 @@ const soloEstudiante = [requireAuth, requireRol("estudiante")];
 
 router.get("/me", soloEstudiante, asyncHandler(controller.getMisProyectos));
 router.post("/me", soloEstudiante, asyncHandler(controller.postProyecto));
+// Sincronizacion con GitHub (CU-05). Van antes de /me/:id.
+router.get("/me/github/repositorios", soloEstudiante, asyncHandler(controller.getRepositoriosGithub));
+router.post("/me/github/importar", soloEstudiante, asyncHandler(controller.postImportarGithub));
+router.get("/me/github/repositorio", soloEstudiante, asyncHandler(controller.getRepositorioGithub));
+
 router.get("/me/:id", soloEstudiante, asyncHandler(controller.getMiProyecto));
 router.put("/me/:id", soloEstudiante, asyncHandler(controller.putProyecto));
 router.delete("/me/:id", soloEstudiante, asyncHandler(controller.deleteProyecto));

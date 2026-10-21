@@ -42,10 +42,12 @@ enum TipoActividadInvestigativa {
   grupo_investigacion
   proyecto
   tutoria
+  tutoria_posgrado
   jurado
   publicacion
   ponencia
   organizacion
+  informe_tecnico
 }
 
 enum TipoReferencia {

@@ -5,10 +5,13 @@ const { ErrorPeticion } = require("../../../lib/errores");
 const { crearValidadores, idEntero } = require("../../../lib/validacion");
 const almacenamiento = require("../../../lib/almacenamiento");
 const { normalizarFoto } = require("../../../lib/imagen");
+const { urlBackend } = require("../../../lib/urlBackend");
 
 // Campos del estudiante que el propio estudiante puede editar. Nombres,
 // apellidos, programa y semestre vienen sincronizados de Q10 y son de solo
 // lectura en FETWork. La foto no va aqui: se sube como archivo (subirFoto).
+// La hoja de vida puede ser un enlace (hoja_vida_url) o un PDF adjunto
+// (subirHojaVida); ambos se guardan en la misma columna.
 const CAMPOS_EDITABLES = ["telefono", "hoja_vida_url", "portafolio_url", "github_url"];
 const CAMPOS_URL = ["hoja_vida_url", "portafolio_url", "github_url"];
 const CAMPOS_VISIBILIDAD = ["mostrar_experiencia", "mostrar_certificaciones", "mostrar_proyectos", "mostrar_contacto"];
@@ -54,7 +57,8 @@ function serializarPerfil(e) {
     semestre: e.semestre,
     telefono: e.telefono,
     foto_url: almacenamiento.urlPublica(e.foto_url),
-    hoja_vida_url: e.hoja_vida_url,
+    hoja_vida_url: almacenamiento.esArchivo(e.hoja_vida_url) ? null : e.hoja_vida_url,
+    hoja_vida_archivo: almacenamiento.esArchivo(e.hoja_vida_url),
     portafolio_url: e.portafolio_url,
     github_url: e.github_url,
     visibilidad: {
@@ -96,10 +100,26 @@ async function actualizarMiPerfil(id_usuario, body) {
     if (!(campo in body)) continue;
     data[campo] = CAMPOS_URL.includes(campo) ? url(body[campo], campo) : telefono(body[campo]);
   }
+  if (data.github_url) validarPerfilGithub(data.github_url);
 
   const estudiante = await obtenerEstudianteAutenticado(id_usuario);
   const actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, data);
+  // Si un enlace reemplazo (o vacio) la hoja de vida adjunta, se borra el PDF.
+  if ("hoja_vida_url" in data && data.hoja_vida_url !== estudiante.hoja_vida_url) {
+    await almacenamiento.eliminar(estudiante.hoja_vida_url).catch(() => {});
+  }
   return serializarPerfil(actualizado);
+}
+
+// El enlace de GitHub debe ser el perfil (https://github.com/usuario): de
+// ahi se toma el usuario para sincronizar los repositorios (CU-05).
+function validarPerfilGithub(valor) {
+  const u = new URL(valor);
+  const segmentos = u.pathname.split("/").filter(Boolean);
+  const esGithub = ["github.com", "www.github.com"].includes(u.hostname.toLowerCase());
+  if (!esGithub || segmentos.length !== 1 || !/^[A-Za-z0-9-]{1,39}$/.test(segmentos[0])) {
+    throw new ErrorPeticion(400, "La URL de GitHub debe ser la de tu perfil, por ejemplo https://github.com/usuario.");
+  }
 }
 
 // ---------- Foto de perfil ----------
@@ -151,6 +171,72 @@ async function eliminarFoto(id_usuario) {
   const actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, { foto_url: null });
   await almacenamiento.eliminar(estudiante.foto_url).catch(() => {});
   return serializarPerfil(actualizado);
+}
+
+// ---------- Hoja de vida adjunta (PDF) ----------
+//
+// Es la hoja de vida que el estudiante quiere mostrar a las empresas (no la
+// institucional PA-GTH-F-10, que lleva datos privados). Se guarda como
+// archivo privado: solo se descarga por la API, la del propio estudiante en
+// /me/hoja-vida-archivo y la publica solo si "mostrar_contacto" esta activo.
+
+const MAX_HOJA_VIDA_BYTES = 5 * 1024 * 1024;
+
+function esPdf(buffer) {
+  return buffer.length >= 5 && buffer.toString("ascii", 0, 5) === "%PDF-";
+}
+
+async function subirHojaVida(id_usuario, archivo) {
+  if (!archivo?.buffer?.length) {
+    throw new ErrorPeticion(400, "Selecciona el archivo PDF de tu hoja de vida.");
+  }
+  if (archivo.buffer.length > MAX_HOJA_VIDA_BYTES) {
+    throw new ErrorPeticion(400, "La hoja de vida no puede pesar más de 5 MB.");
+  }
+  if (!esPdf(archivo.buffer)) {
+    throw new ErrorPeticion(400, "La hoja de vida debe ser un archivo PDF.");
+  }
+
+  const estudiante = await obtenerEstudianteAutenticado(id_usuario);
+  const referencia = await almacenamiento.guardar(archivo.buffer, { carpeta: "hojas-vida", extension: "pdf", privado: true });
+  let actualizado;
+  try {
+    actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, { hoja_vida_url: referencia });
+  } catch (err) {
+    await almacenamiento.eliminar(referencia);
+    throw err;
+  }
+  await almacenamiento.eliminar(estudiante.hoja_vida_url).catch(() => {});
+  return serializarPerfil(actualizado);
+}
+
+async function eliminarHojaVida(id_usuario) {
+  const estudiante = await obtenerEstudianteAutenticado(id_usuario);
+  if (!almacenamiento.esArchivo(estudiante.hoja_vida_url)) {
+    throw new ErrorPeticion(404, "No tienes una hoja de vida adjunta.");
+  }
+  const actualizado = await repository.actualizarEstudiante(estudiante.id_estudiante, { hoja_vida_url: null });
+  await almacenamiento.eliminar(estudiante.hoja_vida_url).catch(() => {});
+  return serializarPerfil(actualizado);
+}
+
+async function leerHojaVida(e) {
+  const buffer = almacenamiento.esArchivo(e.hoja_vida_url) ? await almacenamiento.leer(e.hoja_vida_url) : null;
+  if (!buffer) throw new ErrorPeticion(404, "La hoja de vida no está disponible.");
+  return { buffer, nombreArchivo: `Hoja de vida - ${e.nombres} ${e.apellidos}.pdf` };
+}
+
+async function descargarMiHojaVida(id_usuario) {
+  return leerHojaVida(await obtenerEstudianteAutenticado(id_usuario));
+}
+
+async function descargarHojaVidaPublica(idEstudianteParam) {
+  const id = idEntero(idEstudianteParam, "El perfil solicitado");
+  const e = await repository.findEstudiantePorId(id);
+  if (!e || !e.usuario.activo || !e.mostrar_contacto) {
+    throw new ErrorPeticion(404, "La hoja de vida no está disponible.");
+  }
+  return leerHojaVida(e);
 }
 
 async function actualizarVisibilidad(id_usuario, body) {
@@ -381,7 +467,10 @@ async function obtenerPerfilPublico(idEstudianteParam) {
   }
 
   if (e.mostrar_contacto) {
-    perfil.contacto = { correo: e.usuario.correo, telefono: e.telefono, hoja_vida_url: e.hoja_vida_url };
+    const hojaVidaUrl = almacenamiento.esArchivo(e.hoja_vida_url)
+      ? `${urlBackend()}/api/perfiles/${e.id_estudiante}/hoja-vida-archivo`
+      : e.hoja_vida_url;
+    perfil.contacto = { correo: e.usuario.correo, telefono: e.telefono, hoja_vida_url: hojaVidaUrl };
   }
 
   return perfil;
@@ -395,6 +484,10 @@ module.exports = {
   actualizarMiPerfil,
   subirFoto,
   eliminarFoto,
+  subirHojaVida,
+  eliminarHojaVida,
+  descargarMiHojaVida,
+  descargarHojaVidaPublica,
   actualizarVisibilidad,
   obtenerCatalogoHabilidades,
   listarMisHabilidades,

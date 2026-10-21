@@ -180,6 +180,11 @@ function construirPlantilla() {
     const finFilas = tabla.lastIndexOf("</w:tr>") + "</w:tr>".length;
     reemplazos.set(62, [tabla.slice(0, inicioFilas) + filas[0] + repetida + vacia + tabla.slice(finFilas)]);
   }
+  // Tras la tabla el formato en blanco deja cuatro parrafos vacios (espacio
+  // para escribir a mano). Con la tabla llena al final de una pagina pasaban a
+  // la siguiente y dejaban un hueco encima de 2.2; basta con uno.
+  for (let i = 63; i <= 66; i++) verificarVacio(i);
+  [64, 65, 66].forEach((i) => eliminar.add(i));
 
   // ---------- 3. Experiencia laboral ----------
   // El formato trae tres bloques fijos (el 2.º y 3.º sin INSTITUCIÓN/EMPRESA);
@@ -225,10 +230,10 @@ function construirPlantilla() {
   };
 
   despuesDe(121, "4.2 PROYECTOS DE INVESTIGACIÓN DESARROLLADOS", listaActividades("act_proyecto"));
-  despuesDe(126, "Tutorías trabajos de culminación de posgrado", [noRegistra()]);
+  despuesDe(126, "Tutorías trabajos de culminación de posgrado", listaActividades("act_tutoria_posgrado"));
   despuesDe(129, "Tutorías trabajos de culminación de pregrado", listaActividades("act_tutoria"));
   despuesDe(131, "4.4 PAR EVALUADOR / JURADO", listaActividades("act_jurado"));
-  despuesDe(134, "4.5 TRABAJOS E INFORMES TÉCNICOS", [noRegistra()]);
+  despuesDe(134, "4.5 TRABAJOS E INFORMES TÉCNICOS", listaActividades("act_informe_tecnico"));
   despuesDe(137, "4.6 PUBLICACIONES", listaActividades("act_publicacion"));
   despuesDe(140, "4.7 PERTENENCIA A ORGANIZACIONES", listaActividades("act_organizacion"));
   despuesDe(143, "4.8 PONENCIAS", listaActividades("act_ponencia"));
@@ -298,18 +303,26 @@ function construirPlantilla() {
     // anterior: se quita.
     if (titulo === salto + 2 && textoDe(el[salto + 1]).trim() === "") eliminar.add(salto + 1);
     if (!el[titulo].includes("<w:pPr>")) throw new Error(`El formato oficial cambió: el título «${texto}» no tiene propiedades de párrafo.`);
-    reemplazos.set(titulo, [el[titulo].replace("<w:pPr>", "<w:pPr><w:pageBreakBefore/>")]);
+    reemplazos.set(titulo, [el[titulo].replace(/(<w:pStyle w:val="Ttulo1"\/>)/, "$1<w:pageBreakBefore/>")]);
+    if (!reemplazos.get(titulo)[0].includes("<w:pageBreakBefore/>")) {
+      throw new Error(`El formato oficial cambió: el título «${texto}» no usa el estilo Título 1.`);
+    }
   }
 
   // ---------- Ensamblado ----------
 
+  // Los titulos (estilos Título 1/2/3) se mantienen con el parrafo siguiente
+  // para que ninguno quede solo al final de una pagina (p. ej. «4.5» con su
+  // contenido en la hoja siguiente). Va justo despues de pStyle, como pide el
+  // orden de propiedades de OOXML.
   const nuevoBody = el
     .map((contenido, i) => {
       if (reemplazos.has(i)) return reemplazos.get(i).join("");
       if (eliminar.has(i)) return "";
       return contenido;
     })
-    .join("");
+    .join("")
+    .replace(/(<w:pStyle w:val="Ttulo[123]"\/>)/g, "$1<w:keepNext/>");
 
   zip.file("word/document.xml", xml.slice(0, inicioBody) + nuevoBody + xml.slice(finBody));
   return zip.generate({ type: "nodebuffer", compression: "DEFLATE" });

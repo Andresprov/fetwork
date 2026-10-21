@@ -1,4 +1,5 @@
 const service = require("../service/proyectos.service");
+const githubService = require("../service/github.service");
 
 async function getMisProyectos(req, res) {
   res.json({ proyectos: await service.listarMisProyectos(req.usuario.id_usuario) });
@@ -21,4 +22,25 @@ async function deleteProyecto(req, res) {
   res.status(204).end();
 }
 
-module.exports = { getMisProyectos, getMiProyecto, postProyecto, putProyecto, deleteProyecto };
+async function getRepositoriosGithub(req, res) {
+  res.json(await githubService.listarMisRepositorios(req.usuario.id_usuario));
+}
+
+async function postImportarGithub(req, res) {
+  res.status(201).json(await githubService.importarRepositorios(req.usuario.id_usuario, req.body || {}));
+}
+
+async function getRepositorioGithub(req, res) {
+  res.json(await githubService.consultarRepositorio(req.usuario.id_usuario, req.query.url));
+}
+
+module.exports = {
+  getMisProyectos,
+  getMiProyecto,
+  postProyecto,
+  putProyecto,
+  deleteProyecto,
+  getRepositoriosGithub,
+  postImportarGithub,
+  getRepositorioGithub,
+};

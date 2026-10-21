@@ -16,6 +16,32 @@ async function deleteFoto(req, res) {
   res.json(await service.eliminarFoto(req.usuario.id_usuario));
 }
 
+async function putHojaVidaArchivo(req, res) {
+  res.json(await service.subirHojaVida(req.usuario.id_usuario, req.file));
+}
+
+async function deleteHojaVidaArchivo(req, res) {
+  res.json(await service.eliminarHojaVida(req.usuario.id_usuario));
+}
+
+function enviarPdf(res, { buffer, nombreArchivo }) {
+  res.set({
+    "Content-Type": "application/pdf",
+    "Content-Disposition": `inline; filename="hoja-vida.pdf"; filename*=UTF-8''${encodeURIComponent(nombreArchivo)}`,
+    "Cache-Control": "private, no-store",
+    "X-Content-Type-Options": "nosniff",
+  });
+  res.send(buffer);
+}
+
+async function getMiHojaVidaArchivo(req, res) {
+  enviarPdf(res, await service.descargarMiHojaVida(req.usuario.id_usuario));
+}
+
+async function getHojaVidaArchivoPublica(req, res) {
+  enviarPdf(res, await service.descargarHojaVidaPublica(req.params.idEstudiante));
+}
+
 async function putVisibilidad(req, res) {
   res.json(await service.actualizarVisibilidad(req.usuario.id_usuario, req.body || {}));
 }
@@ -80,6 +106,10 @@ module.exports = {
   putMiPerfil,
   putFoto,
   deleteFoto,
+  putHojaVidaArchivo,
+  deleteHojaVidaArchivo,
+  getMiHojaVidaArchivo,
+  getHojaVidaArchivoPublica,
   putVisibilidad,
   getCatalogoHabilidades,
   getMisHabilidades,

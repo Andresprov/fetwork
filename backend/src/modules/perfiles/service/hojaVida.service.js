@@ -13,7 +13,17 @@ const { ErrorPeticion } = require("../../../lib/errores");
 const { crearValidadores, idEntero } = require("../../../lib/validacion");
 
 const NIVELES_TITULO = ["tecnico", "tecnologo", "pregrado", "especializacion", "maestria"];
-const TIPOS_ACTIVIDAD = ["grupo_investigacion", "proyecto", "tutoria", "jurado", "publicacion", "ponencia", "organizacion"];
+const TIPOS_ACTIVIDAD = [
+  "grupo_investigacion",
+  "proyecto",
+  "tutoria",
+  "tutoria_posgrado",
+  "jurado",
+  "informe_tecnico",
+  "publicacion",
+  "ponencia",
+  "organizacion",
+];
 const TIPOS_REFERENCIA = ["familiar", "personal"];
 const ESTADOS_CIVILES = ["Soltero(a)", "Casado(a)", "Unión libre", "Separado(a)", "Divorciado(a)", "Viudo(a)"];
 const GRUPOS_RH = ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"];

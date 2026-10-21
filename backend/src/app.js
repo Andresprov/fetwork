@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const prisma = require("./lib/prisma");
@@ -11,9 +12,14 @@ const app = express();
 app.use(cors({ exposedHeaders: ["Content-Disposition"] }));
 app.use(express.json());
 
-// Archivos subidos por los usuarios (foto de perfil) cuando el proveedor de
-// almacenamiento es el disco local (src/lib/almacenamiento).
-app.use("/uploads", express.static(require("./lib/almacenamiento/almacenamiento.local").DIR_UPLOADS, { index: false, dotfiles: "deny" }));
+// Archivos publicos subidos por los usuarios (foto de perfil) cuando se
+// guardaron en el disco local (src/lib/almacenamiento). Solo se sirven las
+// carpetas publicas: las hojas de vida adjuntas se descargan por la API, que
+// respeta la configuracion de visibilidad del estudiante.
+const almacenamientoLocal = require("./lib/almacenamiento/almacenamiento.local");
+for (const carpeta of almacenamientoLocal.CARPETAS_PUBLICAS) {
+  app.use(`/uploads/${carpeta}`, express.static(path.join(almacenamientoLocal.DIR_UPLOADS, carpeta), { index: false, dotfiles: "deny" }));
+}
 
 app.get("/api/health", async (req, res) => {
   let db = "disconnected";

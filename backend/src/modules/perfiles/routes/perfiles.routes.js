@@ -22,20 +22,36 @@ router.get("/me", soloEstudiante, asyncHandler(controller.getMiPerfil));
 router.put("/me", soloEstudiante, asyncHandler(controller.putMiPerfil));
 router.put("/me/visibilidad", soloEstudiante, asyncHandler(controller.putVisibilidad));
 
-// Foto de perfil: multipart con el campo "foto". El tipo y el tamaño se
-// validan en el service; el limite de multer solo corta subidas abusivas.
-const subidaFoto = multer({ storage: multer.memoryStorage(), limits: { fileSize: 2 * 1024 * 1024, files: 1 } }).single("foto");
-function recibirFoto(req, res, next) {
-  subidaFoto(req, res, (err) => {
-    if (err instanceof multer.MulterError) {
-      const mensaje = err.code === "LIMIT_FILE_SIZE" ? "La foto no puede pesar más de 2 MB." : "Envía una sola imagen en el campo «foto».";
-      return next(new ErrorPeticion(400, mensaje));
-    }
-    next(err);
-  });
+// Subidas multipart de un solo archivo. El tipo y el tamaño se validan en el
+// service; el limite de multer solo corta subidas abusivas.
+function recibirArchivo(campo, maxBytes, { muyGrande, invalido }) {
+  const subida = multer({ storage: multer.memoryStorage(), limits: { fileSize: maxBytes, files: 1 } }).single(campo);
+  return (req, res, next) => {
+    subida(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        return next(new ErrorPeticion(400, err.code === "LIMIT_FILE_SIZE" ? muyGrande : invalido));
+      }
+      next(err);
+    });
+  };
 }
+
+const recibirFoto = recibirArchivo("foto", 2 * 1024 * 1024, {
+  muyGrande: "La foto no puede pesar más de 2 MB.",
+  invalido: "Envía una sola imagen en el campo «foto».",
+});
+const recibirHojaVida = recibirArchivo("hoja_vida", 5 * 1024 * 1024, {
+  muyGrande: "La hoja de vida no puede pesar más de 5 MB.",
+  invalido: "Envía un solo PDF en el campo «hoja_vida».",
+});
+
 router.put("/me/foto", soloEstudiante, recibirFoto, asyncHandler(controller.putFoto));
 router.delete("/me/foto", soloEstudiante, asyncHandler(controller.deleteFoto));
+
+// Hoja de vida adjunta en PDF (distinta de la institucional PA-GTH-F-10).
+router.get("/me/hoja-vida-archivo", soloEstudiante, asyncHandler(controller.getMiHojaVidaArchivo));
+router.put("/me/hoja-vida-archivo", soloEstudiante, recibirHojaVida, asyncHandler(controller.putHojaVidaArchivo));
+router.delete("/me/hoja-vida-archivo", soloEstudiante, asyncHandler(controller.deleteHojaVidaArchivo));
 
 router.get("/me/habilidades", soloEstudiante, asyncHandler(controller.getMisHabilidades));
 router.post("/me/habilidades", soloEstudiante, asyncHandler(controller.postHabilidad));
@@ -64,5 +80,9 @@ for (const recurso of ["titulos", "actividades", "referencias"]) {
   router.put(`/me/hoja-vida/${recurso}/:id`, soloEstudiante, asyncHandler(crud.actualizar));
   router.delete(`/me/hoja-vida/${recurso}/:id`, soloEstudiante, asyncHandler(crud.eliminar));
 }
+
+// Hoja de vida adjunta publica: solo si el estudiante muestra su contacto.
+// Va al final para que no capture /me/hoja-vida-archivo como :idEstudiante.
+router.get("/:idEstudiante/hoja-vida-archivo", asyncHandler(controller.getHojaVidaArchivoPublica));
 
 module.exports = router;
