@@ -1,4 +1,4 @@
-import client from "./client";
+import client, { obtenerArchivo } from "./client";
 
 const BASE = "/perfiles/me/hoja-vida";
 
@@ -27,26 +27,9 @@ export async function eliminarRegistro(recurso, id) {
   await client.delete(`${BASE}/${recurso}/${id}`);
 }
 
-// PDF generado por el backend desde el formato oficial, con el nombre que
-// indica Content-Disposition. Con responseType "blob" el cuerpo de un error
-// tambien llega como Blob: se convierte a JSON para getErrorMessage.
-export async function obtenerPdfHojaVida() {
-  try {
-    const respuesta = await client.get(`${BASE}/exportar`, { responseType: "blob" });
-    const disposicion = respuesta.headers["content-disposition"] || "";
-    const nombre = /filename="([^"]+)"/.exec(disposicion)?.[1] || "Hoja_de_vida_PA-GTH-F-10.pdf";
-    return { blob: respuesta.data, nombre };
-  } catch (err) {
-    const data = err?.response?.data;
-    if (data instanceof Blob) {
-      try {
-        err.response.data = JSON.parse(await data.text());
-      } catch {
-        /* se usa el mensaje generico */
-      }
-    }
-    throw err;
-  }
+// PDF generado por el backend desde el formato oficial.
+export function obtenerPdfHojaVida() {
+  return obtenerArchivo(`${BASE}/exportar`, "Hoja_de_vida_PA-GTH-F-10.pdf");
 }
 
 export function guardarArchivo(blob, nombre) {

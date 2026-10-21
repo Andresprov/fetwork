@@ -1,4 +1,4 @@
-import client from "./client";
+import client, { obtenerArchivo } from "./client";
 
 export async function getMiPerfil() {
   const { data } = await client.get("/perfiles/me");
@@ -21,6 +21,23 @@ export async function subirFoto(archivo) {
 export async function eliminarFoto() {
   const { data } = await client.delete("/perfiles/me/foto");
   return data;
+}
+
+// Hoja de vida adjunta en PDF (multipart, campo "hoja_vida").
+export async function subirHojaVida(archivo) {
+  const formulario = new FormData();
+  formulario.append("hoja_vida", archivo);
+  const { data } = await client.put("/perfiles/me/hoja-vida-archivo", formulario, { headers: { "Content-Type": "multipart/form-data" } });
+  return data;
+}
+
+export async function eliminarHojaVida() {
+  const { data } = await client.delete("/perfiles/me/hoja-vida-archivo");
+  return data;
+}
+
+export function obtenerMiHojaVida() {
+  return obtenerArchivo("/perfiles/me/hoja-vida-archivo", "hoja-vida.pdf");
 }
 
 export async function actualizarVisibilidad(payload) {

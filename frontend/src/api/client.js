@@ -38,4 +38,27 @@ export function getErrorMessage(error) {
   return "Ocurrió un error inesperado. Intenta de nuevo.";
 }
 
+// Descarga un archivo (PDF) con el nombre que indica Content-Disposition.
+// Con responseType "blob" el cuerpo de un error tambien llega como Blob: se
+// convierte a JSON para que getErrorMessage muestre el mensaje del backend.
+export async function obtenerArchivo(ruta, nombrePorDefecto) {
+  try {
+    const respuesta = await client.get(ruta, { responseType: "blob" });
+    const disposicion = respuesta.headers["content-disposition"] || "";
+    const utf8 = /filename\*=UTF-8''([^;]+)/i.exec(disposicion)?.[1];
+    const nombre = (utf8 && decodeURIComponent(utf8)) || /filename="([^"]+)"/.exec(disposicion)?.[1] || nombrePorDefecto;
+    return { blob: respuesta.data, nombre };
+  } catch (err) {
+    const data = err?.response?.data;
+    if (data instanceof Blob) {
+      try {
+        err.response.data = JSON.parse(await data.text());
+      } catch {
+        /* se usa el mensaje generico */
+      }
+    }
+    throw err;
+  }
+}
+
 export default client;

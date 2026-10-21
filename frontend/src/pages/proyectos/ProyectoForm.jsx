@@ -9,6 +9,7 @@ import { actualizarProyecto, crearProyecto, getMiProyecto } from "../../api/proy
 import { getErrorMessage } from "../../api/client";
 import { aInputFecha } from "../../lib/formato";
 import { SUGERENCIAS_TECNOLOGIAS, TIPOS_ENLACE } from "../../lib/proyectos";
+import PanelGithub from "../../components/proyectos/PanelGithub";
 
 const VACIO = { nombre: "", fecha: "", descripcion: "", repositorio_github_url: "", tecnologias: [], enlaces: [] };
 const MAX_TECNOLOGIAS = 20;
@@ -37,6 +38,7 @@ export default function ProyectoForm() {
   const [nuevaTecnologia, setNuevaTecnologia] = useState("");
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState(null);
+  const [aviso, setAviso] = useState(null);
 
   useEffect(() => {
     if (esNuevo) return;
@@ -83,6 +85,45 @@ export default function ProyectoForm() {
     setForm((f) => ({ ...f, enlaces: f.enlaces.map((en, j) => (j === i ? { ...en, [campo]: e.target.value } : en)) }));
   const agregarEnlace = () => setForm((f) => ({ ...f, enlaces: [...f.enlaces, { tipo: "demo", url: "" }] }));
   const quitarEnlace = (i) => setForm((f) => ({ ...f, enlaces: f.enlaces.filter((_, j) => j !== i) }));
+
+  // Completa con los datos del repositorio solo lo que el estudiante no ha
+  // llenado; las tecnologias se suman a las que ya tiene.
+  function completarConGithub(repo) {
+    const f = form;
+    const nuevo = { ...f };
+    const cambios = [];
+    if (!f.nombre.trim()) {
+      nuevo.nombre = repo.nombre;
+      cambios.push("nombre");
+    }
+    if (!f.descripcion.trim() && repo.descripcion) {
+      nuevo.descripcion = repo.descripcion;
+      cambios.push("descripción");
+    }
+    if (!f.fecha && repo.creado_en) {
+      nuevo.fecha = repo.creado_en.slice(0, 10);
+      cambios.push("fecha");
+    }
+    const tecnologias = [...f.tecnologias];
+    for (const t of repo.tecnologias_sugeridas) {
+      if (tecnologias.length >= MAX_TECNOLOGIAS) break;
+      if (!tecnologias.some((x) => x.toLowerCase() === t.toLowerCase())) tecnologias.push(t);
+    }
+    if (tecnologias.length > f.tecnologias.length) {
+      nuevo.tecnologias = tecnologias;
+      cambios.push(`${tecnologias.length - f.tecnologias.length} tecnologías`);
+    }
+    if (repo.homepage && !f.enlaces.some((en) => en.url.trim() === repo.homepage) && f.enlaces.length < MAX_ENLACES) {
+      nuevo.enlaces = [...f.enlaces, { tipo: "demo", url: repo.homepage }];
+      cambios.push("demo");
+    }
+    setForm(nuevo);
+    setAviso(
+      cambios.length
+        ? `Se completó desde GitHub: ${cambios.join(", ")}. Revisa y guarda los cambios.`
+        : "El formulario ya tenía toda la información del repositorio."
+    );
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -275,6 +316,13 @@ export default function ProyectoForm() {
         </div>
 
         <aside className="lg:col-span-4 flex flex-col gap-space-lg lg:sticky lg:top-40">
+          {repoValido && <PanelGithub key={form.repositorio_github_url.trim()} url={form.repositorio_github_url.trim()} onCompletar={completarConGithub} />}
+          {aviso && (
+            <Alert tone="success" onClose={() => setAviso(null)}>
+              {aviso}
+            </Alert>
+          )}
+
           <Card className="p-space-lg flex flex-col gap-space-md">
             <div className="flex items-center justify-between">
               <span className="font-headline-sm text-headline-sm text-on-surface">Checklist de calidad</span>

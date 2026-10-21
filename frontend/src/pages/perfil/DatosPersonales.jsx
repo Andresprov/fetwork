@@ -6,12 +6,13 @@ import PageHeader from "../../components/ui/PageHeader";
 import { Alert } from "../../components/ui/Feedback";
 import { ReadOnlyField, TextField } from "../../components/ui/FormFields";
 import Avatar from "../../components/perfil/Avatar";
-import { actualizarMiPerfil, eliminarFoto, subirFoto } from "../../api/perfiles";
+import { actualizarMiPerfil, eliminarFoto, eliminarHojaVida, obtenerMiHojaVida, subirFoto, subirHojaVida } from "../../api/perfiles";
 import { getErrorMessage } from "../../api/client";
 
 const CAMPOS = ["telefono", "hoja_vida_url", "portafolio_url", "github_url"];
 const TIPOS_FOTO = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FOTO_BYTES = 2 * 1024 * 1024;
+const MAX_HOJA_VIDA_BYTES = 5 * 1024 * 1024;
 
 function valoresIniciales(perfil) {
   return Object.fromEntries(CAMPOS.map((c) => [c, perfil[c] || ""]));
@@ -39,8 +40,11 @@ export default function DatosPersonales() {
     e.preventDefault();
     setGuardando(true);
     setError(null);
+    // Solo se envian los campos modificados: asi un enlace de hoja de vida
+    // vacio no reemplaza (ni borra) el PDF adjunto.
+    const cambios = Object.fromEntries(CAMPOS.filter((c) => form[c] !== (perfil[c] || "")).map((c) => [c, form[c]]));
     try {
-      const actualizado = await actualizarMiPerfil(form);
+      const actualizado = await actualizarMiPerfil(cambios);
       setPerfil(actualizado);
       setForm(valoresIniciales(actualizado));
       setExito(true);
@@ -102,6 +106,7 @@ export default function DatosPersonales() {
               />
 
               <FotoPerfil perfil={perfil} setPerfil={setPerfil} />
+              <HojaVidaAdjunta perfil={perfil} setPerfil={setPerfil} />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                 <TextField
@@ -115,12 +120,13 @@ export default function DatosPersonales() {
                 />
                 <TextField
                   id="hoja_vida_url"
-                  label="Hoja de vida"
+                  label="Enlace a tu hoja de vida"
                   icon="description"
                   type="url"
                   placeholder="https://..."
                   value={form.hoja_vida_url}
                   onChange={cambiar("hoja_vida_url")}
+                  help={perfil.hoja_vida_archivo ? "Si guardas un enlace, reemplazará el PDF adjunto." : "Opcional si adjuntas el PDF."}
                 />
                 <TextField
                   id="github_url"
@@ -130,6 +136,7 @@ export default function DatosPersonales() {
                   placeholder="https://github.com/usuario"
                   value={form.github_url}
                   onChange={cambiar("github_url")}
+                  help="El enlace de tu perfil: con él puedes importar tus repositorios al portafolio."
                 />
                 <TextField
                   id="portafolio_url"
@@ -218,6 +225,99 @@ function FotoPerfil({ perfil, setPerfil }) {
               <Button size="sm" variant="secondary" icon="delete" loading={ocupado === "quitando"} disabled={Boolean(ocupado)} onClick={onQuitar}>
                 Quitar
               </Button>
+            )}
+          </div>
+        </div>
+      </div>
+      {error && <Alert tone="error" onClose={() => setError(null)}>{error}</Alert>}
+    </div>
+  );
+}
+
+// Hoja de vida en PDF para las empresas (no la institucional PA-GTH-F-10).
+// Como la foto, se guarda al seleccionarla. En el perfil publico solo se puede
+// descargar si el estudiante muestra su contacto.
+function HojaVidaAdjunta({ perfil, setPerfil }) {
+  const input = useRef(null);
+  const [ocupado, setOcupado] = useState(null); // "subiendo" | "quitando" | "abriendo"
+  const [error, setError] = useState(null);
+
+  async function onSeleccionar(e) {
+    const archivo = e.target.files?.[0];
+    e.target.value = "";
+    if (!archivo) return;
+    setError(null);
+    if (archivo.type && archivo.type !== "application/pdf") return setError("La hoja de vida debe ser un archivo PDF.");
+    if (archivo.size > MAX_HOJA_VIDA_BYTES) return setError("La hoja de vida no puede pesar más de 5 MB.");
+    setOcupado("subiendo");
+    try {
+      setPerfil(await subirHojaVida(archivo));
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setOcupado(null);
+    }
+  }
+
+  async function onQuitar() {
+    setError(null);
+    setOcupado("quitando");
+    try {
+      setPerfil(await eliminarHojaVida());
+    } catch (err) {
+      setError(getErrorMessage(err));
+    } finally {
+      setOcupado(null);
+    }
+  }
+
+  // Se abre la pestaña antes de la peticion para que el navegador no la
+  // bloquee como ventana emergente.
+  async function onVer() {
+    setError(null);
+    setOcupado("abriendo");
+    const pestana = window.open("", "_blank");
+    try {
+      const { blob } = await obtenerMiHojaVida();
+      const url = URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
+      if (pestana) pestana.location.href = url;
+      else window.location.assign(url);
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch (err) {
+      pestana?.close();
+      setError(getErrorMessage(err));
+    } finally {
+      setOcupado(null);
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-space-sm p-space-md rounded-lg border border-outline-variant/70">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+        <div className="w-14 h-14 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+          <span className="material-symbols-outlined text-[28px]">{perfil.hoja_vida_archivo ? "picture_as_pdf" : "upload_file"}</span>
+        </div>
+        <div className="flex flex-col gap-space-xs flex-1">
+          <span className="font-label-lg text-label-lg text-on-surface flex flex-wrap items-center gap-space-xs">
+            Hoja de vida en PDF {perfil.hoja_vida_archivo && <Badge tone="primary" icon="check">Adjunta</Badge>}
+          </span>
+          <span className="font-body-sm text-body-sm text-on-surface-variant">
+            La que verán las empresas si muestras tu contacto. PDF de máximo 5 MB. No es la hoja de vida institucional.
+          </span>
+          <div className="flex flex-wrap gap-space-xs">
+            <input ref={input} type="file" accept="application/pdf,.pdf" className="hidden" onChange={onSeleccionar} />
+            <Button size="sm" icon="upload" loading={ocupado === "subiendo"} disabled={Boolean(ocupado)} onClick={() => input.current?.click()}>
+              {perfil.hoja_vida_archivo ? "Reemplazar PDF" : "Subir PDF"}
+            </Button>
+            {perfil.hoja_vida_archivo && (
+              <>
+                <Button size="sm" variant="secondary" icon="visibility" loading={ocupado === "abriendo"} disabled={Boolean(ocupado)} onClick={onVer}>
+                  Ver
+                </Button>
+                <Button size="sm" variant="secondary" icon="delete" loading={ocupado === "quitando"} disabled={Boolean(ocupado)} onClick={onQuitar}>
+                  Quitar
+                </Button>
+              </>
             )}
           </div>
         </div>

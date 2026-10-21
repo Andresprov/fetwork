@@ -18,11 +18,13 @@ export const NIVELES_TITULO = [
 export const TIPOS_ACTIVIDAD = [
   { value: "grupo_investigacion", label: "Grupo de investigación / semillero" },
   { value: "proyecto", label: "Proyecto de investigación" },
-  { value: "tutoria", label: "Tutoría o monitoría" },
-  { value: "jurado", label: "Jurado" },
+  { value: "tutoria", label: "Tutoría de trabajo de grado (pregrado)" },
+  { value: "tutoria_posgrado", label: "Tutoría de trabajo de grado (posgrado)" },
+  { value: "jurado", label: "Par evaluador / jurado" },
+  { value: "informe_tecnico", label: "Trabajo o informe técnico" },
   { value: "publicacion", label: "Publicación" },
   { value: "ponencia", label: "Ponencia" },
-  { value: "organizacion", label: "Organización de eventos" },
+  { value: "organizacion", label: "Pertenencia a organizaciones" },
 ];
 
 export const TIPOS_REFERENCIA = [

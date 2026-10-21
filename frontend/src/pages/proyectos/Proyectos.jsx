@@ -10,9 +10,11 @@ import { eliminarProyecto, getMisProyectos } from "../../api/proyectos";
 import { getErrorMessage } from "../../api/client";
 import { formatearMesAnio } from "../../lib/formato";
 import { etiquetaEnlace, iconoEnlace, rutaRepositorio } from "../../lib/proyectos";
+import ImportarGithubModal from "../../components/proyectos/ImportarGithubModal";
 
 // Portafolio de proyectos del estudiante (CU-04). El registro y la edicion
-// viven en ProyectoForm (incluye la vinculacion del repositorio, CU-05).
+// viven en ProyectoForm (incluye la vinculacion del repositorio, CU-05); la
+// importacion desde GitHub, en ImportarGithubModal.
 export default function Proyectos() {
   const { perfil, recargarPerfil } = useOutletContext();
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ export default function Proyectos() {
   const [busqueda, setBusqueda] = useState("");
   const [porEliminar, setPorEliminar] = useState(null);
   const [eliminando, setEliminando] = useState(false);
+  const [sincronizando, setSincronizando] = useState(false);
 
   useEffect(() => {
     getMisProyectos()
@@ -40,6 +43,11 @@ export default function Proyectos() {
 
   const conRepositorio = proyectos.filter((p) => p.repositorio_github_url).length;
   const tecnologias = new Set(proyectos.flatMap((p) => p.tecnologias.map((t) => t.toLowerCase()))).size;
+
+  function onImportados(nuevos) {
+    setProyectos((prev) => [...nuevos, ...prev]);
+    recargarPerfil();
+  }
 
   async function onEliminar() {
     setEliminando(true);
@@ -64,9 +72,14 @@ export default function Proyectos() {
         title="Portafolio de proyectos"
         description="Exhibe las aplicaciones que has desarrollado, tus proyectos de aula y de semillero, y vincula sus repositorios para que las empresas aliadas conozcan tu trabajo."
         actions={
-          <Button icon="add_circle" onClick={() => navigate("/perfil/proyectos/nuevo")}>
-            Registrar proyecto
-          </Button>
+          <>
+            <Button variant="secondary" icon="sync" onClick={() => setSincronizando(true)}>
+              Sincronizar con GitHub
+            </Button>
+            <Button icon="add_circle" onClick={() => navigate("/perfil/proyectos/nuevo")}>
+              Registrar proyecto
+            </Button>
+          </>
         }
       />
 
@@ -93,12 +106,17 @@ export default function Proyectos() {
           icon="folder_special"
           title="Aún no has registrado proyectos"
           action={
-            <Button size="sm" icon="add" onClick={() => navigate("/perfil/proyectos/nuevo")}>
-              Registrar mi primer proyecto
-            </Button>
+            <div className="flex flex-wrap justify-center gap-space-xs">
+              <Button size="sm" icon="add" onClick={() => navigate("/perfil/proyectos/nuevo")}>
+                Registrar mi primer proyecto
+              </Button>
+              <Button size="sm" variant="secondary" icon="sync" onClick={() => setSincronizando(true)}>
+                Importar desde GitHub
+              </Button>
+            </div>
           }
         >
-          Incluye proyectos de aula, de semillero o personales. Las empresas valoran ver código real y demos funcionales.
+          Incluye proyectos de aula, de semillero o personales, o impórtalos directamente desde tus repositorios públicos de GitHub. Las empresas valoran ver código real y demos funcionales.
         </EmptyState>
       ) : (
         <>
@@ -183,6 +201,8 @@ export default function Proyectos() {
           )}
         </>
       )}
+
+      {sincronizando && <ImportarGithubModal onClose={() => setSincronizando(false)} onImportados={onImportados} />}
 
       <ConfirmDialog
         open={porEliminar !== null}
