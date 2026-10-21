@@ -292,10 +292,70 @@ Puntos clave a no olvidar:
     devuelven tal cual. Al reemplazar o quitar la foto se borra el archivo
     anterior. En el frontend, Datos personales sube la foto al
     seleccionarla (Subir/Cambiar/Quitar).
-    - Pendiente para Sprint 4: proveedor Cloudinary (en Render/Railway el
-      disco local se borra en cada despliegue), sincronizar/importar repos
-      desde la API de GitHub y subir la hoja de vida como archivo (hoy URL).
+  - ✅ **Sprint 4 — GitHub, portafolio y perfil público (21/10/2026)**. Las
+    HU-14 a HU-17 (enlaces GitHub/portafolio, vista pública y visibilidad) ya
+    estaban cubiertas por el Sprint 2; este sprint agregó:
+    - **Sincronización con GitHub (CU-05)**, en el módulo proyectos:
+      `providers/github.client.js` (API REST pública, sin OAuth; caché de 5
+      min en memoria; `GITHUB_TOKEN` opcional sube el límite de 60 a 5000
+      consultas/hora) y `service/github.service.js`. Rutas (antes de
+      `/me/:id`): `GET /api/proyectos/me/github/repositorios` (repos públicos
+      propios, sin forks, marcando los ya importados),
+      `POST .../github/importar` (`{ repositorios: ["usuario/repo"] }`, máx.
+      30; crea el proyecto con nombre, descripción, fecha de creación,
+      lenguajes + topics como tecnologías y el homepage como demo; omite
+      repos ajenos y ya importados, sin duplicar) y
+      `GET .../github/repositorio?url=` (estrellas, forks, lenguajes, 3
+      últimos commits). El usuario sale de `github_url`, que ahora debe ser
+      un perfil `https://github.com/usuario` (400 si no).
+    - **Hoja de vida en PDF** (distinta de la PA-GTH-F-10): `PUT/DELETE/GET
+      /api/perfiles/me/hoja-vida-archivo` (multipart `hoja_vida`, firma
+      `%PDF-`, máx. 5 MB) y `GET /api/perfiles/:id/hoja-vida-archivo`
+      (pública solo con `mostrar_contacto`; registrada al final del router
+      para no capturar `/me`). Se guarda como archivo **privado** en la misma
+      columna `hoja_vida_url`; el perfil devuelve `hoja_vida_archivo: true` y
+      la vista pública enlaza al endpoint. Un enlace escrito en Datos
+      personales reemplaza (y borra) el PDF.
+    - **Almacenamiento**: `lib/almacenamiento/index.js` es ahora una fachada
+      que guarda con el proveedor activo (`ALMACENAMIENTO=local|cloudinary`)
+      y despacha leer/eliminar/urlPublica por el prefijo de la referencia
+      (`/uploads/...` o `cloudinary:<tipo>/<public_id>.<ext>`), así los
+      archivos viejos siguen funcionando al cambiar. `almacenamiento.cloudinary.js`
+      usa la API REST firmada sin SDK (`CLOUDINARY_URL`); fotos públicas
+      (`upload`) y hojas de vida privadas (`private`, descargadas con
+      petición firmada). La firma se validó contra el ejemplo de la
+      documentación de Cloudinary, pero **no se ha probado contra una cuenta
+      real** (no hay credenciales todavía). En local solo se sirve
+      `/uploads/fotos`; `uploads/hojas-vida` no es accesible por URL.
+    - **Hoja de vida PA-GTH-F-10**: nuevos tipos de actividad
+      `tutoria_posgrado` e `informe_tecnico` (migración
+      `20261021184325_tipos_actividad_hoja_vida`, aplicada en Neon) → llenan
+      «Tutorías … de posgrado» y «4.5 Trabajos e informes técnicos». En
+      `hojaVida.plantilla.js` se quitaron 3 de los 4 párrafos vacíos tras la
+      tabla de cursos (dejaban un hueco arriba de 2.2) y todos los títulos
+      (Título 1/2/3) llevan `keepNext` (4.5 ya no queda huérfano al pie).
+      La etiqueta del tipo `organizacion` en la UI pasó a «Pertenencia a
+      organizaciones» (así se llama 4.7 en el formato).
+    - Frontend: botón «Sincronizar con GitHub» en el portafolio
+      (`components/proyectos/ImportarGithubModal.jsx`), panel GitHub en el
+      formulario de proyecto con «Completar con datos de GitHub»
+      (`PanelGithub.jsx`, solo llena lo vacío y suma tecnologías) y bloque
+      «Hoja de vida en PDF» en Datos personales (el formulario ahora envía
+      solo los campos modificados). `api/client.js` expone `obtenerArchivo`
+      para descargas de PDF.
+    - Verificado: script de API (36 chequeos) y E2E en Edge headless (18,
+      incluida vista móvil sin scroll horizontal) con Camilo y la cuenta
+      pública `octocat`; datos de prueba restaurados.
 - Fases 5–12: pendientes según cronograma, hasta mediados de noviembre 2026.
+  - 🔜 Sprint 5 (31/10–6/11): módulo empresarial (búsqueda, vacantes
+    CU-18/CU-19) **+ validación de empresas** (rol Validador de Empresas:
+    aprobar/rechazar con comentario las empresas en «pendiente»; usa
+    `estado_validacion`, `id_validador`, `fecha_validacion` y
+    `comentario_validacion` de `empresas`). Se agregó al Sprint 5 del
+    `cronograma.xlsx` el 21/10/2026 a pedido del usuario, porque sin
+    validador ninguna empresa registrada puede entrar. El resto del módulo
+    `administracion` (coordinador, auditoría docente) sigue sin sprint
+    propio y en 501.
 
 ## Documentos de referencia (cópialos a `/docs` en este repo)
 
